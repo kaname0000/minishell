@@ -1,20 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 14:21:50 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/03 15:31:57 by okaname          ###   ########.fr       */
+/*   Created: 2025/03/03 15:17:08 by okaname           #+#    #+#             */
+/*   Updated: 2025/03/03 15:33:20 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <readline/history.h>
+#include <readline/readline.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-# include "libft/libft.h"
+int	input(void)
+{
+	char	*line;
 
-int	input(void);
-
-#endif
+	line = NULL;
+	while (1)
+	{
+		line = readline("");
+		if (line == NULL || strlen(line) == 0)
+		{
+			free(line);
+			break ;
+		}
+		printf("line is '%s'\n", line);
+		add_history(line);
+		free(line);
+	}
+	printf("exit\n");
+	return (0);
+}

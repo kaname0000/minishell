@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:20:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/03 14:54:40 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:31:10 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,6 @@
 
 int	main(void)
 {
-	char	*line;
-
-	line = NULL;
-	while (1)
-	{
-		line = readline("> ");
-		if (line == NULL || strlen(line) == 0)
-		{
-			free(line);
-			break ;
-		}
-		printf("line is '%s'\n", line);
-		add_history(line);
-		free(line);
-	}
-	printf("exit\n");
+	input();
 	return (0);
 }

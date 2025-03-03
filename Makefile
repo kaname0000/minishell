@@ -1,17 +1,17 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/03 14:19:36 by okaname           #+#    #+#              #
-#    Updated: 2025/03/03 14:20:37 by okaname          ###   ########.fr        #
+#    Updated: 2025/03/03 15:32:24 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 hCC = cc
-CFLAGS = -Wall -Wextra -Werror -I./includes 
+CFLAGS = -Wall -Wextra -Werror -I./includes -lreadline
 
 MANDATORY = minishell
 BONUS = minishell_bonus
@@ -19,7 +19,8 @@ BONUS = minishell_bonus
 LIBFTDIR = ./libft
 LIBFT = $(LIBFTDIR)/libft.a
 
-SRCS =  main.c
+SRCS =  main.c \
+		input.c
 
 OBJS = $(SRCS:.c=.o)
 
