@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   excute.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 17:33:49 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/03 19:07:48 by okaname          ###   ########.fr       */
+/*   Created: 2025/03/03 17:10:58 by okaname           #+#    #+#             */
+/*   Updated: 2025/03/03 17:53:02 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+// arg={"/bin/ls",[option],NULL}
+int	ls(char *arg[], char *envp[])
 {
-	int		pipefd[2];
-	int		i;
-	pid_t	pid1;
-	pid_t	pid2;
-
-	i = 1;
-	if (argc != 5)
-		error_arg();
-	while (i < 5)
-	{
-		if (argv[i][0] == '\0')
-			error_arg();
-		i++;
-	}
-	if (pipe(pipefd) == -1)
-		error_pipe();
-	pid1 = pipex_input(argv, envp, pipefd);
-	pid2 = pipex_output(pid1, argv, envp, pipefd);
-	close_process(pipefd, pid1, pid2);
-	return (0);
+	if (execve(arg[0], arg, envp) == -1)
+		perror("execve");
+	return (1);
 }
