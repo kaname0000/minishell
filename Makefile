@@ -6,7 +6,7 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/03 14:19:36 by okaname           #+#    #+#              #
-#    Updated: 2025/03/03 16:01:40 by okaname          ###   ########.fr        #
+#    Updated: 2025/03/04 20:40:57 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ LIBFT = $(LIBFTDIR)/libft.a
 
 SRCS =  main.c \
 		input.c\
-		set_act.c
+		set_act.c\
+		ft_strtok.c\
+		command.c
 
 OBJS = $(SRCS:.c=.o)
 

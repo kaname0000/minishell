@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   analysis.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:55:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/03 19:58:01 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:57:05 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ANALYSIS_H
 # define ANALYSIS_H
 
-# include "../pipex/libft/libft.h"
+# include "../libft/libft.h"
 
 typedef enum
 {
