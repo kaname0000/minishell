@@ -6,15 +6,15 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:55:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/04 21:08:33 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/04 21:11:16 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ANALYSIS_H
 # define ANALYSIS_H
 
+# include "../libft/libft.h"
 # include "get_next_line/get_next_line.h"
-# include "yota_libft/libft.h"
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>
