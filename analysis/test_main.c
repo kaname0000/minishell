@@ -6,38 +6,12 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 14:48:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/04 20:59:59 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:31:15 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "analysis.h"
 #include "fcntl.h"
-
-static void	free_all_value(t_tokenlist *tokenlist)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < tokenlist->set_count)
-	{
-		y = 0;
-		while (y < tokenlist->size[x])
-		{
-			free(tokenlist->token[x][y].value);
-			y++;
-		}
-		x++;
-	}
-}
-
-static void	free_tokenlist(t_tokenlist *tokenlist)
-{
-	free_all_value(tokenlist);
-	free_array((void **)tokenlist->token);
-	free(tokenlist->size);
-	free(tokenlist);
-}
 
 int	main(void)
 {
@@ -56,6 +30,7 @@ int	main(void)
 		free(line);
 	}
 	tokenlist = analysis(input);
+	free(line);
 	free(input);
 	free_tokenlist(tokenlist);
 }

@@ -6,15 +6,15 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:55:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/04 21:11:16 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:57:52 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ANALYSIS_H
 # define ANALYSIS_H
 
-# include "../libft/libft.h"
-# include "get_next_line/get_next_line.h"
+# include "analysis_get_next_line/get_next_line.h"
+# include "analysis_libft/libft.h"
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -52,8 +52,9 @@ typedef struct s_tokenlist
 t_tokenlist				*analysis(char *input);
 void					lexical_analysis(t_tokenlist *tokenlist);
 
-void					free_array(void **array);
-void					free_values(t_tokenlist *tokenlist, int i, int j);
+void					free_array(char **array);
+void					free_token(t_tokenlist *tokenlist);
 void					malloc_failed(void);
+void					free_tokenlist(t_tokenlist *tokenlist);
 
 #endif
