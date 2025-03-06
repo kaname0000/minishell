@@ -1,2 +1,2 @@
-ls -l | echo "a" << >
+ls -l | echo    "a" << >
 echo "AAA"
