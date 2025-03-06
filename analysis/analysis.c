@@ -6,41 +6,36 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:56:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/06 15:26:51 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:01:03 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "analysis.h"
 
-//文字列中に指定の文字が何文字あるか数える
-int	count_letter(char *input, char c)
+//各行に含まれる単語数のカウント
+static int	count_word(char **array)
 {
 	int	count;
-	int	i;
 
-	count = 1;
-	i = 0;
-	while (input[i])
-	{
-		if (input[i] == c)
-			count++;
-		i++;
-	}
+	count = 0;
+	while (array[count])
+		count++;
+	count++;
 	return (count);
 }
 
-//各行をトークン化する（具体）
+//各行をトークン化する（valueの値）
 static void	tokenize_command(char *command, t_tokenlist *tokenlist, int i,
 		char **lines)
 {
 	char	**array;
 	int		j;
 
-	tokenlist->size[i] = count_letter(command, ' ') + 1;
 	array = ft_split(command, ' ');
 	if (!array)
 		return (tokenlist->token[i] = NULL, free_array(lines),
 			free_tokenlist(tokenlist));
+	tokenlist->size[i] = count_words(array);
 	tokenlist->token[i] = (t_token *)malloc(sizeof(t_token)
 			* tokenlist->size[i]);
 	if (!tokenlist->token[i])
@@ -63,13 +58,30 @@ static void	tokenize_command(char *command, t_tokenlist *tokenlist, int i,
 	return (free_array(array));
 }
 
+//行数のカウント
+static int	count_line(char *input)
+{
+	int	count;
+	int	i;
+
+	count = 1;
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '\n')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 //各行をトークン化する
 static void	split_commands_to_tokens(char *input, t_tokenlist *tokenlist)
 {
 	char	**array;
 	int		i;
 
-	tokenlist->set_count = count_letter(input, '\n');
+	tokenlist->set_count = count_line(input);
 	array = ft_split(input, '\n');
 	if (!array)
 		return (tokenlist->token = NULL, free_tokenlist(tokenlist));
@@ -90,6 +102,7 @@ static void	split_commands_to_tokens(char *input, t_tokenlist *tokenlist)
 	return (free_array(array));
 }
 
+//テスト用出力関数
 static void	print_token(t_tokenlist *tokenlist)
 {
 	int			i;

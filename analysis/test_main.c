@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 14:48:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/06 15:31:15 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:10:34 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	main(void)
 		free(line);
 	}
 	tokenlist = analysis(input);
+	printf("set_count = %d, size = {%d, %d}\n", tokenlist->set_count,
+		tokenlist->size[0], tokenlist->size[1]);
 	free(line);
 	free(input);
 	free_tokenlist(tokenlist);

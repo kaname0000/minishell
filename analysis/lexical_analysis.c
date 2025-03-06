@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:08:50 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/04 20:52:19 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:02:06 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static int	check_invalid(char *value)
 	return (1);
 }
 
+// token_typeの割当
 static void	check_token(t_token *token)
 {
 	if (!token->value || token->value[0] == '\0')
@@ -76,6 +77,7 @@ static void	check_token(t_token *token)
 		token->type = TOK_IDENTIFIER;
 }
 
+//字句解析
 void	lexical_analysis(t_tokenlist *tokenlist)
 {
 	int	i;
