@@ -1,0 +1,2 @@
+echo "hello world" | cat < ls -l
+echo "AAA"
