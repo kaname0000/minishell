@@ -1,2 +1,2 @@
-echo "hello world" | cat < ls -l
-echo "AAA"
+echo "this is a 
+quote"

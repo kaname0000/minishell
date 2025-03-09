@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:02:03 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/06 20:43:18 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:37:47 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	check_token(t_token *token)
 		token->type = TOK_REDIR_APPEND;
 	else if (!ft_strcmp(token->value, "|"))
 		token->type = TOK_PIPE;
-	else if (!ft_strcmp(token->value, "\\"))
-		token->type = TOK_BACKSLASH;
+	else if (!ft_strcmp(token->value, "&"))
+		token->type = TOK_AMPERSAND;
 	else if (!ft_strcmp(token->value, "("))
 		token->type = TOK_LPAREN;
 	else if (!ft_strcmp(token->value, ")"))
@@ -83,5 +83,5 @@ void	check_token(t_token *token)
 	else if (!ft_strcmp(token->value, "\n"))
 		token->type = TOK_NEWLINE;
 	else
-		token->type = TOK_EXIT_STATUS;
+		token->type = 0;
 }

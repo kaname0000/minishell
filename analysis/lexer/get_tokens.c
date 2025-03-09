@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:30:13 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/07 15:55:02 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/09 22:01:55 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,36 +31,33 @@ static void	tokenize_command(char *command, t_tokenlist *tokenlist, int i,
 	char	**array;
 	int		j;
 
-	if (i != tokenlist->set_count - 1)
-		array = ft_split_custom(command, ' ');
-	else
-		array = ft_split(command, ' ');
+	array = ft_split_custom(command, tokenlist, i);
+	array = check_single_and_double_quote(array);
 	if (!array)
-		return (tokenlist->token[i] = NULL, free_array(lines),
-			free_tokenlist(tokenlist));
+		return (tokenlist->token[i] = NULL, free_tokenlist(tokenlist, lines,
+				NULL, FAILED));
 	tokenlist->token_count[i] = count_word(array);
 	if (!array)
-		return (free_array(lines), free_array(array),
-			free_tokenlist(tokenlist));
-	tokenlist->token[i] = (t_token *)malloc(sizeof(t_token)
+		free_tokenlist(tokenlist, lines, array, FAILED);
+	tokenlist->token[i] = (t_token **)malloc(sizeof(t_token *)
 			* tokenlist->token_count[i]);
 	if (!tokenlist->token[i])
-		return (free_array(array), free_array(lines),
-			free_tokenlist(tokenlist));
+		free_tokenlist(tokenlist, lines, array, FAILED);
 	j = 0;
 	while (j < tokenlist->token_count[i] - 1)
 	{
-		tokenlist->token[i][j].value = ft_strdup(array[j]);
-		if (!tokenlist->token[i][j].value)
-			return (free_array(array), free_array(lines),
-				free_tokenlist(tokenlist));
-		tokenlist->token[i][j].line = i;
-		tokenlist->token[i][j].column = j;
+		tokenlist->token[i][j] = (t_token *)malloc(sizeof(t_token));
+		if (!tokenlist->token[i][j])
+			free_tokenlist(tokenlist, lines, array, FAILED);
+		tokenlist->token[i][j]->value = ft_strdup(array[j]);
+		if (!tokenlist->token[i][j]->value)
+			free_tokenlist(tokenlist, lines, array, FAILED);
 		j++;
 	}
-	tokenlist->token[i][j].value = NULL;
-	tokenlist->token[i][j].line = i;
-	tokenlist->token[i][j].column = j + 1;
+	tokenlist->token[i][j] = (t_token *)malloc(sizeof(t_token));
+	if (!tokenlist->token[i][j])
+		free_tokenlist(tokenlist, lines, array, FAILED);
+	tokenlist->token[i][j]->value = NULL;
 	return (free_array(array));
 }
 
@@ -90,15 +87,16 @@ void	get_tokens(char *input, t_tokenlist *tokenlist)
 	tokenlist->set_count = count_line(input);
 	array = ft_split(input, '\n');
 	if (!array)
-		return (tokenlist->token = NULL, free_tokenlist(tokenlist));
-	tokenlist->token = (t_token **)malloc(sizeof(t_token *)
+		return (tokenlist->token = NULL, free_tokenlist(tokenlist, NULL, NULL,
+				FAILED));
+	tokenlist->token = (t_token ***)malloc(sizeof(t_token **)
 			* tokenlist->set_count);
 	if (!tokenlist->token)
-		return (free_array(array), free_tokenlist(tokenlist));
+		free_tokenlist(tokenlist, array, NULL, FAILED);
 	tokenlist->token_count = (int *)malloc(sizeof(int) * (tokenlist->set_count
 				+ 1));
 	if (!tokenlist->token_count)
-		return (free_array(array), free_tokenlist(tokenlist));
+		free_tokenlist(tokenlist, array, NULL, FAILED);
 	tokenlist->token_count[tokenlist->set_count] = 0;
 	i = 0;
 	while (i < tokenlist->set_count)
@@ -106,6 +104,6 @@ void	get_tokens(char *input, t_tokenlist *tokenlist)
 		tokenize_command(array[i], tokenlist, i, array);
 		i++;
 	}
-	check_quote(tokenlist);
+	check_single_and_double_quote(tokenlist, array);
 	return (free_array(array));
 }
