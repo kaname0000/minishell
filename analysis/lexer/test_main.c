@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 14:48:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/06 21:37:10 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:21:24 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ int	main(void)
 		tokenlist->token_count[0], tokenlist->token_count[1]);
 	free(line);
 	// free(input);
-	free_tokenlist(tokenlist);
+	free_tokenlist(tokenlist, NULL, NULL, SUCCESS);
 }

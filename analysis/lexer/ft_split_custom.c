@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 13:48:03 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/07 14:29:28 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/09 22:01:04 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,18 @@ static char	**ft_split_words(char **result, const char *s, char c,
 	return (result[++word_count] = NULL, result);
 }
 
-char	**ft_split_custom(char const *s, char c)
+char	**ft_split_custom(char *s, t_tokenlist *tokenlist, int i)
 {
 	char	**result;
 	size_t	count;
 
+	if (i == tokenlist->set_count - 1)
+		return (ft_split(s, ' '));
 	if (!s)
 		return (NULL);
-	count = ft_word_count(s, c);
+	count = ft_word_count(s, ' ');
 	result = (char **)malloc(sizeof(char *) * (count + 2));
 	if (!result)
 		return (NULL);
-	return (ft_split_words(result, s, c, 0));
+	return (ft_split_words(result, s, ' ', 0));
 }

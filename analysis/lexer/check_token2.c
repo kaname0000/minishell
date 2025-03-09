@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:05:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/06 20:42:50 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:54:57 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,23 @@
 
 void	check_token2(t_token *token)
 {
-	if (!ft_strcmp(token->value, "<"))
-		token->type = TOK_REDIR_IN;
+	if (!ft_strcmp(token->value, "echo") || !ft_strcmp(token->value, "cd")
+		|| !ft_strcmp(token->value, "pwd") || !ft_strcmp(token->value, "export")
+		|| !ft_strcmp(token->value, "unset") || !ft_strcmp(token->value, "env")
+		|| !ft_strcmp(token->value, "exit"))
+		token->type = TOK_BUILTIN;
+	else if (!ft_strcmp(token->value, "\\"))
+		token->type = TOK_BACKSLASH;
+	else if (1)
+		token->type = TOK_SQUOTE;
+	else if (1)
+		token->type = TOK_DQUOTE;
+	else if (1)
+		token->type = TOK_ENV_VAR;
+	else if (1)
+		token->type = TOK_SEMICOLON;
+	else if (1)
+		token->type = TOK_ASSIGNMENT;
+	else
+		token->type = TOK_WORD;
 }

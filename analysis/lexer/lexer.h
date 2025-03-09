@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:55:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/07 15:18:47 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/09 22:02:09 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,34 @@ enum					e_tokentype
 {
 	TOK_WORD,
 	TOK_ASSIGNMENT,
-	TOK_BUILTIN,
-	TOK_PIPE,
+	TOK_BUILTIN, // clear
+	TOK_PIPE,    // clear
 	TOK_SEMICOLON,
-	TOK_AMPERSAND,
-	TOK_REDIR_IN,
-	TOK_REDIR_OUT,
-	TOK_REDIR_APPEND,
-	TOK_HEREDOC,
+	TOK_AMPERSAND,    // clear
+	TOK_REDIR_IN,     // clear
+	TOK_REDIR_OUT,    // clear
+	TOK_REDIR_APPEND, // clear
+	TOK_HEREDOC,      // clear
 	TOK_SQUOTE,
 	TOK_DQUOTE,
-	TOK_BACKSLASH,
-	TOK_LPAREN,
-	TOK_RPAREN,
+	TOK_BACKSLASH, // clear
+	TOK_LPAREN,    // clear
+	TOK_RPAREN,    // clear
 	TOK_ENV_VAR,
-	TOK_EXIT_STATUS,
-	TOK_NEWLINE,
-	TOK_EOF
+	TOK_EXIT_STATUS, // clear
+	TOK_NEWLINE,     // clear
+	TOK_EOF          // clear
 };
 
 typedef struct s_token
 {
 	enum e_tokentype	type;
 	char				*value;
-	int					line;
-	int					column;
 }						t_token;
 
 typedef struct s_tokenlist
 {
-	t_token				**token;
+	t_token				***token;
 	int					set_count;
 	int					*token_count;
 }						t_tokenlist;
@@ -63,13 +61,12 @@ typedef struct s_tokenlist
 void					lexical_analysis(char *input, t_tokenlist *tokenlist);
 void					get_tokens(char *input, t_tokenlist *tokenlist);
 void					free_array(char **array);
-void					free_token(t_tokenlist *tokenlist);
-void					malloc_failed(void);
-void					free_tokenlist(t_tokenlist *tokenlist);
+void					free_tokenlist(t_tokenlist *tokenlist, char **array1,
+							char **array2, int key);
 void					check_token(t_token *token);
-char					**ft_split_custom(char const *s, char c);
-void					check_quote(t_tokenlist *tokenlist);
-
+char					**ft_split_custom(char const *s, t_tokenlist *tokenlist,
+							int i);
+void					check_single_and_double_quote(char **array);
 t_tokenlist				*analysis(char *input);
 
 #endif
