@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_tokentype.h                                  :+:      :+:    :+:   */
+/*   check_squote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 19:48:15 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/11 03:28:24 by okamotoyota      ###   ########.fr       */
+/*   Created: 2025/03/11 03:25:14 by okamotoyota       #+#    #+#             */
+/*   Updated: 2025/03/11 03:30:32 by okamotoyota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECK_TOKENTYPE_H
-# define CHECK_TOKENTYPE_H
+#include "check_tokentype.h"
 
-# include "../lexer.h"
+// 現在の実装ではシングルとダブルが混在する場合の判定が曖昧なので、要確認
+int	check_squote(t_token *token)
+{
+	int	i;
 
-int	check_env_var(t_token *token, t_tokenlist *tokenlist);
-int	check_exit_status(t_token *token);
-int	check_squote(t_token *token);
-int	check_dquote(t_token *token);
-
-#endif
+	if (!token->value)
+		return (FAILED);
+	i = 0;
+	while (token->value[i])
+	{
+		if (token->squote[i])
+			return (SUCCESS);
+		i++;
+	}
+	return (FAILED);
+}
