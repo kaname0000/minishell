@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:30:13 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/09 22:01:55 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:38:11 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	tokenize_command(char *command, t_tokenlist *tokenlist, int i,
 	int		j;
 
 	array = ft_split_custom(command, tokenlist, i);
-	array = check_single_and_double_quote(array);
 	if (!array)
 		return (tokenlist->token[i] = NULL, free_tokenlist(tokenlist, lines,
 				NULL, FAILED));
@@ -104,6 +103,5 @@ void	get_tokens(char *input, t_tokenlist *tokenlist)
 		tokenize_command(array[i], tokenlist, i, array);
 		i++;
 	}
-	check_single_and_double_quote(tokenlist, array);
 	return (free_array(array));
 }

@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:28:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/09 21:33:00 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/10 23:19:32 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,35 @@ static void	malloc_failed(void)
 	exit(EXIT_FAILURE);
 }
 
+void	free_flag_array(t_tokenlist *tokenlist)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < tokenlist->set_count)
+	{
+		j = 0;
+		while (j < tokenlist->token_count[i] - 1)
+		{
+			if (!tokenlist->token[i][j]->squote
+				|| !tokenlist->token[i][j]->dquote)
+				return ;
+			free(tokenlist->token[i][j]->squote);
+			free(tokenlist->token[i][j]->dquote);
+			j++;
+		}
+		i++;
+	}
+}
+
 static void	free_token_and_value(t_tokenlist *tokenlist, int key)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (tokenlist->token[i])
+	while (i < tokenlist->set_count)
 	{
 		j = 0;
 		while (j < tokenlist->token_count[i])
