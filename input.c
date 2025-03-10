@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:17:08 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/03 17:07:43 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:34:40 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	input(void)
 	line = NULL;
 	while (1)
 	{
-		line = readline("");
+		line = readline("minishell$");
 		if (line == NULL)
 		{
 			free(line);
@@ -31,7 +31,7 @@ int	input(void)
 			free(line);
 			continue ;
 		}
-		printf("line is %s\n", line);
+		printf("line is %s", line);
 		add_history(line);
 		free(line);
 	}

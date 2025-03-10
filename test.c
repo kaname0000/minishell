@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 14:20:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/10 15:09:10 by okaname          ###   ########.fr       */
+/*   Created: 2025/03/10 18:54:30 by okaname           #+#    #+#             */
+/*   Updated: 2025/03/10 18:54:31 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-// int	main(int argc, char *argv[], char *envp[])
-// {
-// 	(void)argc;
-// 	(void)argv;
-// 	(void)envp;
-// 	set_act();
-// 	input();
-// 	return (0);
-// }
+int	main(void)
+{
+	while (1)
+	{
+	}
+	return (0);
+}

@@ -1,23 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 14:20:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/10 15:09:10 by okaname          ###   ########.fr       */
+/*   Created: 2024/12/11 17:37:54 by yookamot          #+#    #+#             */
+/*   Updated: 2025/03/06 20:49:52 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "error.h"
 
-// int	main(int argc, char *argv[], char *envp[])
-// {
-// 	(void)argc;
-// 	(void)argv;
-// 	(void)envp;
-// 	set_act();
-// 	input();
-// 	return (0);
-// }
+void	error_arg(void)
+{
+	write(2, "Error: Invalid Arguments\n", 26);
+	exit(1);
+}
+
+void	error_pipe(void)
+{
+	perror("bash: pipe");
+	exit(1);
+}
+
+void	error_infile_invalid(char *infile)
+{
+	write(2, "bash: ", 6);
+	perror(infile);
+}
+
+void	error_infile_open_failed(char *infile)
+{
+	write(2, "bash: ", 6);
+	perror(infile);
+}
+
+void	error_infile_close_failed(void)
+{
+	perror("bash: close");
+}

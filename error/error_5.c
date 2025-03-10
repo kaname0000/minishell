@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 14:20:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/10 15:09:10 by okaname          ###   ########.fr       */
+/*   Created: 2024/12/14 18:09:59 by yookamot          #+#    #+#             */
+/*   Updated: 2025/03/06 20:49:44 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "error.h"
 
-// int	main(int argc, char *argv[], char *envp[])
-// {
-// 	(void)argc;
-// 	(void)argv;
-// 	(void)envp;
-// 	set_act();
-// 	input();
-// 	return (0);
-// }
+void	error_command2_nonexistent(pid_t pid1, char **cmd_parts)
+{
+	write(2, "bash: ", 6);
+	write(2, cmd_parts[0], ft_strlen(cmd_parts[0]));
+	write(2, ": No such file or directory\n",
+		ft_strlen(": No such file or directory\n"));
+	ft_free_split(cmd_parts);
+	if (pid1 != -1)
+		waitpid(pid1, NULL, 0);
+	exit(127);
+}
