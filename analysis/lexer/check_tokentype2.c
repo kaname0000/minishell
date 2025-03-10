@@ -1,45 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_token2.c                                     :+:      :+:    :+:   */
+/*   check_tokentype2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:05:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/08 16:54:57 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:01:24 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-// static int	check_literal(char *value)
-// {
-// 	int	len;
+static int	check_assignment(char *value)
+{
+	int	i;
 
-// 	if (!value || value[0] == '\0')
-// 		return (1);
-// 	len = ft_strlen(value);
-// 	if ((value[0] == '\'' && value[len - 1] == '\'') || (value[0] == '\"'
-// 			&& value[len - 1] == '\"'))
-// 		return (0);
-// 	return (1);
-// }
-
-// static int	check_invalid(char *value)
-// {
-// 	int	len;
-
-// 	if (!value || value[0] == '\0')
-// 		return (1);
-// 	len = ft_strlen(value);
-// 	if (value[0] == '\'' && value[len - 1] != '\'')
-// 		return (0);
-// 	if (value[0] == '\"' && value[len - 1] != '\"')
-// 		return (0);
-// 	if (value[len - 1] == '\\')
-// 		return (0);
-// 	return (1);
-// }
+	if (!ft_isalpha(value[0]) && value[0] != '_')
+		return (FAILED);
+	i = 1;
+	while (value[i] && value[i] != '=')
+	{
+		if (!ft_isalnum(value[0]) && value[i] != '_')
+			return (FAILED);
+		i++;
+	}
+	if (!value[i])
+		return (FAILED);
+	return (SUCCESS);
+}
 
 void	check_token2(t_token *token)
 {
@@ -54,11 +43,11 @@ void	check_token2(t_token *token)
 		token->type = TOK_SQUOTE;
 	else if (1)
 		token->type = TOK_DQUOTE;
-	else if (1)
+	else if (SUCCESS == check_env_var(token->value))
 		token->type = TOK_ENV_VAR;
 	else if (1)
 		token->type = TOK_SEMICOLON;
-	else if (1)
+	else if (SUCCESS == check_assignment(token->value))
 		token->type = TOK_ASSIGNMENT;
 	else
 		token->type = TOK_WORD;
