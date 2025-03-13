@@ -2,6 +2,9 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "type_traits": "c",
-        "analysis.h": "c"
+        "analysis.h": "c",
+        "error.h": "c",
+        "redirector.h": "c",
+        "stat.h": "c"
     }
 }

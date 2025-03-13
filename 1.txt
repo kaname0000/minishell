@@ -1,0 +1,21 @@
+total 1364
+-rw-r--r-- 1 okaname 2024_tokyo       0  3月 13 20:42 1.txt
+-rw-r--r-- 1 okaname 2024_tokyo       2  3月 13 18:59 2.txt
+drwxr-xr-x 4 okaname 2024_tokyo     233  3月 10 19:04 analysis
+drwxr-xr-x 2 okaname 2024_tokyo      72  3月 13 17:36 built_in_command
+drwxr-xr-x 2 okaname 2024_tokyo     191  3月 13 20:38 error
+-rwxr-xr-x 1 okaname 2024_tokyo   15736  3月 10 19:04 inf_loop
+-rw-r--r-- 1 okaname 2024_tokyo    1384  3月 13 18:53 input.c
+-rw-r--r-- 1 okaname 2024_tokyo    4888  3月 13 20:38 input.o
+drwxr-xr-x 3 okaname 2024_tokyo    4096  3月 13 20:38 libft
+-rw-r--r-- 1 okaname 2024_tokyo    1095  3月 13 17:52 main.c
+-rw-r--r-- 1 okaname 2024_tokyo    1360  3月 13 20:38 main.o
+-rw-r--r-- 1 okaname 2024_tokyo    1864  3月 13 20:38 Makefile
+-rwxr-xr-x 1 okaname 2024_tokyo 1319976  3月 13 20:42 minishell
+-rw-r--r-- 1 okaname 2024_tokyo    1299  3月 13 17:50 minishell.h
+drwxr-xr-x 2 okaname 2024_tokyo     208  3月 13 20:42 operators
+-rw-r--r-- 1 okaname 2024_tokyo    1362  3月  6 18:31 set_act.c
+-rw-r--r-- 1 okaname 2024_tokyo    5040  3月 13 20:38 set_act.o
+-rw-r--r-- 1 okaname 2024_tokyo     941  3月 13 19:59 test.c
+-rw-r--r-- 1 okaname 2024_tokyo      69  3月 10 19:04 test.txt
+drwxr-xr-x 2 okaname 2024_tokyo      51  3月 13 20:38 utils

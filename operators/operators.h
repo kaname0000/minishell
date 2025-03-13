@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   operators.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 14:21:50 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/13 21:16:56 by okaname          ###   ########.fr       */
+/*   Created: 2025/03/07 20:38:22 by okaname           #+#    #+#             */
+/*   Updated: 2025/03/13 20:12:26 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef OPERATORS_H
+# define OPERATORS_H
 
-# include "built_in_command/built_in.h"
-# include "libft/libft.h"
-# include "operators/operators.h"
+# include "../error/error.h"
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -26,12 +24,20 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-typedef struct s_info
+typedef struct s_command
 {
-	int	status;
-}		t_info;
+	char	*cmd_path;
+	char	**cmd;
+	int		fd_in;
+	int		fd_out;
+	char	**envp;
+}			t_command;
 
-int		input(void);
-void	set_act(void);
+int			open_outfile(char *outfile);
+int			open_infile(char *infile);
+int			open_appendfile(char *appendfile);
+char		*get_full_path(char *cmd, char **envp);
+pid_t		redirector(t_command *cmd);
+int			here_doc(char *char_EOF);
 
 #endif

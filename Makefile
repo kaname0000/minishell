@@ -6,12 +6,12 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/03 14:19:36 by okaname           #+#    #+#              #
-#    Updated: 2025/03/03 16:01:40 by okaname          ###   ########.fr        #
+#    Updated: 2025/03/13 21:15:14 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 hCC = cc
-CFLAGS = -Wall -Wextra -Werror -I./includes 
+CFLAGS = -Wall -Wextra -Werror -I./includes -fsanitize=address
 LIBS = -lreadline
 
 MANDATORY = minishell
@@ -19,12 +19,21 @@ BONUS = minishell_bonus
 
 LIBFTDIR = ./libft
 LIBFT = $(LIBFTDIR)/libft.a
-# PIPEXDIR = ./pipex
-# PIPEX = $(PIPEXDIR)/pipex.a
 
 SRCS =  main.c \
 		input.c\
-		set_act.c
+		set_act.c\
+		operators/get_full_path.c\
+		operators/redirector.c\
+		operators/here_document.c\
+		operators/openfile.c\
+		error/error_1.c\
+		error/error_2.c\
+		error/error_3.c\
+		error/error_4.c\
+		error/error_5.c\
+		utils/utils.c\
+		built_in_command/exit.c\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -39,9 +48,6 @@ $(BONUS): $(LIBFT) $(OBJS)
 
 $(LIBFT):
 	make -C $(LIBFTDIR) bonus
-
-# $(PIPEX):
-# 	make -C $(PIPEXDIR)
 
 bonus: $(BONUS)
 
