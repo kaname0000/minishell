@@ -6,12 +6,12 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/03 14:19:36 by okaname           #+#    #+#              #
-#    Updated: 2025/03/10 16:39:16 by okaname          ###   ########.fr        #
+#    Updated: 2025/03/13 21:15:14 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 hCC = cc
-CFLAGS = -Wall -Wextra -Werror -I./includes 
+CFLAGS = -Wall -Wextra -Werror -I./includes -fsanitize=address
 LIBS = -lreadline
 
 MANDATORY = minishell
@@ -26,12 +26,14 @@ SRCS =  main.c \
 		operators/get_full_path.c\
 		operators/redirector.c\
 		operators/here_document.c\
+		operators/openfile.c\
 		error/error_1.c\
 		error/error_2.c\
 		error/error_3.c\
 		error/error_4.c\
 		error/error_5.c\
 		utils/utils.c\
+		built_in_command/exit.c\
 
 OBJS = $(SRCS:.c=.o)
 

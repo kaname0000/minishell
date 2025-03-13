@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 18:54:30 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/13 20:47:24 by okaname          ###   ########.fr       */
+/*   Created: 2025/03/13 21:15:28 by okaname           #+#    #+#             */
+/*   Updated: 2025/03/13 21:24:42 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef BUILT_IN_H
+# define BUILT_IN_H
 
-// int	main(void)
-// {
-// 	while (1)
-// 	{
-// 	}
-// 	return (0);
-// }
+# include "../operators/operators.h"
+# include <stdlib.h>
+
+void	ft_exit(char **strs);
+
+#endif

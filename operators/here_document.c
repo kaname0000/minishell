@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:24:05 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/10 18:04:30 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/13 18:06:58 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	malloc_error(void)
 	exit(1);
 }
 
-int	get_doc(int pipefd, char *char_EOF)
+static int	get_doc(int pipefd, char *char_EOF)
 {
 	char	*line;
 
@@ -36,15 +36,13 @@ int	get_doc(int pipefd, char *char_EOF)
 	}
 }
 
-int	here_doc(t_command *cmd, char *char_EOF)
+int	here_doc(char *char_EOF)
 {
 	int	pipefd[2];
 
 	if (pipe(pipefd) < 0)
 		error_pipe();
 	get_doc(pipefd[1], char_EOF);
-	cmd->fd_in = pipefd[0];
 	close(pipefd[1]);
-	redirector(cmd);
-	return (0);
+	return (pipefd[0]);
 }
