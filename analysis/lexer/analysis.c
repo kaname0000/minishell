@@ -6,14 +6,14 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:56:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/09 20:30:21 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/14 05:32:50 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
 //テスト用出力関数
-static void	print_token(t_tokenlist *tokenlist)
+void	print_token(t_tokenlist *tokenlist)
 {
 	int	i;
 	int	j;
@@ -41,6 +41,8 @@ static void	print_token(t_tokenlist *tokenlist)
 		}
 		i++;
 	}
+	printf("set_count = %d, token_count = {%d, %d}\n", tokenlist->set_count,
+		tokenlist->token_count[0], tokenlist->token_count[1]);
 }
 
 //字句解析と構文解析
@@ -52,7 +54,6 @@ t_tokenlist	*analysis(char *input)
 	if (!tokenlist)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
 	lexical_analysis(input, tokenlist);
-	print_token(tokenlist);
 	// syntax_analysis(tokenlist);
 	return (tokenlist);
 }

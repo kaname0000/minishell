@@ -1,87 +1,139 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_token.c                                      :+:      :+:    :+:   */
+/*   check_tokentype.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:02:03 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/08 19:37:47 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:11:38 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-static int	ft_strcmp(const char *s1, const char *s2)
+// envと一致する文字列が環境変数として有効なものかチェック
+static int	check_valid_env(t_token *token, int i, int len)
 {
-	size_t	i;
+	int	value_len;
 
-	if (!s1 || !s2)
-		return (-1);
-	i = 0;
-	while (s1[i] && s2[i])
+	if (token->squote[i])
+		return (FAILED);
+	value_len = ft_strlen(token->value);
+	if (i && token->value[i - 1] == '{')
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+		if (value_len > i + len && token->value[i + len] != '}')
+			return (FAILED);
+		i--;
 	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	if (i == 1 && token->value[i - 1] == '$')
+		return (SUCCESS);
+	if (i == 2 && token->value[i - 1] == '$' && token->value[i - 2] != '\\')
+		return (SUCCESS);
+	if (i > 2 && token->value[i - 1] == '$')
+	{
+		if (token->value[i - 2] != '\\')
+			return (SUCCESS);
+		else if (token->value[i - 3] == '\\')
+			return (SUCCESS);
+		else
+			return (FAILED);
+	}
+	return (FAILED);
 }
 
-// static int	check_literal(char *value)
-// {
-// 	int	len;
+// 何個目のenvと一致する文字列を使うべきかを返す
+static int	count_env(t_token *token, char *env)
+{
+	int	i;
+	int	j;
+	int	count;
 
-// 	if (!value || value[0] == '\0')
-// 		return (1);
-// 	len = ft_strlen(value);
-// 	if ((value[0] == '\'' && value[len - 1] == '\'') || (value[0] == '\"'
-// 			&& value[len - 1] == '\"'))
-// 		return (0);
-// 	return (1);
-// }
+	i = 0;
+	count = 0;
+	while (token->value[i])
+	{
+		j = 0;
+		while (token->value[i + j] == env[j] && env[j])
+			j++;
+		if (!env[j])
+		{
+			count++;
+			if (check_valid_env(token, i, ft_strlen(env)))
+				return (count);
+		}
+		i++;
+	}
+	return (FAILED);
+}
 
-// static int	check_invalid(char *value)
-// {
-// 	int	len;
+static void	search_keyword2(t_token *token, t_tokenlist *tokenlist)
+{
+	if (check_redirection(token, '>', tokenlist))
+		return ;
+	if (check_redirection(token, '<', tokenlist))
+		return ;
+	if (check_backslash(token, tokenlist))
+		return ;
+	if (check_double_symbol(token, ">>", tokenlist))
+		return ;
+	if (check_double_symbol(token, "<<", tokenlist))
+		return ;
+	if (check_squote(token, tokenlist))
+		return ;
+	if (check_dquote(token, tokenlist))
+		return ;
+	if (check_assignment(token, tokenlist))
+		return ;
+}
 
-// 	if (!value || value[0] == '\0')
-// 		return (1);
-// 	len = ft_strlen(value);
-// 	if (value[0] == '\'' && value[len - 1] != '\'')
-// 		return (0);
-// 	if (value[0] == '\"' && value[len - 1] != '\"')
-// 		return (0);
-// 	if (value[len - 1] == '\\')
-// 		return (0);
-// 	return (1);
-// }
+// tokenのvalueの中から、キーワードを探し、見つけた場合はsplitする
+static void	search_keyword(t_token *token, t_tokenlist *tokenlist)
+{
+	char	*env;
+	int		count;
+
+	env = check_env_var(token, tokenlist);
+	if (env)
+	{
+		count = count_env(token, env);
+		if (count)
+			return (split_token(tokenlist, env, token, count), free(env));
+	}
+	count = check_exit_status(token);
+	if (count)
+		return (split_token(tokenlist, ft_strdup("$?"), token, count));
+	if (check_single_symbol(token, ';', tokenlist))
+		return ;
+	if (check_single_symbol(token, '&', tokenlist))
+		return ;
+	if (check_single_symbol(token, '|', tokenlist))
+		return ;
+	if (check_single_symbol(token, '{', tokenlist))
+		return ;
+	if (check_single_symbol(token, '}', tokenlist))
+		return ;
+	search_keyword2(token, tokenlist);
+}
 
 // token_typeの割当
-void	check_token(t_token *token)
+void	check_tokentype(t_token *token, t_tokenlist *tokenlist)
 {
-	if (!token->value || token->value[0] == '\0')
-		token->type = TOK_EOF;
-	else if (!ft_strcmp(token->value, "<"))
-		token->type = TOK_REDIR_IN;
-	else if (!ft_strcmp(token->value, ">"))
-		token->type = TOK_REDIR_OUT;
-	else if (!ft_strcmp(token->value, "<<"))
-		token->type = TOK_HEREDOC;
-	else if (!ft_strcmp(token->value, ">>"))
-		token->type = TOK_REDIR_APPEND;
-	else if (!ft_strcmp(token->value, "|"))
-		token->type = TOK_PIPE;
-	else if (!ft_strcmp(token->value, "&"))
-		token->type = TOK_AMPERSAND;
-	else if (!ft_strcmp(token->value, "("))
-		token->type = TOK_LPAREN;
-	else if (!ft_strcmp(token->value, ")"))
-		token->type = TOK_RPAREN;
-	else if (!ft_strcmp(token->value, "$?"))
-		token->type = TOK_EXIT_STATUS;
-	else if (!ft_strcmp(token->value, "\n"))
-		token->type = TOK_NEWLINE;
-	else
-		token->type = 0;
+	int	i;
+
+	if (!token || !token->value)
+		return ;
+	token->count = 1;
+	token->type = -1;
+	search_keyword(token, tokenlist);
+	if (token->count > 1 && token->split_token)
+	{
+		i = 0;
+		while (i < token->count)
+		{
+			if (token->split_token[i]->value)
+				check_tokentype(token->split_token[i], tokenlist);
+			i++;
+		}
+	}
 }

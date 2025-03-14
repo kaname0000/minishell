@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_dquote.c                                     :+:      :+:    :+:   */
+/*   check_single_symbol.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 03:25:14 by okamotoyota       #+#    #+#             */
-/*   Updated: 2025/03/14 01:48:51 by yookamot         ###   ########.fr       */
+/*   Created: 2025/03/13 15:32:49 by yookamot          #+#    #+#             */
+/*   Updated: 2025/03/13 19:58:27 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "check_tokentype.h"
 
-static int	count_dquote(t_token *token)
+static int	count_signle_symbol(t_token *token, int c)
 {
 	int	i;
 	int	count;
@@ -21,37 +21,32 @@ static int	count_dquote(t_token *token)
 	count = 0;
 	while (token->value[i])
 	{
-		if (token->value[i] == '"')
+		if (token->value[i] == c)
 		{
 			count++;
-			if (token->squote[i])
+			if (token->squote[i] || token->dquote[i] || (i != 0
+					&& token->value[i - 1] == '\\'))
 				break ;
-			if (i == 1 && token->value[i - 1] == '\\')
-				break ;
-			if (i > 1 && token->value[i - 1] == '\\' && token->value[i
-				- 2] != '\\')
-				break ;
-			return (count);
+			else
+				return (count);
 		}
 		i++;
 	}
 	return (FAILED);
 }
 
-int	check_dquote(t_token *token, t_tokenlist *tokenlist)
+int	check_single_symbol(t_token *token, int c, t_tokenlist *tokenlist)
 {
 	int		count;
 	char	*symbol;
 
-	if (!ft_strcmp(token->value, "\""))
-		return (SUCCESS);
-	count = count_dquote(token);
+	count = count_signle_symbol(token, c);
 	if (!count)
 		return (FAILED);
 	symbol = (char *)malloc(sizeof(char) * 2);
 	if (!symbol)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
-	symbol[0] = '"';
+	symbol[0] = (char)c;
 	symbol[1] = '\0';
 	split_token(tokenlist, symbol, token, count);
 	if (token->type != TOK_SPLIT)
