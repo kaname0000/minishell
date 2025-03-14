@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_dquote.c                                     :+:      :+:    :+:   */
+/*   check_assignment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 03:25:14 by okamotoyota       #+#    #+#             */
-/*   Updated: 2025/03/14 01:48:51 by yookamot         ###   ########.fr       */
+/*   Created: 2025/03/13 17:57:13 by yookamot          #+#    #+#             */
+/*   Updated: 2025/03/13 18:47:45 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "check_tokentype.h"
 
-static int	count_dquote(t_token *token)
+static int	check_valid_word(char *value, int i)
+{
+	if (!value[i + 1])
+		return (FAILED);
+	while (i > 0)
+	{
+		if (!ft_isalnum(value[i]) && value[i] != '_')
+			return (FAILED);
+		i--;
+	}
+	if (!ft_isalpha(value[0]) || value[0] != '_')
+		return (FAILED);
+	return (SUCCESS);
+}
+
+static int	count_assignment(t_token *token)
 {
 	int	i;
 	int	count;
@@ -21,39 +36,28 @@ static int	count_dquote(t_token *token)
 	count = 0;
 	while (token->value[i])
 	{
-		if (token->value[i] == '"')
+		if (token->value[i] == '=')
 		{
 			count++;
-			if (token->squote[i])
-				break ;
-			if (i == 1 && token->value[i - 1] == '\\')
-				break ;
-			if (i > 1 && token->value[i - 1] == '\\' && token->value[i
-				- 2] != '\\')
-				break ;
-			return (count);
+			if (token->squote[i] || token->dquote[i]
+				|| !check_valid_word(token->value, i))
+				return (FAILED);
+			else
+				return (count);
 		}
 		i++;
 	}
 	return (FAILED);
 }
 
-int	check_dquote(t_token *token, t_tokenlist *tokenlist)
+int	check_assignment(t_token *token, t_tokenlist *tokenlist)
 {
-	int		count;
-	char	*symbol;
+	int	count;
 
-	if (!ft_strcmp(token->value, "\""))
-		return (SUCCESS);
-	count = count_dquote(token);
+	count = count_assignment(token);
 	if (!count)
 		return (FAILED);
-	symbol = (char *)malloc(sizeof(char) * 2);
-	if (!symbol)
-		free_tokenlist(tokenlist, NULL, NULL, FAILED);
-	symbol[0] = '"';
-	symbol[1] = '\0';
-	split_token(tokenlist, symbol, token, count);
+	split_token(tokenlist, ft_strdup("="), token, count);
 	if (token->type != TOK_SPLIT)
 		return (FAILED);
 	return (SUCCESS);

@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexical_analysis.c                                 :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 16:08:50 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/14 13:11:00 by yookamot         ###   ########.fr       */
+/*   Created: 2025/03/06 19:37:21 by yookamot          #+#    #+#             */
+/*   Updated: 2025/03/10 17:37:31 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-//字句解析
-void	lexical_analysis(char *input, t_tokenlist *tokenlist)
+# include "../analysis.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+enum				e_nodetype
 {
-	int	i;
-	int	j;
+	NODE_CMD,
+	NODE_PIPE,
+	NODE_REDIR_IN,
+	NODE_REDIR_OUT
+};
 
-	get_tokens(input, tokenlist);
-	check_quote(tokenlist);
-	init_token(tokenlist);
-	i = 0;
-	while (i < tokenlist->set_count)
-	{
-		j = 0;
-		while (j < tokenlist->token_count[i])
-		{
-			check_tokentype(tokenlist->token[i][j], tokenlist);
-			j++;
-		}
-		i++;
-	}
-	traverse_token_list(tokenlist);
-}
+typedef struct s_ast
+{
+	e_nodetype		type;
+	char			**argv;
+	char			*filename;
+	struct s_ast	*left;
+	struct s_ast	*right;
+}					t_ast;
+
+#endif

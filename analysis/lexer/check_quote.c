@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:26:44 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/10 23:19:26 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/13 19:41:20 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,9 @@ void	check_quote(t_tokenlist *tokenlist)
 		{
 			malloc_flag_array(tokenlist, i, j);
 			k = 0;
-			while (k < ft_strlen(tokenlist->token[i][j]))
+			while (k < (int)ft_strlen(tokenlist->token[i][j]->value))
 			{
-				get_squote_info(tokenlist, i, j, k);
-				get_dquote_info(tokenlist, i, j, k);
+				get_quote_info(tokenlist, i, j, k);
 				k++;
 			}
 			j++;
