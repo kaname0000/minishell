@@ -2,7 +2,7 @@ NAME = analysis
 
 # コンパイラ設定
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I. -I./lexer -I./analysis_get_next_line -I./lexer/check_tokentype
+CFLAGS = -g -Wall -Wextra -Werror -I. -I./lexer -I./analysis_get_next_line -I./lexer/check_tokentype
 
 # ソースディレクトリ
 SRC_DIR_LEXER = ./lexer
@@ -10,15 +10,14 @@ SRC_DIR_GNL = ./analysis_get_next_line
 
 # ソースファイル
 SRCS_LEXER = $(SRC_DIR_LEXER)/analysis.c \
-             $(SRC_DIR_LEXER)/check_quote.c \
              $(SRC_DIR_LEXER)/check_tokentype.c \
              $(SRC_DIR_LEXER)/ft_split_custom.c \
              $(SRC_DIR_LEXER)/get_tokens.c \
              $(SRC_DIR_LEXER)/get_tokentype.c \
              $(SRC_DIR_LEXER)/init_token.c \
              $(SRC_DIR_LEXER)/lexical_analysis.c \
+             $(SRC_DIR_LEXER)/set_quote_info.c \
              $(SRC_DIR_LEXER)/split_token.c \
-             $(SRC_DIR_LEXER)/split_token_quote.c \
              $(SRC_DIR_LEXER)/test_main.c \
              $(SRC_DIR_LEXER)/traverse_tokens.c \
              $(SRC_DIR_LEXER)/free_tokenlist.c \

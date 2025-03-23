@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_tokentype.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:02:03 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/14 13:11:38 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:53:50 by okamotoyota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	check_valid_env(t_token *token, int i, int len)
 {
 	int	value_len;
 
-	if (token->squote[i])
+	if (token->squote)
 		return (FAILED);
 	value_len = ft_strlen(token->value);
 	if (i && token->value[i - 1] == '{')

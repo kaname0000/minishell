@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   split_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 01:59:24 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/14 12:39:25 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:11:25 by okamotoyota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-//１つめのvalue作る
+// １つめのvalue作る
 static char	*get_new_pre_value(const char *s1, const char *s2, int count)
 {
 	int		i;
@@ -46,7 +46,7 @@ static char	*get_new_pre_value(const char *s1, const char *s2, int count)
 	return (new);
 }
 
-//３つめのvalue作る
+// ３つめのvalue作る
 static char	*make_post_value(const char *s, int i)
 {
 	char	*new;
@@ -66,7 +66,7 @@ static char	*make_post_value(const char *s, int i)
 	return (new);
 }
 
-//３つめのvalueつくる
+// ３つめのvalueつくる
 static char	*get_new_post_value(const char *s1, const char *s2, int count)
 {
 	int	i;
@@ -87,7 +87,7 @@ static char	*get_new_post_value(const char *s1, const char *s2, int count)
 	return (ft_strdup(""));
 }
 
-//分割数と分割したトークンのvalueを格納
+// 分割数と分割したトークンのvalueを格納
 static void	remake_token(t_tokenlist *tokenlist, char **values, t_token *token,
 		char *str)
 {
@@ -118,7 +118,6 @@ static void	remake_token(t_tokenlist *tokenlist, char **values, t_token *token,
 	}
 	free(str);
 	free(values);
-	remake_quote(tokenlist, token);
 	token->type = TOK_SPLIT;
 }
 

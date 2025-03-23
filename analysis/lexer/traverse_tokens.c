@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_tokens.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:08:38 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/14 14:44:40 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/18 01:24:44 by okamotoyota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,23 @@ const char	*token_types[] = {"TOK_WORD", "TOK_ASSIGNMENT", "TOK_LITERAL",
 static void	process_token(t_token *token)
 {
 	static t_token	*pre_token;
+	static t_token	*pre_pre_token;
 
 	if (token->count == 1)
 	{
+		set_quote_info(token, pre_token, pre_pre_token);
+		printf("A\n");
 		get_tokentype(token, pre_token);
+		printf("A\n");
 		if (!ft_strcmp(token->value, "\n"))
 			printf("%-20s \\n           \n", token_types[token->type]);
 		else
 			printf("%-20s %-12s\n", token_types[token->type], token->value);
-		if (token->value)
+		printf("A\n");
+		if (pre_token && pre_pre_token)
+			pre_pre_token = pre_token;
+		printf("A\n");
+		if (token)
 			pre_token = token;
 	}
 }

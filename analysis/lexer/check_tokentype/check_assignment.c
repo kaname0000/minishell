@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_assignment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:57:13 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/13 18:47:45 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:58:16 by okamotoyota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	count_assignment(t_token *token)
 		if (token->value[i] == '=')
 		{
 			count++;
-			if (token->squote[i] || token->dquote[i]
+			if (token->squote || token->dquote
 				|| !check_valid_word(token->value, i))
 				return (FAILED);
 			else

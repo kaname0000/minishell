@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:55:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/14 14:19:07 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:58:45 by okamotoyota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,16 @@ enum					e_tokentype
 	TOK_NEWLINE,
 	TOK_NULL,
 	TOK_EOF,
-	TOK_SPLIT
+	TOK_SPLIT,
+	UNSIGNED
 };
 
 typedef struct s_token
 {
 	enum e_tokentype	type;
 	char				*value;
-	int					*squote;
-	int					*dquote;
+	int					squote;
+	int					dquote;
 	int					count;
 	struct s_token		**split_token;
 }						t_token;
@@ -80,18 +81,16 @@ void					free_tokenlist(t_tokenlist *tokenlist, char **array1,
 void					check_tokentype(t_token *token, t_tokenlist *tokenlist);
 char					**ft_split_custom(char *s, t_tokenlist *tokenlist,
 							int i);
-void					check_quote(t_tokenlist *tokenlist);
-void					free_flag_array(t_tokenlist *tokenlist);
 void					init_token(t_tokenlist *tokenlist);
 int						ft_strcmp(const char *s1, const char *s2);
 char					*ft_strstr(const char *s1, const char *s2);
 void					split_token(t_tokenlist *tokenlist, char *str,
 							t_token *token, int count);
 void					traverse_token_list(t_tokenlist *tokenlist);
-void					remake_quote(t_tokenlist *tokenlist, t_token *token);
 t_tokenlist				*analysis(char *input);
 void					get_tokentype(t_token *token, t_token *pre_token);
-
+void					set_quote_info(t_token *token, t_token *pre_token,
+							t_token *pre_pre_token);
 void					print_token(t_tokenlist *tokenlist);
 
 #endif

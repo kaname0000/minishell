@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:48:33 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/13 20:17:15 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:00:04 by okamotoyota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int	count_redirection(t_token *token, int c)
 			&& token->value[i + 1] != c)
 		{
 			count++;
-			if (token->squote[i] || token->dquote[i] || (i != 0
-					&& token->value[i - 1] == '\\'))
+			if (token->squote || token->dquote || (i != 0 && token->value[i
+					- 1] == '\\'))
 				break ;
 			else
 				return (count);

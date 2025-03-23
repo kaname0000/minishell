@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_dquote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 03:25:14 by okamotoyota       #+#    #+#             */
-/*   Updated: 2025/03/14 01:48:51 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:58:36 by okamotoyota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	count_dquote(t_token *token)
 		if (token->value[i] == '"')
 		{
 			count++;
-			if (token->squote[i])
+			if (token->squote)
 				break ;
 			if (i == 1 && token->value[i - 1] == '\\')
 				break ;

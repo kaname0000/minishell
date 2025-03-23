@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_exit_status.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:47:17 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/13 14:33:32 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:59:24 by okamotoyota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //$がvalue内に見つかるたびに呼び出され終了ステータスとして適切かチェック
 static int	is_valid_exit_status(t_token *token, int i)
 {
-	if (token->squote[i] || (i && token->value[i - 1] == '\\'))
+	if (token->squote || (i && token->value[i - 1] == '\\'))
 		return (FAILED);
 	return (SUCCESS);
 }
