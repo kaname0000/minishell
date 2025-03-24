@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:21:50 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/13 21:16:56 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:52:29 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,9 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-typedef struct s_info
-{
-	int	status;
-}		t_info;
-
 int		input(void);
 void	set_act(void);
+t_env	*env_init(char **env);
+void	free_list(t_env *head);
 
 #endif

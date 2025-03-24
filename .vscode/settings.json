@@ -5,6 +5,9 @@
         "analysis.h": "c",
         "error.h": "c",
         "redirector.h": "c",
-        "stat.h": "c"
+        "stat.h": "c",
+        "built_in.h": "c",
+        "types.h": "c",
+        "utils.h": "c"
     }
 }

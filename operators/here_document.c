@@ -6,16 +6,28 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:24:05 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/13 18:06:58 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:20:42 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operators.h"
 
-void	malloc_error(void)
+extern t_signal	g_variable;
+
+static void	exit_doc(char *char_EOF, int line)
 {
-	printf("malloc error");
-	exit(1);
+	char	*c_line;
+
+	c_line = ft_itoa(line);
+	if (c_line == NULL)
+		error_malloc(NULL, NULL);
+	ft_putstr_fd("bash: warning: here-document at line ", 2);
+	ft_putstr_fd(c_line, 2);
+	ft_putstr_fd(" delimited by end-of-file (wanted `", 2);
+	ft_putstr_fd(char_EOF, 2);
+	ft_putstr_fd("`)\n", 2);
+	free(c_line);
+	exit(0);
 }
 
 static int	get_doc(int pipefd, char *char_EOF)
@@ -27,7 +39,7 @@ static int	get_doc(int pipefd, char *char_EOF)
 	{
 		line = readline("> ");
 		if (line == NULL)
-			malloc_error();
+			exit_doc(char_EOF, 1);
 		if (!ft_strncmp(line, char_EOF, ft_strlen(char_EOF)))
 			return (free(line), 0);
 		write(pipefd, line, ft_strlen(line));
@@ -40,6 +52,7 @@ int	here_doc(char *char_EOF)
 {
 	int	pipefd[2];
 
+	g_variable.input_mode = HERE_DOC;
 	if (pipe(pipefd) < 0)
 		error_pipe();
 	get_doc(pipefd[1], char_EOF);

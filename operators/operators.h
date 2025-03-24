@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:38:22 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/13 20:12:26 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:38:43 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,21 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+# define COMMAND_LINE 1
+# define HERE_DOC 2
+
+typedef struct s_signal
+{
+	int		input_mode;
+}			t_signal;
+
 typedef struct s_command
 {
 	char	*cmd_path;
 	char	**cmd;
 	int		fd_in;
 	int		fd_out;
+	int		fd_err;
 	char	**envp;
 }			t_command;
 

@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 17:36:08 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/13 21:31:50 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/19 23:21:10 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,7 @@ static int	ft_atoi_with_error(char *n, int *error_flag)
 		i++;
 	}
 	while (ft_isdigit(n[i]))
-	{
-		if ((sign == 1 && (num > (INT_MAX - (n[i] - '0')) / 10)) || (sign == -1
-				&& (-num < (INT_MIN + (n[i] - '0')) / 10)))
-			*error_flag = 1;
 		num = num * 10 + (n[i++] - '0');
-	}
 	if (n[i] != '\0')
 		*error_flag = 1;
 	return ((int)num * sign);

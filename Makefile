@@ -6,12 +6,13 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/03 14:19:36 by okaname           #+#    #+#              #
-#    Updated: 2025/03/13 21:15:14 by okaname          ###   ########.fr        #
+#    Updated: 2025/03/24 20:51:19 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 hCC = cc
-CFLAGS = -Wall -Wextra -Werror -I./includes -fsanitize=address
+# CFLAGS = -Wall -Wextra -Werror -I./includes -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I./includes 
 LIBS = -lreadline
 
 MANDATORY = minishell
@@ -23,6 +24,7 @@ LIBFT = $(LIBFTDIR)/libft.a
 SRCS =  main.c \
 		input.c\
 		set_act.c\
+		env_init.c\
 		operators/get_full_path.c\
 		operators/redirector.c\
 		operators/here_document.c\
@@ -34,6 +36,13 @@ SRCS =  main.c \
 		error/error_5.c\
 		utils/utils.c\
 		built_in_command/exit.c\
+		built_in_command/cd.c\
+		built_in_command/echo.c\
+		built_in_command/env.c\
+		built_in_command/export.c\
+		built_in_command/pwd.c\
+		built_in_command/sort_env.c\
+		built_in_command/unset.c\
 
 OBJS = $(SRCS:.c=.o)
 

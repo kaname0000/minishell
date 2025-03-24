@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 18:37:12 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/13 21:20:20 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:39:31 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ static int	execve_child_process(t_command *cmd)
 	if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
 		error_redirect();
 	if (cmd->fd_out != STDOUT_FILENO && close(cmd->fd_out) == -1)
+		error_close();
+	if (dup2(cmd->fd_err, STDERR_FILENO) == -1)
+		error_redirect();
+	if (cmd->fd_err != STDERR_FILENO && close(cmd->fd_err) == -1)
 		error_close();
 	execve(cmd->cmd_path, cmd->cmd, cmd->envp);
 	perror("bash");

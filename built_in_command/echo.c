@@ -6,13 +6,11 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:46:28 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/13 17:28:23 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:54:58 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include <stdio.h>
-#include <unistd.h>
+#include "built_in.h"
 
 int	printf_var(char *str)
 {
@@ -73,14 +71,5 @@ int	echo(int nflag, char **strs)
 	}
 	if (!nflag)
 		printf("\n");
-	return (0);
-}
-
-int	main(int argc, char *argv[])
-{
-	char **strs;
-	(void)argc;
-	strs = ft_split(*argv, ' ');
-	echo(0, strs);
 	return (0);
 }

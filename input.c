@@ -6,11 +6,13 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:17:08 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/13 21:23:13 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/24 20:06:15 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_signal	g_variable;
 
 void	t(char *line)
 {
@@ -28,6 +30,7 @@ int	input(void)
 	line = NULL;
 	while (1)
 	{
+		g_variable.input_mode = COMMAND_LINE;
 		line = readline("minishell$ ");
 		if (line == NULL)
 		{
@@ -39,7 +42,8 @@ int	input(void)
 			free(line);
 			continue ;
 		}
-		t(line);
+		// t(line);
+		printf("%s\n", line);
 		add_history(line);
 		free(line);
 	}
