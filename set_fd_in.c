@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 22:19:09 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/25 22:25:51 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/26 00:30:03 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,9 @@ int	set_fd_in(t_command **cmd, t_token *token)
 	{
 		if ((token[i])->type == TOK_PIPE)
 			pipe_count++;
+		else if ((token[i])->type == TOK_REDIR_IN)
+		{
+			(cmd[pipe_count])->fd_in =
+		}
 	}
 }

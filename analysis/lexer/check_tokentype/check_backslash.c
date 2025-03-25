@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_backslash.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:19:06 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/13 19:58:07 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:58:25 by okamotoyota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "check_tokentype.h"
 
-//何個目のバックスラッシュが有効かカウント
+// 何個目のバックスラッシュが有効かカウント
 static int	count_backslash(t_token *token)
 {
 	int	i;
@@ -25,7 +25,7 @@ static int	count_backslash(t_token *token)
 		if (token->value[i] == '\\')
 		{
 			count++;
-			if (token->squote[i] || (i && token->value[i - 1] == '\\'))
+			if (token->squote || (i && token->value[i - 1] == '\\'))
 				break ;
 			else
 				return (count);
@@ -35,7 +35,7 @@ static int	count_backslash(t_token *token)
 	return (FAILED);
 }
 
-//バックスラッシュの有無をチェック
+// バックスラッシュの有無をチェック
 int	check_backslash(t_token *token, t_tokenlist *tokenlist)
 {
 	int		count;

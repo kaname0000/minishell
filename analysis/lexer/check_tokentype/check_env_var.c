@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_env_var.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:01:29 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/14 11:57:18 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:59:18 by okamotoyota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static int	check_literal(t_token *token, int i)
 {
 	if ((!ft_isalpha(token->value[i]) && token->value[i] != '_')
-		|| token->squote[i])
+		|| token->squote)
 		return (FAILED);
 	return (SUCCESS);
 }
@@ -30,10 +30,7 @@ static char	*get_env_var(char *value, int start, int end,
 
 	env = (char *)malloc(sizeof(char) * (end - start + 2));
 	if (!env)
-	{
-		free_flag_array(tokenlist);
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
-	}
 	i = 0;
 	while (i < end - start)
 	{

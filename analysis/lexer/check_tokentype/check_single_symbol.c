@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_single_symbol.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:32:49 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/13 19:58:27 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/17 10:01:24 by okamotoyota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	count_signle_symbol(t_token *token, int c)
 		if (token->value[i] == c)
 		{
 			count++;
-			if (token->squote[i] || token->dquote[i] || (i != 0
+			if (token->squote || token->dquote || (i != 0
 					&& token->value[i - 1] == '\\'))
 				break ;
 			else

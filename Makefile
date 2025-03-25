@@ -6,7 +6,7 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/03/26 00:15:08 by okaname          ###   ########.fr        #
+#    Updated: 2025/03/26 00:40:16 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,13 +46,14 @@ SRCS =  main.c \
 		built_in_command/sort_env.c\
 		built_in_command/unset.c\
 		analysis/lexer/analysis.c \
-        analysis/lexer/check_quote.c \
+        analysis/lexer/set_quote_info.c \
         analysis/lexer/check_tokentype.c \
         analysis/lexer/ft_split_custom.c \
         analysis/lexer/get_tokens.c \
         analysis/lexer/get_tokentype.c \
         analysis/lexer/init_token.c \
         analysis/lexer/lexical_analysis.c \
+        analysis/lexer/reshape_tokenlist.c \
         analysis/lexer/split_token.c \
         analysis/lexer/split_token_quote.c \
         analysis/lexer/test_main.c \

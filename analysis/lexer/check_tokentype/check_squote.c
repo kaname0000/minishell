@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_squote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 03:25:14 by okamotoyota       #+#    #+#             */
-/*   Updated: 2025/03/13 20:16:40 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:59:45 by okamotoyota      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static int	count_squote(t_token *token)
 		if (token->value[i] == '\'')
 		{
 			count++;
-			if (token->dquote[i])
+			if (token->dquote)
 				break ;
-			if (i == 1 && token->value[i - 1] == '\\' && !token->squote[i - 1])
+			if (i == 1 && token->value[i - 1] == '\\' && !token->squote)
 				break ;
 			if (i > 1 && token->value[i - 1] == '\\' && token->value[i
-				- 2] != '\\' && !token->squote[i - 1])
+				- 2] != '\\' && !token->squote)
 				break ;
 			else
 				return (count);
