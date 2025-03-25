@@ -6,35 +6,37 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/03/25 23:16:04 by okaname          ###   ########.fr        #
+#    Updated: 2025/03/26 00:15:08 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 # CFLAGS = -Wall -Wextra -Werror -I./includes -fsanitize=address
 CFLAGS = -Wall -Wextra -Werror -I./includes 
-LIBS = -lreadline -L./libft -lft
+LIBS = -lreadline
 
 MANDATORY = minishell
 BONUS = minishell_bonus
 
-ANALYSISDIR = ./analysis
-ANALYSIS = $(ANALYSISDIR)/analysis.a
+LIBFTDIR = ./libft
+LIBFT = $(LIBFTDIR)/libft.a
 
 SRCS =  main.c \
 		input.c\
 		set_act.c\
-		openfile.c\
 		env_init.c\
 		operators/get_full_path.c\
 		operators/redirector.c\
 		operators/here_document.c\
+		openfile.c\
 		error/error_1.c\
 		error/error_2.c\
 		error/error_3.c\
 		error/error_4.c\
 		error/error_5.c\
 		utils/utils.c\
+		get_next_line/get_next_line.c\
+		get_next_line/get_next_line_utils.c\
 		built_in_command/exit.c\
 		built_in_command/cd.c\
 		built_in_command/echo.c\
@@ -43,19 +45,43 @@ SRCS =  main.c \
 		built_in_command/pwd.c\
 		built_in_command/sort_env.c\
 		built_in_command/unset.c\
+		analysis/lexer/analysis.c \
+        analysis/lexer/check_quote.c \
+        analysis/lexer/check_tokentype.c \
+        analysis/lexer/ft_split_custom.c \
+        analysis/lexer/get_tokens.c \
+        analysis/lexer/get_tokentype.c \
+        analysis/lexer/init_token.c \
+        analysis/lexer/lexical_analysis.c \
+        analysis/lexer/split_token.c \
+        analysis/lexer/split_token_quote.c \
+        analysis/lexer/test_main.c \
+        analysis/lexer/traverse_tokens.c \
+        analysis/lexer/free_tokenlist.c \
+        analysis/lexer/utils.c \
+        analysis/lexer/check_tokentype/check_single_symbol.c \
+        analysis/lexer/check_tokentype/check_double_symbol.c \
+        analysis/lexer/check_tokentype/check_env_var.c \
+        analysis/lexer/check_tokentype/check_exit_status.c \
+        analysis/lexer/check_tokentype/check_squote.c \
+        analysis/lexer/check_tokentype/check_dquote.c \
+        analysis/lexer/check_tokentype/check_backslash.c \
+        analysis/lexer/check_tokentype/check_redirection.c \
+        analysis/lexer/check_tokentype/check_assignment.c\
 
 OBJS = $(SRCS:.c=.o)
 
 all: $(MANDATORY)
 
-$(MANDATORY): $(ANALYSIS) $(OBJS) 
-	$(CC) $(CFLAGS) $(ANALYSIS) $(OBJS) $(LIBS) -o $@
+$(MANDATORY): $(LIBFT) $(OBJS) 
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBS) -o $@
 
-$(BONUS): $(ANALYSIS) $(OBJS) 
-	$(CC) $(CFLAGS) $(ANALYSIS) $(OBJS) $(LIBS) -o $@
+$(BONUS): $(LIBFT) $(OBJS) 
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBS) -o $@
 
-$(ANALYSIS):
-	make -C $(ANALYSISDIR) 
+
+$(LIBFT):
+	make -C $(LIBFTDIR) bonus
 
 bonus: $(BONUS)
 
@@ -64,11 +90,13 @@ bonus: $(BONUS)
 
 clean:
 	rm -f $(OBJS) 
-	make -C $(ANALYSISDIR) clean
+	make -C $(LIBFTDIR) clean
+# 	make -C $(PIPEXDIR) clean
 
 fclean: clean
 	rm -f $(MANDATORY) $(BONUS)
-	make -C $(ANALYSISDIR) fclean
+	make -C $(LIBFTDIR) fclean
+#	make -C $(PIPEXDIR) fclean
 
 re: fclean all
 

@@ -1,1 +1,10 @@
-cmd infile outfileの３つ並びは６通りすべて実行できる
+echo "Hello, World!" > output.txt | cat input.txt
+echo "This is a test" && ls -l | grep "test" ; cat >> result.txt
+$USER
+$USER
+echo $USER && echo $PATH
+echo "Single quotes: 'foo'" ; echo "Double quotes: \"bar\""
+echo \n > file.txt ; cat file.txt
+$USER
+echo "Hello
+world"
