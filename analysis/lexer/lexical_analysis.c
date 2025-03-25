@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexical_analysis.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 16:08:50 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/26 00:38:51 by okaname          ###   ########.fr       */
+/*   Created: 2025/03/26 01:04:00 by yookamot          #+#    #+#             */
+/*   Updated: 2025/03/26 01:04:02 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 // 字句解析
 void	lexical_analysis(char *input, t_tokenlist *tokenlist)
 {
-	int	i;
-	int	j;
+	int			i;
+	int			j;
+	t_tokenset	*tokenset;
 
 	// t_tokenset	*tokenset;
 	get_tokens(input, tokenlist);

@@ -5,8 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2025/03/26 00:34:42 by okaname           #+#    #+#             */
 /*   Updated: 2025/03/26 00:52:14 by okaname          ###   ########.fr       */
+=======
+/*   Created: 2025/03/03 15:55:45 by yookamot          #+#    #+#             */
+/*   Updated: 2025/03/26 00:29:44 by yookamot         ###   ########.fr       */
+>>>>>>> d79cecb (muzuine)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +102,7 @@ t_tokenlist				*analysis(char *input);
 void					get_tokentype(t_token *token, t_token *pre_token);
 void					set_quote_info(t_token *token, t_token *pre_token,
 							t_token *pre_pre_token);
-void					print_token(t_tokenlist *tokenlist);
+t_tokenset				*reshape_tokenlist(char *input, t_tokenlist *tokenlist);
+void					tokenize_with_quotes(char *input, t_tokenset *tokenset);
 
 #endif

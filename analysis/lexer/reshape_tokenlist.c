@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 22:25:08 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/25 23:45:03 by yookamot         ###   ########.fr       */
+/*   Created: 2025/03/26 01:03:47 by yookamot          #+#    #+#             */
+/*   Updated: 2025/03/26 01:03:48 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ t_tokenset	*reshape_tokenlist(char *input, t_tokenlist *tokenlist)
 		tokenset->token[n] = get_nth_token(tokenlist, n);
 		n++;
 	}
-	free(tokenlist->set_count);
+	free(tokenlist->token_count);
 	free(tokenlist);
 	tokenize_with_quotes(input, tokenset);
 }
