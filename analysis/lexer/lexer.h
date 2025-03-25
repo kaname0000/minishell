@@ -6,14 +6,14 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 00:34:42 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/26 00:34:53 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/26 00:52:14 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# include "../../get_next_line/get_next_line.h"
+# include "../../get_next_line.h"
 # include "../../libft/libft.h"
 # include "../analysis.h"
 # include "check_tokentype/check_tokentype.h"
