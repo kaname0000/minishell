@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 01:59:24 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/17 10:11:25 by okamotoyota      ###   ########.fr       */
+/*   Updated: 2025/03/25 22:23:24 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,11 @@ static void	remake_token(t_tokenlist *tokenlist, char **values, t_token *token,
 				return (free(str), free_tokenlist(tokenlist, values, NULL,
 						FAILED));
 			token->split_token[l]->value = values[k];
+			token->split_token[l]->type = UNSIGNED;
 			l++;
 		}
 		k++;
 	}
-	free(str);
 	free(values);
 	token->type = TOK_SPLIT;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_quote_info.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 17:09:00 by okamotoyota       #+#    #+#             */
-/*   Updated: 2025/03/17 10:16:22 by okamotoyota      ###   ########.fr       */
+/*   Updated: 2025/03/23 20:22:01 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,20 @@ void	set_quote_info(t_token *token, t_token *pre_token,
 		{
 			set_quote_after_backslash(token, pre_token, pre_pre_token);
 			return ;
+		}
+	}
+	else
+	{
+		if (!ft_strcmp(token->value, "'"))
+		{
+			token->type = TOK_SQUOTE_START;
+			token->squote = 1;
+			return ;
+		}
+		else if (!ft_strcmp(token->value, "\""))
+		{
+			token->type = TOK_DQUOTE_START;
+			token->dquote = 1;
 		}
 	}
 }

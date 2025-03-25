@@ -1,1 +1,1 @@
-echo "Hello, World!\" > output.txt | cat input.txt
+$USER

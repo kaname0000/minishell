@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_tokentype.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 13:11:59 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/17 17:57:51 by okamotoyota      ###   ########.fr       */
+/*   Updated: 2025/03/23 20:11:24 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

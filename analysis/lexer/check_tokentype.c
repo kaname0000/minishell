@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_tokentype.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:02:03 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/17 09:53:50 by okamotoyota      ###   ########.fr       */
+/*   Updated: 2025/03/25 21:55:23 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	check_tokentype(t_token *token, t_tokenlist *tokenlist)
 	if (!token || !token->value)
 		return ;
 	token->count = 1;
-	token->type = -1;
+	token->type = UNSIGNED;
 	search_keyword(token, tokenlist);
 	if (token->count > 1 && token->split_token)
 	{

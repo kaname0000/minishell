@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:55:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/17 17:58:45 by okamotoyota      ###   ########.fr       */
+/*   Updated: 2025/03/25 22:38:15 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ typedef struct s_tokenlist
 	int					set_count;
 	int					*token_count;
 }						t_tokenlist;
+
+typedef struct s_tokenset
+{
+	t_token				**token;
+	int					count;
+}						t_tokenset;
 
 # define FAILED 0
 # define SUCCESS 1
