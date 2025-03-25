@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:15:28 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/24 20:54:41 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/25 19:59:19 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUILT_IN_H
 
 # include "../utils/utils.h"
+# include <stdbool.h>
 # include <stdlib.h>
 
 typedef struct s_env
@@ -26,7 +27,10 @@ typedef struct s_env
 typedef struct s_mini
 {
 	t_env			*var_env;
-	int				status;
+	int				exit_status;
+	char			*input;
+	int				origin_fd_in;
+	int				origin_fd_out;
 }					t_mini;
 
 void				ft_exit(char **strs);
@@ -34,5 +38,6 @@ int					ft_pwd(void);
 void				print_sorted_env(t_env *head);
 void				print_list(t_env *head);
 int					ft_pwd(void);
+int					ft_echo(int nflag, char **strs, t_env *env);
 
 #endif

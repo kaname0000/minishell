@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:55:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/14 14:19:07 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/25 23:01:28 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
+# include "../../get_next_line/get_next_line.h"
+# include "../../libft/libft.h"
 # include "../analysis.h"
-# include "../analysis_get_next_line/get_next_line.h"
-# include "../analysis_libft/libft.h"
 # include "check_tokentype/check_tokentype.h"
 # include <stdio.h>
 # include <stdlib.h>

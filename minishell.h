@@ -6,13 +6,14 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:21:50 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/24 20:52:29 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/25 22:31:17 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+// # include "analysis/analysis.h"
 # include "built_in_command/built_in.h"
 # include "libft/libft.h"
 # include "operators/operators.h"

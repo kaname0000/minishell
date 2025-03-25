@@ -1,12 +1,16 @@
 NAME = analysis
+LIB_NAME = analysis.a
 
 # コンパイラ設定
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I. -I./lexer -I./analysis_get_next_line -I./lexer/check_tokentype
+CFLAGS = -Wall -Wextra -Werror -I. -I./lexer -I../get_next_line -I./lexer/check_tokentype
 
 # ソースディレクトリ
 SRC_DIR_LEXER = ./lexer
-SRC_DIR_GNL = ./analysis_get_next_line
+SRC_DIR_GNL = ../get_next_line
+
+LIBFTDIR = ../libft
+LIBFT = $(LIBFTDIR)/libft.a
 
 # ソースファイル
 SRCS_LEXER = $(SRC_DIR_LEXER)/analysis.c \
@@ -41,11 +45,12 @@ OBJS_LEXER = $(SRCS_LEXER:.c=.o)
 OBJS_GNL = $(SRCS_GNL:.c=.o)
 
 # コンパイルターゲット
-all: $(NAME)
+all: $(LIB_NAME)
 
-$(NAME): $(OBJS_LEXER) $(OBJS_GNL) libft
-	$(CC) $(CFLAGS) $(OBJS_LEXER) $(OBJS_GNL) -L./analysis_libft -lft -o $(NAME)
+$(LIB_NAME): $(OBJS_LEXER) $(OBJS_GNL) $(LIBFT)
+	ar rcs $@ $^
 
+# 個別のオブジェクトファイルの作成
 $(SRC_DIR_LEXER)/%.o: $(SRC_DIR_LEXER)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -53,18 +58,18 @@ $(SRC_DIR_GNL)/%.o: $(SRC_DIR_GNL)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # libftのコンパイルを呼び出し
-libft:
-	$(MAKE) -C ./analysis_libft
+$(LIBFT):
+	$(MAKE) -C ../libft bonus
 
 # クリーンアップ
 clean:
 	rm -f $(OBJS_LEXER) $(OBJS_GNL)
-	$(MAKE) -C ./analysis_libft clean
+	$(MAKE) -C ../libft clean
 
 # 完全なクリーンアップ（実行ファイルを削除）
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C ./analysis_libft fclean
+	rm -f $(LIB_NAME)
+	$(MAKE) -C ../libft fclean
 
 # 再ビルド
 re: fclean all

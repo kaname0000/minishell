@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:20:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/24 20:46:52 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/25 23:18:58 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,30 @@ t_signal	g_variable;
 // 	minishell.var_env = env_init(envp);
 // 	set_act();
 // 	cmd.cmd = ft_split(argv[1], ' ');
-// 	cmd.fd_in = here_doc(argv[2]);
+// 	// cmd.fd_in = here_doc(argv[2]);
+// 	cmd.fd_in = open_infile(argv[1]);
 // 	cmd.fd_out = 1;
 // 	cmd.fd_err = open("error.txt", O_RDWR);
 // 	cmd.envp = envp;
-// 	redirector(&cmd);
+// 	// redirector(&cmd);
 // 	return (0);
 // }
 
-int	main(int argc, char *argv[], char **envp)
-{
-	t_mini	minishell;
+// int	main(int argc, char *argv[], char **envp)
+// {
+// 	t_mini	minishell;
 
-	(void)argc;
-	(void)argv;
-	minishell.var_env = env_init(envp);
-	set_act();
-	input();
+// 	(void)argc;
+// 	(void)argv;
+// 	minishell.var_env = env_init(envp);
+// 	set_act();
+// 	// input();
+// 	ft_echo(1, &argv[1], minishell.var_env);
+// 	return (0);
+// }
+
+int	main(void)
+{
+	ft_putstr_fd("hello", 1);
 	return (0);
 }

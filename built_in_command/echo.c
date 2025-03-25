@@ -6,33 +6,44 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:46:28 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/24 20:54:58 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/25 18:30:57 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_in.h"
 
-int	printf_var(char *str)
+int	print_var(char *str, t_env *env)
 {
-	return (printf("%s", str));
+	t_env	*tmp;
+	int		len;
+
+	tmp = env;
+	len = ft_strlen(str);
+	while (tmp != NULL)
+	{
+		if (ft_strncmp(str, tmp->key, len) == 0)
+			return (printf("%s\n", tmp->value));
+		tmp = tmp->next;
+	}
+	return (printf("\n"));
 }
 
-int	printf_str(char *str)
+int	print_str(char *str)
 {
-	int	i;
-	int	flag;
-	int	count;
+	int		i;
+	bool	flag;
+	int		count;
 
 	i = 0;
-	flag = 0;
+	flag = false;
 	count = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\\')
-			flag++;
-		if (flag ^ 1)
+			flag = true;
+		if (flag)
 		{
-			flag = 0;
+			flag = false;
 			i++;
 			continue ;
 		}
@@ -41,6 +52,7 @@ int	printf_str(char *str)
 		i++;
 		count++;
 	}
+	write(1, "\n", 1);
 	return (count);
 }
 
@@ -56,7 +68,7 @@ int is_valid$(char *str)
 	return (0);
 }
 
-int	echo(int nflag, char **strs)
+int	ft_echo(int nflag, char **strs, t_env *env)
 {
 	int	i;
 
@@ -64,9 +76,9 @@ int	echo(int nflag, char **strs)
 	while (strs[i] != NULL)
 	{
 		if (is_valid$(strs[i]))
-			printf_var(strs[i]);
+			print_var(&(strs[i][1]), env);
 		else
-			printf_str(strs[i]);
+			print_str(strs[i]);
 		i++;
 	}
 	if (!nflag)

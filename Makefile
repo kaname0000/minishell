@@ -5,30 +5,30 @@
 #                                                     +:+ +:+         +:+      #
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/03/03 14:19:36 by okaname           #+#    #+#              #
-#    Updated: 2025/03/24 20:51:19 by okaname          ###   ########.fr        #
+#    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
+#    Updated: 2025/03/25 23:16:04 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-hCC = cc
+CC = cc
 # CFLAGS = -Wall -Wextra -Werror -I./includes -fsanitize=address
 CFLAGS = -Wall -Wextra -Werror -I./includes 
-LIBS = -lreadline
+LIBS = -lreadline -L./libft -lft
 
 MANDATORY = minishell
 BONUS = minishell_bonus
 
-LIBFTDIR = ./libft
-LIBFT = $(LIBFTDIR)/libft.a
+ANALYSISDIR = ./analysis
+ANALYSIS = $(ANALYSISDIR)/analysis.a
 
 SRCS =  main.c \
 		input.c\
 		set_act.c\
+		openfile.c\
 		env_init.c\
 		operators/get_full_path.c\
 		operators/redirector.c\
 		operators/here_document.c\
-		operators/openfile.c\
 		error/error_1.c\
 		error/error_2.c\
 		error/error_3.c\
@@ -48,15 +48,14 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(MANDATORY)
 
-$(MANDATORY): $(LIBFT) $(OBJS) 
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBS) -o $@
+$(MANDATORY): $(ANALYSIS) $(OBJS) 
+	$(CC) $(CFLAGS) $(ANALYSIS) $(OBJS) $(LIBS) -o $@
 
-$(BONUS): $(LIBFT) $(OBJS) 
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBS) -o $@
+$(BONUS): $(ANALYSIS) $(OBJS) 
+	$(CC) $(CFLAGS) $(ANALYSIS) $(OBJS) $(LIBS) -o $@
 
-
-$(LIBFT):
-	make -C $(LIBFTDIR) bonus
+$(ANALYSIS):
+	make -C $(ANALYSISDIR) 
 
 bonus: $(BONUS)
 
@@ -65,13 +64,11 @@ bonus: $(BONUS)
 
 clean:
 	rm -f $(OBJS) 
-	make -C $(LIBFTDIR) clean
-# 	make -C $(PIPEXDIR) clean
+	make -C $(ANALYSISDIR) clean
 
 fclean: clean
 	rm -f $(MANDATORY) $(BONUS)
-	make -C $(LIBFTDIR) fclean
-#	make -C $(PIPEXDIR) fclean
+	make -C $(ANALYSISDIR) fclean
 
 re: fclean all
 

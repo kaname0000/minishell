@@ -6,11 +6,11 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 20:06:21 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/13 20:24:56 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/25 22:31:33 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operators.h"
+#include "minishell.h"
 
 static void	error_openfile(char *file)
 {
