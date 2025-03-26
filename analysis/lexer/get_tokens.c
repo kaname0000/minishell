@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:30:13 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/25 22:08:17 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/26 12:40:55 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ static int	count_line(char *input)
 }
 
 //各行をトークン化する
-void	get_tokens(char *input, t_tokenlist *tokenlist)
+void	get_tokens(t_tokenlist *tokenlist)
 {
 	char	**array;
 	int		i;
 
-	tokenlist->set_count = count_line(input);
-	array = ft_split(input, '\n');
+	tokenlist->set_count = count_line(tokenlist->input);
+	array = ft_split(tokenlist->input, '\n');
 	if (!array)
 		return (tokenlist->token = NULL, free_tokenlist(tokenlist, NULL, NULL,
 				FAILED));

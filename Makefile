@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
+#    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/03/26 00:51:52 by okaname          ###   ########.fr        #
+#    Updated: 2025/03/26 15:06:07 by yookamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror -I./includes -fsanitize=address
+#CFLAGS = -g -Wall -Wextra -Werror -I./includes -fsanitize=address
 CFLAGS = -Wall -Wextra -Werror -I./includes 
 LIBS = -lreadline
 
@@ -55,8 +55,8 @@ SRCS =  main.c \
         analysis/lexer/lexical_analysis.c \
         analysis/lexer/reshape_tokenlist.c \
         analysis/lexer/split_token.c \
-        analysis/lexer/split_token_quote.c \
         analysis/lexer/test_main.c \
+		analysis/lexer/tokenize_with_quotes.c \
         analysis/lexer/traverse_tokens.c \
         analysis/lexer/free_tokenlist.c \
         analysis/lexer/utils.c \

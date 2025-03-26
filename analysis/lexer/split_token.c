@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 01:59:24 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/25 22:23:24 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/26 14:58:45 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ static void	remake_token(t_tokenlist *tokenlist, char **values, t_token *token,
 						FAILED));
 			token->split_token[l]->value = values[k];
 			token->split_token[l]->type = UNSIGNED;
+			token->split_token[l]->split_token = NULL;
 			l++;
 		}
 		k++;

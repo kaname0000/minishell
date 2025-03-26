@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_tokenlist.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:28:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/17 09:55:49 by okamotoyota      ###   ########.fr       */
+/*   Updated: 2025/03/26 12:45:47 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,9 @@ void	free_tokenlist(t_tokenlist *tokenlist, char **array1, char **array2,
 		malloc_failed();
 	}
 	free_token_and_value(tokenlist, key);
+}
+
+void	free_tokenset(t_tokenset *tokenset)
+{
+	free(tokenset);
 }

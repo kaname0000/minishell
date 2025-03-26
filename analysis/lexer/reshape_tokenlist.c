@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:10:48 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/26 01:10:50 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:00:18 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static int	count_split_token(t_token *token)
 		count += count_split_token(token->split_token[i]);
 		i++;
 	}
-	return (count);
+	return (count - 1);
 }
 
 // tokenの総数をカウント
-static int	count_token(char *input, t_tokenlist *tokenlist)
+static int	count_token(t_tokenlist *tokenlist)
 {
 	int	count;
 	int	i;
@@ -52,23 +52,27 @@ static int	count_token(char *input, t_tokenlist *tokenlist)
 	return (count);
 }
 
-//再帰的にsplit_tokenの中までカウントしていき、n番目のトークンを取得する
+// 再帰的にsplit_tokenの中までカウントしていき、n番目のトークンを取得する
 static t_token	*find_nth_token(t_token *token, int *count, int n)
 {
 	int		i;
 	t_token	*result;
 
+	if (token->count > 0 && token->split_token)
+	{
+		i = 0;
+		while (i < token->count)
+		{
+			result = find_nth_token(token->split_token[i], count, n);
+			if (result)
+				return (result);
+			i++;
+		}
+		return (NULL);
+	}
 	if (*count == n)
 		return (token);
 	(*count)++;
-	i = 0;
-	while (i < token->count)
-	{
-		result = find_nth_token(token->split_token[i], count, n);
-		if (result)
-			return (result);
-		i++;
-	}
 	return (NULL);
 }
 
@@ -98,7 +102,7 @@ static t_token	*get_nth_token(t_tokenlist *tokenlist, int n)
 }
 
 //新たにtokensetを用意し、一次元配列でトークンを管理
-t_tokenset	*reshape_tokenlist(char *input, t_tokenlist *tokenlist)
+t_tokenset	*reshape_tokenlist(t_tokenlist *tokenlist)
 {
 	t_tokenset	*tokenset;
 	int			n;
@@ -107,7 +111,7 @@ t_tokenset	*reshape_tokenlist(char *input, t_tokenlist *tokenlist)
 	if (!tokenset)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
 	tokenset->count = count_token(tokenlist);
-	tokenset->token = (t_token **)malloc(sizeof(tokenset->count));
+	tokenset->token = (t_token **)malloc(sizeof(t_token *) * tokenset->count);
 	if (!tokenset->token)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
 	n = 0;
@@ -116,7 +120,12 @@ t_tokenset	*reshape_tokenlist(char *input, t_tokenlist *tokenlist)
 		tokenset->token[n] = get_nth_token(tokenlist, n);
 		n++;
 	}
+	n = 0;
+	// while (n < tokenset->count)
+	// 	free_array(tokenset->token[n++]->split_token);
+	tokenize_with_quotes(tokenlist->input, tokenset);
 	free(tokenlist->token_count);
+	free(tokenlist->input);
 	free(tokenlist);
-	tokenize_with_quotes(input, tokenset);
+	return (tokenset);
 }

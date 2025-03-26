@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:15:28 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/25 19:59:19 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/26 01:17:47 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define BUILT_IN_H
 
 # include "../utils/utils.h"
+# include <limits.h>
 # include <stdbool.h>
+# include <stdio.h>
 # include <stdlib.h>
 
 typedef struct s_env

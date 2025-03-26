@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 00:53:09 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/17 17:58:43 by okamotoyota      ###   ########.fr       */
+/*   Updated: 2025/03/26 12:38:21 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_token(t_tokenlist *tokenlist)
 			tokenlist->token[i][j]->count = 1;
 			tokenlist->token[i][j]->squote = 0;
 			tokenlist->token[i][j]->dquote = 0;
+			tokenlist->token[i][j]->split_token = NULL;
 			j++;
 		}
 		i++;

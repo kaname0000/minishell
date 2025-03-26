@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:10:38 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/26 01:10:39 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/26 12:53:32 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_token
 typedef struct s_tokenlist
 {
 	t_token				***token;
+	char				*input;
 	int					set_count;
 	int					*token_count;
 }						t_tokenlist;
@@ -80,7 +81,7 @@ typedef struct s_tokenset
 # define SUCCESS 1
 
 void					lexical_analysis(char *input, t_tokenlist *tokenlist);
-void					get_tokens(char *input, t_tokenlist *tokenlist);
+void					get_tokens(t_tokenlist *tokenlist);
 void					free_array(char **array);
 void					free_tokenlist(t_tokenlist *tokenlist, char **array1,
 							char **array2, int key);
@@ -97,7 +98,8 @@ t_tokenlist				*analysis(char *input);
 void					get_tokentype(t_token *token, t_token *pre_token);
 void					set_quote_info(t_token *token, t_token *pre_token,
 							t_token *pre_pre_token);
-t_tokenset				*reshape_tokenlist(char *input, t_tokenlist *tokenlist);
+t_tokenset				*reshape_tokenlist(t_tokenlist *tokenlist);
 void					tokenize_with_quotes(char *input, t_tokenset *tokenset);
+void					free_tokenset(t_tokenset *tokenset);
 
 #endif

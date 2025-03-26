@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 18:55:23 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/06 20:52:13 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/26 01:15:45 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../utils/utils.h"
 # include <errno.h>
+# include <stdio.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>

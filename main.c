@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:20:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/25 23:58:07 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/26 15:09:04 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(void)
 		free(line);
 	}
 	tokenlist = analysis(input);
-	free(line);
-	free(input);
-	free_tokenlist(tokenlist, NULL, NULL, SUCCESS);
+	// free(line);
+	// free(input);
+	// free_tokenlist(tokenlist, NULL, NULL, SUCCESS);
 }
