@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:38:22 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/24 20:38:43 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/26 16:38:58 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,8 @@ typedef struct s_command
 	char	**envp;
 }			t_command;
 
-int			open_outfile(char *outfile);
-int			open_infile(char *infile);
-int			open_appendfile(char *appendfile);
 char		*get_full_path(char *cmd, char **envp);
 pid_t		redirector(t_command *cmd);
-int			here_doc(char *char_EOF);
+int			here_doc(char *char_EOF, int *last, int *fd);
 
 #endif

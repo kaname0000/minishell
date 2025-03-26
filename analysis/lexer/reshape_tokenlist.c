@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reshape_tokenlist.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 22:25:08 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/25 23:45:03 by yookamot         ###   ########.fr       */
+/*   Created: 2025/03/26 16:43:46 by okaname           #+#    #+#             */
+/*   Updated: 2025/03/26 16:49:46 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	count_split_token(t_token *token)
 }
 
 // tokenの総数をカウント
-static int	count_token(char *input, t_tokenlist *tokenlist)
+static int	count_token(t_tokenlist *tokenlist)
 {
 	int	count;
 	int	i;
@@ -98,7 +98,7 @@ static t_token	*get_nth_token(t_tokenlist *tokenlist, int n)
 }
 
 //新たにtokensetを用意し、一次元配列でトークンを管理
-t_tokenset	*reshape_tokenlist(char *input, t_tokenlist *tokenlist)
+t_tokenset	*reshape_tokenlist(t_tokenlist *tokenlist)
 {
 	t_tokenset	*tokenset;
 	int			n;
@@ -116,7 +116,8 @@ t_tokenset	*reshape_tokenlist(char *input, t_tokenlist *tokenlist)
 		tokenset->token[n] = get_nth_token(tokenlist, n);
 		n++;
 	}
-	free(tokenlist->set_count);
+	free(tokenlist->token_count);
 	free(tokenlist);
-	tokenize_with_quotes(input, tokenset);
+	// tokenize_with_quotes(input, tokenset);
+	return (tokenset);
 }

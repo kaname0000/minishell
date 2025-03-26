@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 00:34:42 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/26 00:52:14 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/26 16:50:46 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ t_tokenlist				*analysis(char *input);
 void					get_tokentype(t_token *token, t_token *pre_token);
 void					set_quote_info(t_token *token, t_token *pre_token,
 							t_token *pre_pre_token);
+t_tokenset				*reshape_tokenlist(t_tokenlist *tokenlist);
 void					print_token(t_tokenlist *tokenlist);
 
 #endif

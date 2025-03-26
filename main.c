@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:20:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/25 23:58:07 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/26 16:57:17 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +33,14 @@ t_signal	g_variable;
 // 	return (0);
 // }
 
-// int	main(int argc, char *argv[], char **envp)
-// {
-// 	t_mini	minishell;
-
-// 	(void)argc;
-// 	(void)argv;
-// 	minishell.var_env = env_init(envp);
-// 	set_act();
-// 	// input();
-// 	ft_echo(1, &argv[1], minishell.var_env);
-// 	return (0);
-// }
-
-int	main(void)
+int	main(int argc, char *argv[], char **envp)
 {
-	char		*input;
-	char		*line;
-	int			fd;
-	t_tokenlist	*tokenlist;
+	t_mini	minishell;
 
-	fd = open("test.txt", O_RDONLY);
-	input = NULL;
-	while ((line = get_next_line(fd)))
-	{
-		input = ft_strjoin_gnl(input, line);
-		if (!input)
-			return (1);
-		free(line);
-	}
-	tokenlist = analysis(input);
-	free(line);
-	free(input);
-	free_tokenlist(tokenlist, NULL, NULL, SUCCESS);
+	(void)argc;
+	(void)argv;
+	minishell.var_env = env_init(envp);
+	set_act();
+	input(&minishell);
+	return (0);
 }

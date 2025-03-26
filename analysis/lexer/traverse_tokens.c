@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   traverse_tokens.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:08:38 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/25 22:46:32 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:53:06 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	traverse_token_list(t_tokenlist *tokenlist)
 		j = 0;
 		while (j < tokenlist->token_count[i])
 		{
-			traverse_tokens(tokenlist->token[i][j], 0);
+			traverse_tokens(tokenlist->token[i][j]);
 			j++;
 		}
 		i++;
