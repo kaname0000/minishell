@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:30:13 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/26 12:40:55 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/29 23:20:50 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static void	tokenize_command(char *command, t_tokenlist *tokenlist, int i,
 		return (tokenlist->token[i] = NULL, free_tokenlist(tokenlist, lines,
 				NULL, FAILED));
 	tokenlist->token_count[i] = count_word(array);
-	if (!array)
-		free_tokenlist(tokenlist, lines, array, FAILED);
 	tokenlist->token[i] = (t_token **)malloc(sizeof(t_token *)
 			* tokenlist->token_count[i]);
 	if (!tokenlist->token[i])
@@ -48,16 +46,14 @@ static void	tokenize_command(char *command, t_tokenlist *tokenlist, int i,
 		tokenlist->token[i][j] = (t_token *)malloc(sizeof(t_token));
 		if (!tokenlist->token[i][j])
 			free_tokenlist(tokenlist, lines, array, FAILED);
-		tokenlist->token[i][j]->value = ft_strdup(array[j]);
-		if (!tokenlist->token[i][j]->value)
-			free_tokenlist(tokenlist, lines, array, FAILED);
+		init_token(tokenlist->token[i][j], array[j], tokenlist);
 		j++;
 	}
 	tokenlist->token[i][j] = (t_token *)malloc(sizeof(t_token));
 	if (!tokenlist->token[i][j])
 		free_tokenlist(tokenlist, lines, array, FAILED);
-	tokenlist->token[i][j]->value = NULL;
-	return (free_array(array));
+	init_token(tokenlist->token[i][j], NULL, tokenlist);
+	free_array(array);
 }
 
 //行数のカウント

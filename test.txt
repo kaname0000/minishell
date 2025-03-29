@@ -1,2 +1,2 @@
-echo "hello world dsga    g" asd "DDDDD  "
-daffa echo 'aaa     a'
+ls nonexistent 2>> err<<or.log >> &>
+echo "AAA  df?dff  fd"

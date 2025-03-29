@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:20:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/26 17:29:21 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/29 23:16:40 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,5 @@ int	main(void)
 	}
 	tokenset = analysis(input);
 	print_tokenset(tokenset);
-	// free(line);
-	// free(input);
-	// free_tokenlist(tokenlist, NULL, NULL, SUCCESS);
+	free_tokenset(tokenset);
 }

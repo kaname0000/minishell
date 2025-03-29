@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:10:38 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/26 17:30:13 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/29 22:23:02 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_tokenset
 # define FAILED 0
 # define SUCCESS 1
 
-t_tokenset				*lexical_analysis(char *input, t_tokenlist *tokenlist);
+t_tokenset				*lexical_analysis(t_tokenlist *tokenlist);
 void					get_tokens(t_tokenlist *tokenlist);
 void					free_array(char **array);
 void					free_tokenlist(t_tokenlist *tokenlist, char **array1,
@@ -88,7 +88,8 @@ void					free_tokenlist(t_tokenlist *tokenlist, char **array1,
 void					check_tokentype(t_token *token, t_tokenlist *tokenlist);
 char					**ft_split_custom(char *s, t_tokenlist *tokenlist,
 							int i);
-void					init_token(t_tokenlist *tokenlist);
+void					init_token(t_token *token, char *str,
+							t_tokenlist *tokenlist);
 int						ft_strcmp(const char *s1, const char *s2);
 char					*ft_strstr(const char *s1, const char *s2);
 void					split_token(t_tokenlist *tokenlist, char *str,
@@ -99,7 +100,8 @@ void					get_tokentype(t_token *token, t_token *pre_token);
 void					set_quote_info(t_token *token, t_token *pre_token,
 							t_token *pre_pre_token);
 t_tokenset				*reshape_tokenlist(t_tokenlist *tokenlist);
-void					tokenize_with_quotes(char *input, t_tokenset *tokenset);
+void					tokenize_with_quotes(t_tokenlist *tokenlist,
+							t_tokenset *tokenset);
 void					free_tokenset(t_tokenset *tokenset);
 
 #endif

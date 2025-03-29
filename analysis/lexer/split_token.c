@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 01:59:24 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/26 14:58:45 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/29 23:32:06 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static void	remake_token(t_tokenlist *tokenlist, char **values, t_token *token,
 		token->count = 3;
 	token->split_token = (t_token **)malloc(sizeof(t_token *) * token->count);
 	if (!token->split_token)
-		return (free(str), free_tokenlist(tokenlist, values, NULL, FAILED));
+		free_tokenlist(tokenlist, &str, values, FAILED);
 	k = 0;
 	l = 0;
 	while (k < 3)
@@ -109,16 +109,14 @@ static void	remake_token(t_tokenlist *tokenlist, char **values, t_token *token,
 		{
 			token->split_token[l] = (t_token *)malloc(sizeof(t_token));
 			if (!token->split_token[l])
-				return (free(str), free_tokenlist(tokenlist, values, NULL,
-						FAILED));
-			token->split_token[l]->value = values[k];
-			token->split_token[l]->type = UNSIGNED;
-			token->split_token[l]->split_token = NULL;
+				free_tokenlist(tokenlist, &str, values, FAILED);
+			init_token(token->split_token[l], values[k], tokenlist);
 			l++;
 		}
 		k++;
 	}
-	free(values);
+	free_array(values);
+	free(str);
 	token->type = TOK_SPLIT;
 }
 
@@ -133,25 +131,25 @@ void	split_token(t_tokenlist *tokenlist, char *str, t_token *token,
 		return (free(str));
 	values = (char **)malloc(sizeof(char *) * 4);
 	if (!values)
-		return (free(str), free_tokenlist(tokenlist, NULL, NULL, FAILED));
+		free_tokenlist(tokenlist, &str, NULL, FAILED);
 	values[0] = get_new_pre_value(token->value, str, count);
 	if (!values[0])
-		return (free(str), free_tokenlist(tokenlist, values, NULL, FAILED));
+		free_tokenlist(tokenlist, &str, values, FAILED);
 	values[1] = ft_strdup(str);
 	if (!values[1])
-		return (free(str), free_tokenlist(tokenlist, values, NULL, FAILED));
+		free_tokenlist(tokenlist, &str, values, FAILED);
 	tmp = ft_strstr(token->value, str);
 	if (*(tmp + ft_strlen(str)))
 	{
 		values[2] = get_new_post_value(token->value, str, count);
 		if (!values[2])
-			return (free(str), free_tokenlist(tokenlist, values, NULL, FAILED));
+			free_tokenlist(tokenlist, &str, values, FAILED);
 	}
 	else
 	{
 		values[2] = ft_strdup("");
 		if (!values[2])
-			return (free(str), free_tokenlist(tokenlist, values, NULL, FAILED));
+			free_tokenlist(tokenlist, &str, values, FAILED);
 	}
 	values[3] = NULL;
 	remake_token(tokenlist, values, token, str);

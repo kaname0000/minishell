@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:56:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/26 17:27:47 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:35:26 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ t_tokenset	*analysis(char *input)
 	tokenlist = (t_tokenlist *)malloc(sizeof(t_tokenlist));
 	if (!tokenlist)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
-	tokenset = lexical_analysis(input, tokenlist);
+	tokenlist->input = input;
+	tokenset = lexical_analysis(tokenlist);
 	// syntax_analysis(tokenlist);
 	return (tokenset);
 }

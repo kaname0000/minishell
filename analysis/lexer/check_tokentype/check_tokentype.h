@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_tokentype.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:48:15 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/26 00:52:19 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/29 21:18:23 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,13 @@ int							check_dquote(t_token *token,
 								t_tokenlist *tokenlist);
 int							check_backslash(t_token *token,
 								t_tokenlist *tokenlist);
-int							check_redirection(t_token *token, int c,
+int							check_redirection_in(t_token *token,
+								t_tokenlist *tokenlist);
+int							check_redirection_out(t_token *token,
 								t_tokenlist *tokenlist);
 int							check_assignment(t_token *token,
+								t_tokenlist *tokenlist);
+int							check_ampersand(t_token *token, int c,
 								t_tokenlist *tokenlist);
 
 #endif

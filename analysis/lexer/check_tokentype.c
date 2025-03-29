@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:02:03 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/25 21:55:23 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/03/29 23:40:47 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,15 @@ static int	count_env(t_token *token, char *env)
 
 static void	search_keyword2(t_token *token, t_tokenlist *tokenlist)
 {
-	if (check_redirection(token, '>', tokenlist))
-		return ;
-	if (check_redirection(token, '<', tokenlist))
-		return ;
-	if (check_backslash(token, tokenlist))
+	if (check_double_symbol(token, "<<", tokenlist))
 		return ;
 	if (check_double_symbol(token, ">>", tokenlist))
 		return ;
-	if (check_double_symbol(token, "<<", tokenlist))
+	if (check_redirection_out(token, tokenlist))
+		return ;
+	if (check_redirection_in(token, tokenlist))
+		return ;
+	if (check_backslash(token, tokenlist))
 		return ;
 	if (check_squote(token, tokenlist))
 		return ;
@@ -98,14 +98,15 @@ static void	search_keyword(t_token *token, t_tokenlist *tokenlist)
 	{
 		count = count_env(token, env);
 		if (count)
-			return (split_token(tokenlist, env, token, count), free(env));
+			return (split_token(tokenlist, env, token, count));
+		free(env);
 	}
 	count = check_exit_status(token);
 	if (count)
 		return (split_token(tokenlist, ft_strdup("$?"), token, count));
 	if (check_single_symbol(token, ';', tokenlist))
 		return ;
-	if (check_single_symbol(token, '&', tokenlist))
+	if (check_ampersand(token, '&', tokenlist))
 		return ;
 	if (check_single_symbol(token, '|', tokenlist))
 		return ;
@@ -123,8 +124,6 @@ void	check_tokentype(t_token *token, t_tokenlist *tokenlist)
 
 	if (!token || !token->value)
 		return ;
-	token->count = 1;
-	token->type = UNSIGNED;
 	search_keyword(token, tokenlist);
 	if (token->count > 1 && token->split_token)
 	{
