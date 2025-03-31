@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
+#    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/03/29 20:47:27 by yookamot         ###   ########.fr        #
+#    Updated: 2025/04/01 00:37:46 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-#CFLAGS = -g -Wall -Wextra -Werror -I./includes -fsanitize=address
-CFLAGS = -Wall -Wextra -Werror -I./includes 
+CFLAGS = -g -Wall -Wextra -Werror -I./includes 
+# CFLAGS = -Wall -Wextra -Werror -I./includes -fsanitize=address
 LIBS = -lreadline
 
 MANDATORY = minishell
