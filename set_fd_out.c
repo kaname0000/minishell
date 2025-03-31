@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 01:12:26 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/01 03:58:10 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/01 07:47:22 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*can_access(char *outfile, bool *error_flag, char *open_file)
 {
 	if (*error_flag)
 		return (open_file);
-	if (access(outfile, F_OK) == 0 || access(outfile, W_OK) == -1)
+	if (access(outfile, F_OK) == 0 && access(outfile, W_OK) == -1)
 		*error_flag = true;
 	return (outfile);
 }

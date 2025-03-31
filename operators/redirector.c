@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 18:37:12 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/01 04:48:38 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/01 05:31:41 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,15 @@ pid_t	redirector(t_command *cmd)
 		if (execve_child_process(cmd) == -1)
 			return (free(cmd->cmd_path), -1);
 	}
+	if (cmd->fd_out != 1)
+		close(cmd->fd_out);
+	if (cmd->fd_in != 0)
+		close(cmd->fd_in);
 	if (waitpid(pid, &status, 0) == -1)
 	{
 		perror("waitpid");
 		return (free(cmd->cmd_path), 1);
 	}
-	if (WIFEXITED(status))
-		printf("Child exited with status %d\n", WEXITSTATUS(status));
 	return (free(cmd->cmd_path), pid);
 }
 

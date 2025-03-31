@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:37:03 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/01 04:56:23 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/01 05:55:14 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,23 @@ static t_command	**token_to_cmd(t_token **token, char **envp)
 	t_command	**cmd;
 	int			i;
 
-	cmd_count = count_pipe(token) + 2;
-	cmd = (t_command **)malloc(sizeof(t_command *) * cmd_count);
+	cmd_count = count_pipe(token) + 1;
+	cmd = (t_command **)malloc(sizeof(t_command *) * (cmd_count + 1));
 	if (cmd == NULL)
 		error_malloc(NULL, NULL);
 	i = 0;
-	while (i < cmd_count - 1)
+	while (i < cmd_count)
 	{
 		cmd[i] = (t_command *)malloc(sizeof(t_command));
 		cmd[i]->envp = envp;
 		i++;
 	}
-	cmd[cmd_count - 1] = NULL;
+	cmd[cmd_count] = NULL;
 	set_fd_in(cmd, token);
 	set_fd_out(cmd, token);
 	set_cmd(cmd, token);
+	if (cmd_count > 1)
+		conect_pipe(cmd);
 	return (cmd);
 }
 
@@ -102,13 +104,18 @@ void	print_cmd(t_command **cmd)
 int	run_token(t_mini *minishell)
 {
 	t_tokenset	*tokenlist;
+	int			i;
 
+	i = 0;
 	tokenlist = analysis(minishell->input);
-	printf("aaa\n");
-	print_tokenset(tokenlist);
+	// print_tokenset(tokenlist);
 	minishell->cmd = token_to_cmd(tokenlist->token,
 			list_to_char(minishell->var_env));
-	print_cmd(minishell->cmd);
-	// redirector(minishell->cmd[0]);
+	// print_cmd(minishell->cmd);
+	while ((minishell->cmd)[i] != NULL)
+	{
+		redirector((minishell->cmd)[i]);
+		i++;
+	}
 	return (0);
 }

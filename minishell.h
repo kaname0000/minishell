@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:21:50 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/01 01:11:08 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/01 05:12:52 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	set_act(void);
 t_env	*env_init(char **env);
 void	free_list(t_env *head);
 int		run_token(t_mini *minishell);
+void	conect_pipe(t_command **cmd);
 int		set_cmd(t_command **cmd, t_token **token);
 int		set_fd_out(t_command **cmd, t_token **token);
 int		set_fd_in(t_command **cmd, t_token **token);
