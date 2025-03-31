@@ -6,7 +6,7 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/04/01 00:37:46 by okaname          ###   ########.fr        #
+#    Updated: 2025/04/01 04:45:35 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,14 @@ SRCS =  main.c \
 		input.c\
 		set_act.c\
 		env_init.c\
+		run_token.c\
+		set_fd_in.c\
+		set_fd_out.c\
+		set_cmd.c\
 		operators/get_full_path.c\
 		operators/redirector.c\
 		operators/here_document.c\
-		openfile.c\
+		operators/envp_list_to_char.c\
 		error/error_1.c\
 		error/error_2.c\
 		error/error_3.c\

@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:24:05 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/24 20:20:42 by okaname          ###   ########.fr       */
+/*   Updated: 2025/03/26 16:42:24 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,19 @@ static int	get_doc(int pipefd, char *char_EOF)
 	}
 }
 
-int	here_doc(char *char_EOF)
+int	here_doc(char *char_EOF, int *last, int *fd)
 {
 	int	pipefd[2];
 
+	*last = HERE_DOC;
 	g_variable.input_mode = HERE_DOC;
+	if (*fd != 0 && close(*fd) == -1)
+		return (-1);
 	if (pipe(pipefd) < 0)
 		error_pipe();
 	get_doc(pipefd[1], char_EOF);
-	close(pipefd[1]);
-	return (pipefd[0]);
+	if (close(pipefd[1]) == -1)
+		return (-1);
+	*fd = pipefd[0];
+	return (0);
 }

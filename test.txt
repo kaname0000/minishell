@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 ls nonexistent 2>> err<<or.log >> &>
 echo "AAA  df?dff  fd"
+=======
+1
+>>>>>>> origin/run_token

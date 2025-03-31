@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:17:08 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/24 20:06:15 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/01 03:26:00 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,24 @@ void	t(char *line)
 		ft_exit(strs);
 }
 
-int	input(void)
+int	input(t_mini *minishell)
 {
-	char	*line;
-
-	line = NULL;
 	while (1)
 	{
 		g_variable.input_mode = COMMAND_LINE;
-		line = readline("minishell$ ");
-		if (line == NULL)
+		minishell->input = readline("minishell$ ");
+		if (minishell->input == NULL)
 		{
-			free(line);
+			free(minishell->input);
 			break ;
 		}
-		if (*line == '\0')
+		if (*minishell->input == '\0')
 		{
-			free(line);
+			free(minishell->input);
 			continue ;
 		}
-		// t(line);
-		printf("%s\n", line);
-		add_history(line);
-		free(line);
+		add_history(minishell->input);
+		run_token(minishell);
 	}
 	printf("exit\n");
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:15:28 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/26 01:17:47 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/01 04:47:20 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,19 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
+typedef struct s_command
+{
+	char			*cmd_path;
+	char			**cmd;
+	int				fd_in;
+	int				fd_out;
+	char			**envp;
+}					t_command;
+
 typedef struct s_mini
 {
 	t_env			*var_env;
+	t_command		**cmd;
 	int				exit_status;
 	char			*input;
 	int				origin_fd_in;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_with_quotes.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:10:54 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/29 23:51:04 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/01 01:05:54 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-// valueの中にstrが何個含まれているかをカウント
+// // valueの中にstrが何個含まれているかをカウント
 static int	search_str_in_value(char *value, char *str)
 {
 	int		count;
@@ -28,7 +28,7 @@ static int	search_str_in_value(char *value, char *str)
 	return (count);
 }
 
-// tokensetの中から見つけたいワードを探し、何番目が今回狙っていたワードか返す
+// // tokensetの中から見つけたいワードを探し、何番目が今回狙っていたワードか返す
 static int	search_str_in_token(t_tokenset *tokenset, char *str, int i)
 {
 	int	count;
