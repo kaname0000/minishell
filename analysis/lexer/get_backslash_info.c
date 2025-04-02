@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:47:03 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/02 18:18:15 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/02 19:24:15 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	get_backslash_info(t_token *token, t_token *pre, t_token *next)
 	}
 	else if (pre->dquote)
 	{
-		if (next && (!ft_strcmp(next->value, "$") || !ft_strcmp(next->value,
-					"\"") || !ft_strcmp(next->value, "\\")))
+		if (next && (next->value[0] == '$' || next->value[0] == '\\'
+				|| next->value[0] == '"'))
 		{
 			token->type = TOK_BACKSLASH;
 			token->dquote = 1;
@@ -42,7 +42,7 @@ void	get_backslash_info(t_token *token, t_token *pre, t_token *next)
 		else
 		{
 			token->type = TOK_DQUOTE_IN;
-			token->type = 1;
+			token->dquote = 1;
 		}
 	}
 	else

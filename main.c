@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:20:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/02 18:19:02 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/02 19:26:45 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ static void	print_tokenset(t_tokenset *tokenset)
 			printf("%-20s \\n           \n", token_types[token->type]);
 		else
 			printf("%-20s %-12s\n", token_types[token->type], token->value);
+		// printf("squote = %d : dquote = %d\n\n", token->squote,
+		// token->dquote);
 		i++;
 	}
 }

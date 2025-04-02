@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:10:48 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/02 17:55:42 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/02 19:31:40 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,18 +102,18 @@ static t_token	*get_nth_token(t_tokenlist *tokenlist, int n)
 }
 
 //新たにtokensetを用意し、一次元配列でトークンを管理
-t_tokenset	*reshape_tokenlist(t_tokenlist *tokenlist, char *input)
+t_tokenset	*reshape_tokenlist(t_tokenlist *tokenlist)
 {
 	t_tokenset	*tokenset;
 	int			n;
 
 	tokenset = (t_tokenset *)malloc(sizeof(t_tokenset));
 	if (!tokenset)
-		free_tokenlist(tokenlist, &input, NULL, FAILED);
+		free_tokenlist(tokenlist, NULL, NULL, FAILED);
 	tokenset->count = count_token(tokenlist);
 	tokenset->token = (t_token **)malloc(sizeof(t_token *) * tokenset->count);
 	if (!tokenset->token)
-		return (free(tokenset), free_tokenlist(tokenlist, &input, NULL, FAILED),
+		return (free(tokenset), free_tokenlist(tokenlist, NULL, NULL, FAILED),
 			NULL);
 	n = 0;
 	while (n < tokenset->count)

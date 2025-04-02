@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 13:11:59 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/02 18:16:14 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/02 19:29:49 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	simple_check(t_token *token, t_token *pre_token, char *cmp)
 	}
 }
 
-static int	check_env(t_token *token, t_token *pre_token, char *dollar)
+int	check_env(t_token *token, t_token *pre_token, char *dollar)
 {
 	if (pre_token)
 	{

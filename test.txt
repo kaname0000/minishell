@@ -1,2 +1,1 @@
-echo "SFD SR
-\$USER \"
+echo "ad\$?f \\"dfs $USER" 'dasfg \dfs\'"

@@ -6,7 +6,7 @@
 #    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/04/02 17:34:43 by yookamot         ###   ########.fr        #
+#    Updated: 2025/04/02 19:36:15 by yookamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,6 @@ SRCS =  main.c \
 		analysis/lexer/set_tokentype.c \
         analysis/lexer/split_token.c \
         analysis/lexer/test_main.c \
-		analysis/lexer/tokenize_with_quotes.c \
         analysis/lexer/free_tokenlist.c \
         analysis/lexer/utils.c \
 		analysis/lexer/check_tokentype/check_ampersand.c \
