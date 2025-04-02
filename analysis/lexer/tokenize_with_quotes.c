@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:10:54 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/29 23:51:04 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:12:47 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ static t_token	*make_new_token(char *start, char *end, int type)
 	new_token = (t_token *)malloc(sizeof(t_token));
 	if (!new_token)
 		return (NULL);
+	new_token->split_token = NULL;
+	new_token->squote = 0;
+	new_token->dquote = 0;
+	new_token->count = 1;
+	new_token->type = UNSIGNED;
 	new_value = (char *)malloc(sizeof(char) * (end - start + 1));
 	if (!new_value)
 		return (free(new_token), NULL);
@@ -93,9 +98,15 @@ static t_token	*make_new_token(char *start, char *end, int type)
 	new_value[i] = '\0';
 	new_token->value = new_value;
 	if (type == TOK_DQUOTE_START)
+	{
 		new_token->type = TOK_DQUOTE_IN;
+		new_token->dquote = 1;
+	}
 	if (type == TOK_SQUOTE_START)
+	{
 		new_token->type = TOK_SQUOTE_IN;
+		new_token->squote = 1;
+	}
 	return (new_token);
 }
 
@@ -136,7 +147,7 @@ static int	reshape_tokenset(t_tokenset *tokenset, int i, int j,
 	return (SUCCESS);
 }
 
-static int	search_str(t_tokenlist *tokenlist, t_tokenset *tokenset, int i)
+static int	search_str(t_tokenset *tokenset, int i, char *input)
 {
 	int		count;
 	char	*start;
@@ -145,39 +156,33 @@ static int	search_str(t_tokenlist *tokenlist, t_tokenset *tokenset, int i)
 	t_token	*new_token;
 
 	count = search_str_in_token(tokenset, tokenset->token[i]->value, i);
-	start = search_str_in_input(tokenlist->input, tokenset->token[i]->value,
-			count);
+	start = search_str_in_input(input, tokenset->token[i]->value, count);
 	j = 1;
 	while (i + j < tokenset->count && (tokenset->token[i
 			+ j]->type == TOK_DQUOTE_IN || tokenset->token[i
 			+ j]->type == TOK_SQUOTE_IN))
 		j++;
 	count = search_str_in_token(tokenset, tokenset->token[i + j]->value, i + j);
-	end = search_str_in_input(tokenlist->input, tokenset->token[i + j]->value,
-			count);
+	end = search_str_in_input(input, tokenset->token[i + j]->value, count);
 	if (find_space(start, end) && (tokenset->token[i + 1]->type == TOK_DQUOTE_IN
 			|| tokenset->token[i + 1]->type == TOK_SQUOTE_IN))
 	{
 		new_token = make_new_token(start, end, tokenset->token[i - 1]->type);
 		if (!new_token)
-			return (free_tokenset(tokenset), free_tokenlist(tokenlist, NULL,
-					NULL, FAILED), FAILED);
+			return (free_tokenset(tokenset), FAILED);
 		if (!reshape_tokenset(tokenset, i, j, new_token))
 			return (free(new_token->value), free(new_token),
-				free_tokenset(tokenset), free_tokenlist(tokenlist, NULL, NULL,
-					FAILED), FAILED);
+				free_tokenset(tokenset), FAILED);
 		return (SUCCESS);
 	}
 	return (FAILED);
 }
 
 // "hello   world  "のようなパターンに対応
-void	tokenize_with_quotes(t_tokenlist *tokenlist, t_tokenset *tokenset)
+void	tokenize_with_quotes(t_tokenset *tokenset, char *input)
 {
 	int	i;
 
-	if (!tokenlist->input || !tokenset)
-		return ;
 	i = 0;
 	while (i < tokenset->count)
 	{
@@ -186,7 +191,7 @@ void	tokenize_with_quotes(t_tokenlist *tokenlist, t_tokenset *tokenset)
 			if (i && (tokenset->token[i - 1]->type == TOK_DQUOTE_START
 					|| tokenset->token[i - 1]->type == TOK_SQUOTE_START))
 			{
-				if (search_str(tokenlist, tokenset, i))
+				if (search_str(tokenset, i, input))
 				{
 					i = 0;
 					break ;

@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:10:38 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/29 22:23:02 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:51:12 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,14 @@ int						ft_strcmp(const char *s1, const char *s2);
 char					*ft_strstr(const char *s1, const char *s2);
 void					split_token(t_tokenlist *tokenlist, char *str,
 							t_token *token, int count);
-void					traverse_token_list(t_tokenlist *tokenlist);
 t_tokenset				*analysis(char *input);
 void					get_tokentype(t_token *token, t_token *pre_token);
-void					set_quote_info(t_token *token, t_token *pre_token,
-							t_token *pre_pre_token);
-t_tokenset				*reshape_tokenlist(t_tokenlist *tokenlist);
-void					tokenize_with_quotes(t_tokenlist *tokenlist,
-							t_tokenset *tokenset);
+t_tokenset				*reshape_tokenlist(t_tokenlist *tokenlist, char *input);
+void					tokenize_with_quotes(t_tokenset *tokenset, char *input);
 void					free_tokenset(t_tokenset *tokenset);
+void					set_tokentype(t_tokenset *tokenset);
+void					get_quote_info(t_token *token, t_token *pre);
+void					get_backslash_info(t_token *token, t_token *pre,
+							t_token *next);
 
 #endif
