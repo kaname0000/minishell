@@ -6,7 +6,7 @@
 #    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/04/02 19:36:15 by yookamot         ###   ########.fr        #
+#    Updated: 2025/04/02 20:03:04 by yookamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,6 @@ SRCS =  main.c \
         analysis/lexer/test_main.c \
         analysis/lexer/free_tokenlist.c \
         analysis/lexer/utils.c \
-		analysis/lexer/check_tokentype/check_ampersand.c \
         analysis/lexer/check_tokentype/check_single_symbol.c \
         analysis/lexer/check_tokentype/check_double_symbol.c \
         analysis/lexer/check_tokentype/check_env_var.c \
@@ -69,7 +68,8 @@ SRCS =  main.c \
         analysis/lexer/check_tokentype/check_dquote.c \
         analysis/lexer/check_tokentype/check_backslash.c \
         analysis/lexer/check_tokentype/check_redirection.c \
-        analysis/lexer/check_tokentype/check_assignment.c\
+        #analysis/lexer/check_tokentype/check_assignment.c\
+		analysis/lexer/check_tokentype/check_ampersand.c \
 
 OBJS = $(SRCS:.c=.o)
 

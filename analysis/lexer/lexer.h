@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:10:38 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/02 19:32:05 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/02 20:05:55 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,8 @@
 enum					e_tokentype
 {
 	TOK_WORD,
-	TOK_ASSIGNMENT,
-	TOK_LITERAL,
 	TOK_BUILTIN,
 	TOK_PIPE,
-	TOK_SEMICOLON,
-	TOK_AMPERSAND,
 	TOK_REDIR_IN,
 	TOK_REDIR_OUT,
 	TOK_REDIR_APPEND,
@@ -41,17 +37,44 @@ enum					e_tokentype
 	TOK_DQUOTE_IN,
 	TOK_DQUOTE_END,
 	TOK_BACKSLASH,
-	TOK_LPAREN,
-	TOK_RPAREN,
 	TOK_ENV_VAR,
 	TOK_ENV_VAR_NAME,
 	TOK_EXIT_STATUS,
 	TOK_NEWLINE,
 	TOK_NULL,
-	TOK_EOF,
 	TOK_SPLIT,
 	UNSIGNED
 };
+
+// enum					e_tokentype
+// {
+// 	TOK_WORD,
+// 	TOK_BUILTIN,
+// 	TOK_PIPE,
+// 	TOK_SEMICOLON,
+// 	TOK_AMPERSAND,
+// 	TOK_REDIR_IN,
+// 	TOK_REDIR_OUT,
+// 	TOK_REDIR_APPEND,
+// 	TOK_HEREDOC,
+// 	TOK_SQUOTE_START,
+// 	TOK_SQUOTE_IN,
+// 	TOK_SQUOTE_END,
+// 	TOK_DQUOTE_START,
+// 	TOK_DQUOTE_IN,
+// 	TOK_DQUOTE_END,
+// 	TOK_BACKSLASH,
+// 	TOK_LPAREN,
+// 	TOK_RPAREN,
+// 	TOK_ENV_VAR,
+// 	TOK_ENV_VAR_NAME,
+// 	TOK_EXIT_STATUS,
+// 	TOK_NEWLINE,
+// 	TOK_NULL,
+// 	TOK_EOF,
+// 	TOK_SPLIT,
+// 	UNSIGNED
+// };
 
 typedef struct s_token
 {

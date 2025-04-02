@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:20:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/02 19:26:45 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/02 19:57:03 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,12 @@ t_signal	g_variable;
 // 	return (0);
 // }
 
-const char	*token_types[] = {"TOK_WORD", "TOK_ASSIGNMENT", "TOK_LITERAL",
-		"TOK_BUILTIN", "TOK_PIPE", "TOK_SEMICOLON", "TOK_AMPERSAND",
+const char	*token_types[] = {"TOK_WORD", "TOK_BUILTIN", "TOK_PIPE",
 		"TOK_REDIR_IN", "TOK_REDIR_OUT", "TOK_REDIR_APPEND", "TOK_HEREDOC",
 		"TOK_SQUOTE_START", "TOK_SQUOTE_IN", "TOK_SQUOTE_END",
 		"TOK_DQUOTE_START", "TOK_DQUOTE_IN", "TOK_DQUOTE_END", "TOK_BACKSLASH",
-		"TOK_LPAREN", "TOK_RPAREN", "TOK_ENV_VAR", "TOK_ENV_VAR_NAME",
-		"TOK_EXIT_STATUS", "TOK_NEWLINE", "TOK_NULL", "TOK_EOF", "TOK_SPLIT",
-		"UNSIGNED"};
+		"TOK_ENV_VAR", "TOK_ENV_VAR_NAME", "TOK_EXIT_STATUS", "TOK_NEWLINE",
+		"TOK_NULL", "TOK_SPLIT", "UNSIGNED"};
 
 static void	print_tokenset(t_tokenset *tokenset)
 {
