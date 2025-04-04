@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
+#    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/04/04 20:48:23 by yookamot         ###   ########.fr        #
+#    Updated: 2025/04/05 02:15:07 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,10 @@ SRCS =  main.c \
 		set_act.c\
 		env_init.c\
 		run_token.c\
-		set_fd_in.c\
-		set_fd_out.c\
+		set_fd.c\
 		set_cmd.c\
 		pipex.c\
+		make_prosses.c\
 		operators/get_full_path.c\
 		operators/redirector.c\
 		operators/here_document.c\
@@ -39,6 +39,7 @@ SRCS =  main.c \
 		error/error_3.c\
 		error/error_4.c\
 		error/error_5.c\
+		error/error_6.c\
 		utils/utils.c\
 		get_next_line.c\
 		get_next_line_utils.c\

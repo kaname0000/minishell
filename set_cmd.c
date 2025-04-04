@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 01:12:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/01 03:58:37 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/04 23:58:41 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,9 @@ int	set_cmd(t_command **cmd, t_token **token)
 			i += 2;
 			continue ;
 		}
-		else if ((token[i])->type == TOK_WORD)
+		else if ((token[i])->type == TOK_WORD
+			|| (token[i])->type == TOK_DQUOTE_IN
+			|| (token[i])->type == TOK_SQUOTE_IN)
 		{
 			cmd[pipe_count]->cmd[count] = ft_strdup(token[i]->value);
 			count++;
