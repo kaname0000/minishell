@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:37:21 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/10 17:37:31 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/03 22:40:58 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,9 @@ typedef struct s_ast
 	struct s_ast	*left;
 	struct s_ast	*right;
 }					t_ast;
+
+void				first_check(t_tokenset *tokenset);
+void				error_token(t_tokenset *tokenset, char *value);
+void				error_end_of_file(t_tokenset *tokenset, char *value);
 
 #endif
