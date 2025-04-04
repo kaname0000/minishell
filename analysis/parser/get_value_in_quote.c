@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenize_with_quotes.c                             :+:      :+:    :+:   */
+/*   get_value_in_quote.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 01:10:54 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/29 23:51:04 by yookamot         ###   ########.fr       */
+/*   Created: 2025/04/03 23:00:40 by yookamot          #+#    #+#             */
+/*   Updated: 2025/04/03 23:49:52 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "parser.h"
 
 // valueの中にstrが何個含まれているかをカウント
 static int	search_str_in_value(char *value, char *str)
@@ -71,6 +71,10 @@ static int	find_space(char *start, char *end)
 	return (FAILED);
 }
 
+static char	*expand_env_var(char *new_value)
+{
+}
+
 //クオート配下の文字列をvalueとして持つトークンを作成
 static t_token	*make_new_token(char *start, char *end, int type)
 {
@@ -91,6 +95,7 @@ static t_token	*make_new_token(char *start, char *end, int type)
 		i++;
 	}
 	new_value[i] = '\0';
+	new_value = expand_env_var(new_value);
 	new_token->value = new_value;
 	if (type == TOK_DQUOTE_START)
 		new_token->type = TOK_DQUOTE_IN;
@@ -136,7 +141,7 @@ static int	reshape_tokenset(t_tokenset *tokenset, int i, int j,
 	return (SUCCESS);
 }
 
-static int	search_str(t_tokenlist *tokenlist, t_tokenset *tokenset, int i)
+static int	search_str(t_tokenset *tokenset, int i)
 {
 	int		count;
 	char	*start;
@@ -145,7 +150,7 @@ static int	search_str(t_tokenlist *tokenlist, t_tokenset *tokenset, int i)
 	t_token	*new_token;
 
 	count = search_str_in_token(tokenset, tokenset->token[i]->value, i);
-	start = search_str_in_input(tokenlist->input, tokenset->token[i]->value,
+	start = search_str_in_input(tokenset->input, tokenset->token[i]->value,
 			count);
 	j = 1;
 	while (i + j < tokenset->count && (tokenset->token[i
@@ -153,46 +158,50 @@ static int	search_str(t_tokenlist *tokenlist, t_tokenset *tokenset, int i)
 			+ j]->type == TOK_SQUOTE_IN))
 		j++;
 	count = search_str_in_token(tokenset, tokenset->token[i + j]->value, i + j);
-	end = search_str_in_input(tokenlist->input, tokenset->token[i + j]->value,
+	end = search_str_in_input(tokenset->input, tokenset->token[i + j]->value,
 			count);
 	if (find_space(start, end) && (tokenset->token[i + 1]->type == TOK_DQUOTE_IN
 			|| tokenset->token[i + 1]->type == TOK_SQUOTE_IN))
 	{
 		new_token = make_new_token(start, end, tokenset->token[i - 1]->type);
 		if (!new_token)
-			return (free_tokenset(tokenset), free_tokenlist(tokenlist, NULL,
-					NULL, FAILED), FAILED);
+			return (free_tokenset(tokenset), FAILED);
 		if (!reshape_tokenset(tokenset, i, j, new_token))
 			return (free(new_token->value), free(new_token),
-				free_tokenset(tokenset), free_tokenlist(tokenlist, NULL, NULL,
-					FAILED), FAILED);
+				free_tokenset(tokenset), FAILED);
 		return (SUCCESS);
 	}
 	return (FAILED);
 }
 
-// "hello   world  "のようなパターンに対応
-void	tokenize_with_quotes(t_tokenlist *tokenlist, t_tokenset *tokenset)
-{
-	int	i;
+// // "hello   world  "のようなパターンに対応
+// void	tokenize_with_quotes(t_tokenlist *tokenlist, t_tokenset *tokenset)
+// {
+// 	int	i;
 
-	if (!tokenlist->input || !tokenset)
-		return ;
-	i = 0;
-	while (i < tokenset->count)
-	{
-		while (i < tokenset->count)
-		{
-			if (i && (tokenset->token[i - 1]->type == TOK_DQUOTE_START
-					|| tokenset->token[i - 1]->type == TOK_SQUOTE_START))
-			{
-				if (search_str(tokenlist, tokenset, i))
-				{
-					i = 0;
-					break ;
-				}
-			}
-			i++;
-		}
-	}
+// 	if (!tokenlist->input || !tokenset)
+// 		return ;
+// 	i = 0;
+// 	while (i < tokenset->count)
+// 	{
+// 		while (i < tokenset->count)
+// 		{
+// 			if (i && (tokenset->token[i - 1]->type == TOK_DQUOTE_START
+// 					|| tokenset->token[i - 1]->type == TOK_SQUOTE_START))
+// 			{
+// 				if (search_str(tokenlist, tokenset, i))
+// 				{
+// 					i = 0;
+// 					break ;
+// 				}
+// 			}
+// 			i++;
+// 		}
+// 	}
+// }
+
+// quoteに囲われた文字列を返す
+char	*get_value_in_quote(t_tokenset *tokenset, int i)
+{
+	search_str(tokenset, i + 1);
 }

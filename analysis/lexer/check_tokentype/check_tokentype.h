@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:48:15 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/29 21:18:23 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/02 20:02:07 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int							check_redirection_in(t_token *token,
 								t_tokenlist *tokenlist);
 int							check_redirection_out(t_token *token,
 								t_tokenlist *tokenlist);
-int							check_assignment(t_token *token,
-								t_tokenlist *tokenlist);
-int							check_ampersand(t_token *token, int c,
-								t_tokenlist *tokenlist);
+// int							check_assignment(t_token *token,
+// 								t_tokenlist *tokenlist);
+// int							check_ampersand(t_token *token, int c,
+// 								t_tokenlist *tokenlist);
 
 #endif

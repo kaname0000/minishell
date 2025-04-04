@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reshape_tokenlist.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:10:48 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/01 00:44:25 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/02 19:31:40 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ t_tokenset	*reshape_tokenlist(t_tokenlist *tokenlist)
 		tokenset->token[n] = get_nth_token(tokenlist, n);
 		n++;
 	}
-	tokenize_with_quotes(tokenlist, tokenset);
 	free_tokenlist(tokenlist, NULL, NULL, SUCCESS);
 	return (tokenset);
 }

@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:02:03 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/29 23:40:47 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/02 19:59:26 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ static void	search_keyword2(t_token *token, t_tokenlist *tokenlist)
 		return ;
 	if (check_dquote(token, tokenlist))
 		return ;
-	if (check_assignment(token, tokenlist))
-		return ;
+	// if (check_assignment(token, tokenlist))
+	// 	return ;
 }
 
 // tokenのvalueの中から、キーワードを探し、見つけた場合はsplitする
@@ -104,16 +104,16 @@ static void	search_keyword(t_token *token, t_tokenlist *tokenlist)
 	count = check_exit_status(token);
 	if (count)
 		return (split_token(tokenlist, ft_strdup("$?"), token, count));
-	if (check_single_symbol(token, ';', tokenlist))
-		return ;
-	if (check_ampersand(token, '&', tokenlist))
-		return ;
+	// if (check_single_symbol(token, ';', tokenlist))
+	// 	return ;
+	// if (check_ampersand(token, '&', tokenlist))
+	// 	return ;
 	if (check_single_symbol(token, '|', tokenlist))
 		return ;
-	if (check_single_symbol(token, '{', tokenlist))
-		return ;
-	if (check_single_symbol(token, '}', tokenlist))
-		return ;
+	// if (check_single_symbol(token, '{', tokenlist))
+	// 	return ;
+	// if (check_single_symbol(token, '}', tokenlist))
+	// 	return ;
 	search_keyword2(token, tokenlist);
 }
 
