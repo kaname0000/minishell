@@ -1,46 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   make_prosses.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 19:03:51 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/04 22:33:31 by okaname          ###   ########.fr       */
+/*   Created: 2025/04/05 01:25:14 by okaname           #+#    #+#             */
+/*   Updated: 2025/04/05 02:24:24 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	pipex(int *fd_in, int *fd_out)
+int	make_prosses(t_mini *mini, t_tokenset *tokenlist, int count, int **pid)
 {
-	int	pipefd[2];
-
-	if (pipe(pipefd) < 0)
-		error_pipe();
-	if (*fd_out != 1)
+	(*pid)[count] = fork();
+	if ((*pid)[count] == -1)
+		return (error_fork1(), -1);
+	else if ((*pid)[count] == 0)
 	{
-		if (close(*fd_out) == -1)
-			error_close();
+		set_fd(&(mini->cmd[count]), tokenlist->token, count);
+		mini->cmd[count]->envp = list_to_char(mini->var_env);
+		redirector(mini->cmd[count]);
 	}
-	*fd_out = pipefd[1];
-	if (*fd_in != 0)
-	{
-		if (close(*fd_in) == -1)
-			error_close();
-	}
-	*fd_in = pipefd[0];
+	wait(&(*pid)[count]);
 	return (0);
-}
-
-void	conect_pipe(t_command **cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[i + 1] != NULL)
-	{
-		pipex(&(cmd[i + 1]->fd_in), &(cmd[i]->fd_out));
-		i++;
-	}
 }
