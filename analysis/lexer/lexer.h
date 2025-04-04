@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:10:38 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/02 20:05:55 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/03 21:00:01 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_tokenset
 {
 	t_token				**token;
 	int					count;
+	char				*input;
 }						t_tokenset;
 
 # define FAILED 0

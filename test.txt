@@ -1,1 +1,1 @@
-echo "ad\$?f \\"dfs $USER" 'dasfg \dfs\'"
+echo "${USER} aa
