@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexical_analysis.c                                 :+:      :+:    :+:   */
+/*   set_tokentype.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 01:04:00 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/04 20:39:25 by yookamot         ###   ########.fr       */
+/*   Created: 2025/04/02 16:07:03 by yookamot          #+#    #+#             */
+/*   Updated: 2025/04/02 17:38:25 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-// 字句解析
-t_tokenset	*lexical_analysis(t_tokenlist *tokenlist)
+void	set_tokentype(t_tokenset *tokenset)
 {
-	int			i;
-	int			j;
-	t_tokenset	*tokenset;
+	int		i;
+	t_token	*pre;
+	t_token	*next;
 
-	get_tokens(tokenlist);
 	i = 0;
-	while (i < tokenlist->set_count)
+	while (i < tokenset->count)
 	{
-		j = 0;
-		while (j < tokenlist->token_count[i])
-		{
-			check_tokentype(tokenlist->token[i][j], tokenlist);
-			j++;
-		}
+		if (!i)
+			pre = NULL;
+		else
+			pre = tokenset->token[i - 1];
+		if (i < tokenset->count - 1)
+			next = tokenset->token[i + 1];
+		else
+			next = NULL;
+		get_backslash_info(tokenset->token[i], pre, next);
+		if (tokenset->token[i]->type == UNSIGNED)
+			get_quote_info(tokenset->token[i], pre);
+		get_tokentype(tokenset->token[i], pre);
 		i++;
 	}
-	tokenset = reshape_tokenlist(tokenlist);
-	set_tokentype(tokenset);
-	return (tokenset);
 }
