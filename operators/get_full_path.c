@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:33:13 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/05 02:29:48 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/06 16:46:57 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,9 @@ char	*get_full_path(char *cmd, char **envp)
 	char	*path;
 	char	**path_parts;
 
-	printf("a1\n");
 	cmd_parts = ft_split(cmd, ' ');
-	printf("a2\n");
 	if (!cmd_parts)
 		error_malloc(NULL, NULL);
-	printf("a3\n");
 	if (ft_strchr(cmd_parts[0], '/'))
 	{
 		full_path = check_file_or_directory(cmd_parts);

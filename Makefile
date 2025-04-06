@@ -6,13 +6,13 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/04/05 02:15:07 by okaname          ###   ########.fr        #
+#    Updated: 2025/04/06 17:51:57 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror -I./includes 
-# CFLAGS = -Wall -Wextra -Werror -I./includes -fsanitize=address
+CFLAGS = -g -Wall -Wextra -Werror -I./includes
+# CFLAGS = -Wall -Wextra -Werror -I./includes  -fsanitize=address
 LIBS = -lreadline
 
 MANDATORY = minishell

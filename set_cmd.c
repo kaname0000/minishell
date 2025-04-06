@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 01:12:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/04 23:58:41 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/06 17:16:56 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,23 @@ int	cmd_count(t_command **cmd, t_token **token)
 	return (0);
 }
 
+static void	set_here_doc(t_command **cmd, t_token **token)
+{
+	int	i;
+	int	pipe_count;
+
+	i = 0;
+	pipe_count = 0;
+	while ((token[i])->value != NULL)
+	{
+		if ((token[i])->type == TOK_PIPE)
+			pipe_count++;
+		else if ((token[i])->type == TOK_HEREDOC)
+			here_doc((token[i + 1])->value, &(cmd[pipe_count]->fd_in));
+		i++;
+	}
+}
+
 int	set_cmd(t_command **cmd, t_token **token)
 {
 	int	i;
@@ -59,6 +76,7 @@ int	set_cmd(t_command **cmd, t_token **token)
 	pipe_count = 0;
 	count = 0;
 	cmd_count(cmd, token);
+	set_here_doc(cmd, token);
 	while ((token[i])->value != NULL)
 	{
 		if ((token[i])->type == TOK_PIPE)
