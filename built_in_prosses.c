@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   built_in_prosses.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 18:18:34 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 18:36:34 by okaname          ###   ########.fr       */
+/*   Created: 2025/04/06 20:14:56 by okaname           #+#    #+#             */
+/*   Updated: 2025/04/06 20:16:58 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_in.h"
+#include "minishell.h"
 
-int	ft_cd(char *path)
+int	built_in_prosses(t_mini *mini, t_token **token)
 {
-	if (chdir(path) == -1)
-		perror("chdir failed");
-	else
-		ft_pwd();
+	(void)mini;
+	(void)token;
 	return (0);
 }

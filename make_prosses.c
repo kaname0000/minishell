@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 01:25:14 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 17:42:19 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/06 19:30:46 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ int	make_prosses(t_mini *mini, t_tokenset *tokenlist, int count, int **pid)
 		&& close(mini->cmd[count]->fd_out) == -1)
 		error_close();
 	free_cmd(mini->cmd);
-	wait(&(*pid)[count]);
+	waitpid((*pid)[count], &mini->exit_status, 0);
 	return (0);
 }

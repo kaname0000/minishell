@@ -6,7 +6,7 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/04/06 17:51:57 by okaname          ###   ########.fr        #
+#    Updated: 2025/04/06 21:26:36 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,12 @@ SRCS =  main.c \
 		env_init.c\
 		run_token.c\
 		set_fd.c\
+		set_fd_b.c\
 		set_cmd.c\
 		pipex.c\
 		make_prosses.c\
+		built_in_prosses.c\
+		only_builtin.c\
 		operators/get_full_path.c\
 		operators/redirector.c\
 		operators/here_document.c\

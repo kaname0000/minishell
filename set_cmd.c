@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 01:12:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 17:16:56 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/06 20:17:41 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	cmd_count(t_command **cmd, t_token **token)
 	return (0);
 }
 
-static void	set_here_doc(t_command **cmd, t_token **token)
+static void	set_here_doc(t_command **cmd, t_token **token, int *status)
 {
 	int	i;
 	int	pipe_count;
@@ -61,12 +61,12 @@ static void	set_here_doc(t_command **cmd, t_token **token)
 		if ((token[i])->type == TOK_PIPE)
 			pipe_count++;
 		else if ((token[i])->type == TOK_HEREDOC)
-			here_doc((token[i + 1])->value, &(cmd[pipe_count]->fd_in));
+			here_doc((token[i + 1])->value, &(cmd[pipe_count]->fd_in), status);
 		i++;
 	}
 }
 
-int	set_cmd(t_command **cmd, t_token **token)
+int	set_cmd(t_command **cmd, t_token **token, int *status)
 {
 	int	i;
 	int	pipe_count;
@@ -76,7 +76,7 @@ int	set_cmd(t_command **cmd, t_token **token)
 	pipe_count = 0;
 	count = 0;
 	cmd_count(cmd, token);
-	set_here_doc(cmd, token);
+	set_here_doc(cmd, token, status);
 	while ((token[i])->value != NULL)
 	{
 		if ((token[i])->type == TOK_PIPE)
@@ -94,8 +94,11 @@ int	set_cmd(t_command **cmd, t_token **token)
 		}
 		else if ((token[i])->type == TOK_WORD
 			|| (token[i])->type == TOK_DQUOTE_IN
-			|| (token[i])->type == TOK_SQUOTE_IN)
+			|| (token[i])->type == TOK_SQUOTE_IN
+			|| (token[i])->type == TOK_BUILTIN)
 		{
+			if ((token[i])->type == TOK_BUILTIN && count == 0)
+				cmd[pipe_count]->built_in = 1;
 			cmd[pipe_count]->cmd[count] = ft_strdup(token[i]->value);
 			count++;
 		}

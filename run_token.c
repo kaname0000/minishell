@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:37:03 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 17:43:07 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/06 21:24:23 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	count_pipe(t_token **token)
 	return (count);
 }
 
-static t_command	**token_to_cmd(t_token **token)
+static t_command	**token_to_cmd(t_token **token, int *status)
 {
 	int			cmd_count;
 	t_command	**cmd;
@@ -46,14 +46,42 @@ static t_command	**token_to_cmd(t_token **token)
 			error_malloc(NULL, NULL);
 		cmd[i]->fd_in = 0;
 		cmd[i]->fd_out = 1;
+		cmd[i]->built_in = 0;
 		i++;
 	}
 	cmd[cmd_count] = NULL;
-	set_cmd(cmd, token);
+	set_cmd(cmd, token, status);
 	if (cmd_count > 1)
 		conect_pipe(cmd);
 	return (cmd);
 }
+
+// const char			*token_types[] = {"TOK_WORD", "TOK_BUILTIN", "TOK_PIPE",
+// 				"TOK_REDIR_IN", "TOK_REDIR_OUT", "TOK_REDIR_APPEND",
+// 				"TOK_HEREDOC", "TOK_SQUOTE_START", "TOK_SQUOTE_IN",
+// 				"TOK_SQUOTE_END", "TOK_DQUOTE_START", "TOK_DQUOTE_IN",
+// 				"TOK_DQUOTE_END", "TOK_BACKSLASH", "TOK_ENV_VAR",
+// 				"TOK_ENV_VAR_NAME", "TOK_EXIT_STATUS", "TOK_NEWLINE",
+// 				"TOK_NULL", "TOK_SPLIT", "UNSIGNED"};
+
+// static void	print_tokenset(t_tokenset *tokenset)
+// {
+// 	int		i;
+// 	t_token	*token;
+
+// 	i = 0;
+// 	while (i < tokenset->count)
+// 	{
+// 		token = tokenset->token[i];
+// 		if (!ft_strcmp(token->value, "\n"))
+// 			printf("%-20s \\n           \n", token_types[token->type]);
+// 		else
+// 			printf("%-20s %-12s\n", token_types[token->type], token->value);
+// 		// printf("squote = %d : dquote = %d\n\n", token->squote,
+// 		// token->dquote);
+// 		i++;
+// 	}
+// }
 
 int	run_token(t_mini *mini)
 {
@@ -66,14 +94,18 @@ int	run_token(t_mini *mini)
 	count = 0;
 	pid = malloc(sizeof(int) * 1024);
 	tokenlist = analysis(mini->input);
-	mini->cmd = token_to_cmd(tokenlist->token);
+	// print_tokenset(tokenlist);
+	mini->cmd = token_to_cmd(tokenlist->token, &(mini->exit_status));
 	while (1)
 	{
 		if (tokenlist->token[i]->type == TOK_PIPE)
 			make_prosses(mini, tokenlist, count++, &pid);
 		else if (tokenlist->token[i]->type == TOK_NULL)
 		{
-			make_prosses(mini, tokenlist, count, &pid);
+			if (count == 0 && mini->cmd[0]->built_in)
+				only_built_in(mini, tokenlist->token);
+			else
+				make_prosses(mini, tokenlist, count, &pid);
 			break ;
 		}
 		i++;

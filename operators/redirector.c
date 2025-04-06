@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 18:37:12 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 17:29:54 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/06 19:34:58 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ pid_t	redirector(t_command *cmd)
 {
 	cmd->cmd_path = get_full_path(cmd->cmd[0], cmd->envp);
 	if (cmd->cmd_path == NULL)
-		return (-1);
+		exit(1);
 	if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
 		error_redirect();
 	if (cmd->fd_in != STDIN_FILENO && close(cmd->fd_in) == -1)
@@ -27,5 +27,5 @@ pid_t	redirector(t_command *cmd)
 		error_close();
 	execve(cmd->cmd_path, cmd->cmd, cmd->envp);
 	perror("bash");
-	return (0);
+	return (-1);
 }
