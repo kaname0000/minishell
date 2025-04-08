@@ -6,23 +6,15 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 01:25:14 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 19:30:46 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/08 21:21:28 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_cmd(t_command **cmd)
+static void	free_cmd(t_command *cmd)
 {
-	int	i;
-
-	i = 0;
-	while (cmd[i] != NULL)
-	{
-		free_array(cmd[i]->cmd);
-		free(cmd[i]);
-		i++;
-	}
+	free_array(cmd->cmd);
 	free(cmd);
 }
 
@@ -35,7 +27,10 @@ int	make_prosses(t_mini *mini, t_tokenset *tokenlist, int count, int **pid)
 	{
 		set_fd(&(mini->cmd[count]), tokenlist->token, count);
 		mini->cmd[count]->envp = list_to_char(mini->var_env);
-		redirector(mini->cmd[count]);
+		if (mini->cmd[count]->built_in)
+			built_in_prosses(mini, count);
+		else
+			redirector(mini->cmd[count]);
 	}
 	if (mini->cmd[count]->fd_in != STDIN_FILENO
 		&& close(mini->cmd[count]->fd_in) == -1)
@@ -43,7 +38,7 @@ int	make_prosses(t_mini *mini, t_tokenset *tokenlist, int count, int **pid)
 	if (mini->cmd[count]->fd_out != STDOUT_FILENO
 		&& close(mini->cmd[count]->fd_out) == -1)
 		error_close();
-	free_cmd(mini->cmd);
+	free_cmd(mini->cmd[count]);
 	waitpid((*pid)[count], &mini->exit_status, 0);
 	return (0);
 }

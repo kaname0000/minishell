@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:15:28 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 19:22:01 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/08 21:48:32 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,15 @@ typedef struct s_mini
 	int				origin_fd_out;
 }					t_mini;
 
-void				ft_exit(char **strs);
-int					ft_pwd(void);
+int					ft_cd(t_mini *mini, int count);
+int					ft_echo(t_mini *mini, int count);
+int					ft_env(t_mini *mini, int count);
+int					ft_exit(t_mini *mini, int count);
+int					ft_export(t_mini *mini, int count);
+int					ft_pwd(t_mini *mini, int count);
+int					ft_unset(t_mini *mini, int count);
 void				print_sorted_env(t_env *head);
 void				print_list(t_env *head);
-int					ft_pwd(void);
-int					ft_echo(int nflag, char **strs, t_env *env);
+int					count_array(char **array);
 
 #endif

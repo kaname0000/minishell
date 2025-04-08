@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 01:12:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 20:17:41 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/08 19:15:00 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	cmd_count(t_command **cmd, t_token **token)
 			i += 2;
 			continue ;
 		}
-		else if ((token[i])->type == TOK_WORD)
+		else if ((token[i])->type == TOK_WORD
+			|| (token[i])->type == TOK_BUILTIN)
 			count++;
 		i++;
 	}

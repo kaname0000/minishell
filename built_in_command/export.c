@@ -6,26 +6,18 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 01:46:29 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/24 20:53:50 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/08 22:07:49 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_in.h"
 
-int	ft_export(t_mini *mini)
+int	ft_export(t_mini *mini, int count)
 {
-	char	*path;
+	int	count_a;
 
-	path = getenv("");
-	if (path != NULL)
-	{
-		printf(": %s\n", path);
-	}
-	else
-	{
-		print_sorted_env(mini->var_env);
-	}
-	free(path);
+	count_a = count_array(mini->cmd[count]->cmd);
+	// print_sorted_env(mini->var_env);
 	return (0);
 }
 // int	main(int argc, char *argv[], char **env)

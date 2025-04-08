@@ -6,22 +6,13 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:17:08 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 16:46:28 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/08 18:17:58 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_signal	g_variable;
-
-void	t(char *line)
-{
-	char	**strs;
-
-	strs = ft_split(line, ' ');
-	if (!ft_strncmp(strs[0], "exit", 5))
-		ft_exit(strs);
-}
 
 int	input(t_mini *minishell)
 {

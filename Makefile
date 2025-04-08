@@ -6,7 +6,7 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/04/06 21:26:36 by okaname          ###   ########.fr        #
+#    Updated: 2025/04/08 22:42:18 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,6 @@ SRCS =  main.c \
 		error/error_5.c\
 		error/error_6.c\
 		utils/utils.c\
-		get_next_line.c\
-		get_next_line_utils.c\
 		built_in_command/exit.c\
 		built_in_command/cd.c\
 		built_in_command/echo.c\

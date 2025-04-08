@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:24:05 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 19:17:03 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/08 22:33:06 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,6 @@ static void	exit_doc(char *char_EOF, int line)
 	exit(0);
 }
 
-static int	max_len(char *s1, char *s2)
-{
-	int	i;
-	int	j;
-
-	i = ft_strlen(s1);
-	j = ft_strlen(s2);
-	if (i > j)
-		return (i);
-	else
-		return (j);
-}
-
 static int	get_doc(int pipefd, char *char_EOF, int *status)
 {
 	char	*line;
@@ -67,7 +54,7 @@ static int	get_doc(int pipefd, char *char_EOF, int *status)
 			line = readline("> ");
 			if (line == NULL)
 				exit_doc(char_EOF, 1);
-			if (!ft_strncmp(line, char_EOF, max_len(line, char_EOF)))
+			if (!ft_strcmp(line, char_EOF))
 				free_close_exit(line, pipefd);
 			write(pipefd, line, ft_strlen(line));
 			write(pipefd, "\n", 1);

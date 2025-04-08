@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:21:50 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 21:26:15 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/08 22:43:24 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "analysis/analysis.h"
 # include "built_in_command/built_in.h"
-# include "get_next_line.h"
 # include "operators/operators.h"
 # include <fcntl.h>
 # include <readline/history.h>
@@ -42,7 +41,8 @@ int		set_cmd(t_command **cmd, t_token **token, int *status);
 int		set_fd(t_command **cmd, t_token **token, int count);
 int		set_fd_b(t_command *cmd, t_token **token);
 int		make_prosses(t_mini *mini, t_tokenset *tokenlist, int count, int **pid);
-int		built_in_prosses(t_mini *mini, t_token **token);
+int		built_in_prosses(t_mini *mini, int count);
+int		run_cmd(t_mini *mini, int count);
 int		only_built_in(t_mini *mini, t_token **token);
 
 #endif
