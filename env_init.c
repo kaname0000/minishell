@@ -6,17 +6,11 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:31:18 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/20 05:39:10 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/06 18:01:57 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	malloc_error(void)
-{
-	ft_putendl_fd("malloc error", STDERR_FILENO);
-	exit(1);
-}
 
 void	free_list(t_env *head)
 {
@@ -30,7 +24,6 @@ void	free_list(t_env *head)
 		free(head);
 		head = tmp;
 	}
-	malloc_error();
 }
 
 static t_env	*make_node(char *str)
@@ -44,9 +37,13 @@ static t_env	*make_node(char *str)
 	tmp = ft_split(str, '=');
 	if (tmp == NULL)
 		return (free(new_node), NULL);
-	new_node->key = tmp[0];
-	new_node->value = tmp[1];
+	new_node->key = ft_strdup(tmp[0]);
+	if (tmp[1] == NULL)
+		new_node->value = ft_strdup("");
+	else
+		new_node->value = ft_strdup(tmp[1]);
 	new_node->next = NULL;
+	free_array(tmp);
 	return (new_node);
 }
 
@@ -59,14 +56,14 @@ t_env	*env_init(char **env)
 
 	head = make_node(env[0]);
 	if (head == NULL)
-		malloc_error();
+		error_malloc(NULL, NULL);
 	tmp = head;
 	i = 1;
 	while (env[i] != NULL)
 	{
 		new_node = make_node(env[i]);
 		if (new_node == NULL)
-			free_list(head);
+			return (free_list(head), NULL);
 		tmp->next = new_node;
 		tmp = tmp->next;
 		i++;

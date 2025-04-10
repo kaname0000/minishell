@@ -1,1 +1,1 @@
-echo$? ' my name is $USER' | aa
+echo$? ' my name is $USER' | 

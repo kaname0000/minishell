@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:15:28 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/01 04:47:20 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/06 19:22:01 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_command
 	int				fd_in;
 	int				fd_out;
 	char			**envp;
+	bool			built_in;
 }					t_command;
 
 typedef struct s_mini

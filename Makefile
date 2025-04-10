@@ -5,14 +5,14 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/04/10 18:30:47 by yookamot         ###   ########.fr        #
+#    Created: 2025/04/10 22:22:38 by yookamot          #+#    #+#              #
+#    Updated: 2025/04/10 22:22:45 by yookamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror -I./includes 
-# CFLAGS = -Wall -Wextra -Werror -I./includes -fsanitize=address
+CFLAGS = -g -Wall -Wextra -Werror -I./includes
+# CFLAGS = -Wall -Wextra -Werror -I./includes  -fsanitize=address
 LIBS = -lreadline
 
 MANDATORY = minishell
@@ -26,10 +26,13 @@ SRCS =  main.c \
 		set_act.c\
 		env_init.c\
 		run_token.c\
-		set_fd_in.c\
-		set_fd_out.c\
+		set_fd.c\
+		set_fd_b.c\
 		set_cmd.c\
 		pipex.c\
+		make_prosses.c\
+		built_in_prosses.c\
+		only_builtin.c\
 		operators/get_full_path.c\
 		operators/redirector.c\
 		operators/here_document.c\
@@ -39,6 +42,7 @@ SRCS =  main.c \
 		error/error_3.c\
 		error/error_4.c\
 		error/error_5.c\
+		error/error_6.c\
 		utils/utils.c\
 		get_next_line.c\
 		get_next_line_utils.c\

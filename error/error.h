@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 18:55:23 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/26 01:15:45 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:51:07 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,9 @@ void	error_command1_directory(char **cmd_parts);
 void	error_command2_directory(pid_t pid1, char **cmd_parts);
 void	error_command1_nonexistent(char **cmd_parts);
 void	error_command2_nonexistent(pid_t pid1, char **cmd_parts);
+
+void	error_accese(char *file);
+void	error_open(char *file);
+void	error_close(void);
 
 #endif

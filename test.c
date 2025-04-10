@@ -6,11 +6,11 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:54:30 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/13 20:47:24 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/05 01:22:39 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "minishell.h"
 
 // int	main(void)
 // {

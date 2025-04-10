@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:53:45 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/24 20:31:57 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/06 18:54:21 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ static void	handle_signal(int sig, siginfo_t *info, void *context)
 		rl_redisplay();
 	}
 	else if (sig == SIGINT)
-	{
 		exit(130);
-	}
 }
 
 void	set_act(void)

@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   error_6.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 18:18:34 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 18:36:34 by okaname          ###   ########.fr       */
+/*   Created: 2025/04/04 22:11:50 by okaname           #+#    #+#             */
+/*   Updated: 2025/04/06 16:50:58 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_in.h"
+#include "error.h"
 
-int	ft_cd(char *path)
+void	error_accese(char *file)
 {
-	if (chdir(path) == -1)
-		perror("chdir failed");
-	else
-		ft_pwd();
-	return (0);
+	ft_putstr_fd("bash: ", 2);
+	perror(file);
+	exit(1);
+}
+
+void	error_open(char *file)
+{
+	ft_putstr_fd("bash: ", 2);
+	perror(file);
+	exit(1);
+}
+
+void	error_close(void)
+{
+	perror("bash: close");
+	exit(1);
 }

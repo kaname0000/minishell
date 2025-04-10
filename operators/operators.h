@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:38:22 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/01 04:47:40 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/06 19:09:14 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ typedef struct s_signal
 
 char	*get_full_path(char *cmd, char **envp);
 pid_t	redirector(t_command *cmd);
-// pid_t		redirector(t_mini *minishell);
-int		here_doc(char *char_EOF, int *last, int *fd);
+int		here_doc(char *char_EOF, int *fd, int *status);
 char	**list_to_char(t_env *env);
 
 #endif

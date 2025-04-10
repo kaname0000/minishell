@@ -6,13 +6,20 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:24:05 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/26 16:42:24 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/06 19:17:03 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operators.h"
 
 extern t_signal	g_variable;
+
+static void	free_close_exit(char *line, int fd)
+{
+	free(line);
+	close(fd);
+	exit(0);
+}
 
 static void	exit_doc(char *char_EOF, int line)
 {
@@ -30,35 +37,56 @@ static void	exit_doc(char *char_EOF, int line)
 	exit(0);
 }
 
-static int	get_doc(int pipefd, char *char_EOF)
+static int	max_len(char *s1, char *s2)
 {
-	char	*line;
+	int	i;
+	int	j;
 
-	line = NULL;
-	while (1)
-	{
-		line = readline("> ");
-		if (line == NULL)
-			exit_doc(char_EOF, 1);
-		if (!ft_strncmp(line, char_EOF, ft_strlen(char_EOF)))
-			return (free(line), 0);
-		write(pipefd, line, ft_strlen(line));
-		write(pipefd, "\n", 1);
-		free(line);
-	}
+	i = ft_strlen(s1);
+	j = ft_strlen(s2);
+	if (i > j)
+		return (i);
+	else
+		return (j);
 }
 
-int	here_doc(char *char_EOF, int *last, int *fd)
+static int	get_doc(int pipefd, char *char_EOF, int *status)
+{
+	char	*line;
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		error_fork1();
+	else if (pid == 0)
+	{
+		g_variable.input_mode = HERE_DOC;
+		line = NULL;
+		while (1)
+		{
+			line = readline("> ");
+			if (line == NULL)
+				exit_doc(char_EOF, 1);
+			if (!ft_strncmp(line, char_EOF, max_len(line, char_EOF)))
+				free_close_exit(line, pipefd);
+			write(pipefd, line, ft_strlen(line));
+			write(pipefd, "\n", 1);
+			free(line);
+		}
+	}
+	waitpid(pid, status, 0);
+	return (0);
+}
+
+int	here_doc(char *char_EOF, int *fd, int *status)
 {
 	int	pipefd[2];
 
-	*last = HERE_DOC;
-	g_variable.input_mode = HERE_DOC;
 	if (*fd != 0 && close(*fd) == -1)
 		return (-1);
 	if (pipe(pipefd) < 0)
 		error_pipe();
-	get_doc(pipefd[1], char_EOF);
+	get_doc(pipefd[1], char_EOF, status);
 	if (close(pipefd[1]) == -1)
 		return (-1);
 	*fd = pipefd[0];
