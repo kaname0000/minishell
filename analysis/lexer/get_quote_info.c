@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 17:09:00 by okamotoyota       #+#    #+#             */
-/*   Updated: 2025/04/02 19:30:03 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/05 01:35:28 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,11 @@ void	get_quote_info(t_token *token, t_token *pre)
 		}
 		else if (pre->squote)
 			token->type = TOK_SQUOTE_END;
-		else if (pre->type != TOK_BACKSLASH)
+		else
 		{
 			token->type = TOK_SQUOTE_START;
 			token->squote = 1;
 		}
-		else
-			token->type = TOK_WORD;
 	}
 	else if (!ft_strcmp(token->value, "\""))
 	{
@@ -52,22 +50,12 @@ void	get_quote_info(t_token *token, t_token *pre)
 			token->squote = 1;
 		}
 		else if (pre->dquote)
-		{
-			if (pre->type != TOK_BACKSLASH)
-				token->type = TOK_DQUOTE_END;
-			else
-			{
-				token->type = TOK_DQUOTE_IN;
-				token->dquote = 1;
-			}
-		}
-		else if (pre->type != TOK_BACKSLASH)
+			token->type = TOK_DQUOTE_END;
+		else
 		{
 			token->type = TOK_DQUOTE_START;
 			token->dquote = 1;
 		}
-		else
-			token->type = TOK_WORD;
 	}
 	else
 	{
@@ -78,9 +66,9 @@ void	get_quote_info(t_token *token, t_token *pre)
 		}
 		else if (pre->dquote)
 		{
-			if (check_env(token, pre, "$?"))
+			if (!ft_strcmp(token->value, "$?") && !token->squote)
 				token->type = TOK_EXIT_STATUS;
-			else if (check_env(token, pre, "$"))
+			else if (!ft_strcmp(token->value, "$") && !token->squote)
 				token->type = TOK_ENV_VAR;
 			else if (pre->type == TOK_ENV_VAR)
 				token->type = TOK_ENV_VAR_NAME;

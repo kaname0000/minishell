@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_env_var.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okamotoyota <okamotoyota@student.42.fr>    +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:01:29 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/17 09:59:18 by okamotoyota      ###   ########.fr       */
+/*   Updated: 2025/04/05 00:42:35 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,49 +41,15 @@ static char	*get_env_var(char *value, int start, int end,
 	return (env);
 }
 
-//${VAR}のような形に対応
-static char	*is_valid_env_name_brace(t_token *token, t_tokenlist *tokenlist,
-		int i)
-{
-	int		j;
-	char	*env;
-
-	j = i;
-	if (!check_literal(token, i))
-		return (NULL);
-	i++;
-	while (token->value[i] && token->value[i] != '}')
-	{
-		if (!check_literal(token, i) || !ft_isdigit(token->value[i]))
-			return (NULL);
-		i++;
-	}
-	if (!token->value[i])
-		return (NULL);
-	env = get_env_var(token->value, j, i, tokenlist);
-	if (!getenv(env))
-		return (free(env), NULL);
-	return (env);
-}
-
 //$がvalue内に見つかるたびに呼び出され環境変数として適切かチェック
 static char	*is_valid_env_name(t_token *token, t_tokenlist *tokenlist, int i)
 {
 	int		j;
 	char	*env;
 
-	if (!token->value[i] || (i && token->value[i - 1] == '\\'))
+	if (!token->value[i])
 		return (NULL);
-	if (i && token->value[i - 1] == '\\')
-	{
-		if (i > 1 && token->value[i - 2] != '\\')
-			return (NULL);
-		if (i == 1)
-			return (NULL);
-	}
 	i++;
-	if (token->value[i] == '{')
-		return (is_valid_env_name_brace(token, tokenlist, i + 1));
 	j = i;
 	if (!check_literal(token, i))
 		return (NULL);

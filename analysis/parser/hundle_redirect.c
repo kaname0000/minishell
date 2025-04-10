@@ -6,13 +6,13 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 21:35:56 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/03 23:23:46 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/04 23:50:32 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	hundle_redir_out(t_tokenset *tokenset, int i)
+static void	hundle_redir_in_out(t_tokenset *tokenset, int i)
 {
 	char	*file;
 
@@ -31,16 +31,10 @@ static void	hundle_redir_out(t_tokenset *tokenset, int i)
 		get_value_in_quote(tokenset, i + 1);
 		file = tokenset->token[i + 2]->value;
 	}
-	if (access(tokenset->token[i + 1]->value, F_OK) == 0
-		&& access(tokenset->token[i + 1]->value, W_OK) == -1)
-		error_outfile_invalid(tokenset, tokenset->token[i + 1]->value);
-	// fileは正常なリダイレクト先。正常な構文として登録
 }
 
 void	hundle_redirect(t_tokenset *tokenset, int i, int type)
 {
-	if (type == TOK_REDIR_OUT)
-		hundle_redir_out(tokenset, i);
-	if (type == TOK_REDIR_IN)
-		hundle_redir_in(tokenset, i);
+	if (type == TOK_REDIR_IN && type == TOK_REDIR_OUT)
+		hundle_redir_in_out(tokenset, i);
 }

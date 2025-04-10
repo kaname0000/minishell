@@ -6,7 +6,7 @@
 #    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/04/04 20:48:23 by yookamot         ###   ########.fr        #
+#    Updated: 2025/04/10 18:30:47 by yookamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,6 @@ SRCS =  main.c \
 		built_in_command/unset.c\
 		analysis/lexer/analysis.c \
         analysis/lexer/get_quote_info.c \
-		analysis/lexer/get_backslash_info.c \
         analysis/lexer/check_tokentype.c \
         analysis/lexer/ft_split_custom.c \
         analysis/lexer/get_tokens.c \
@@ -62,19 +61,17 @@ SRCS =  main.c \
         analysis/lexer/reshape_tokenlist.c \
 		analysis/lexer/set_tokentype.c \
         analysis/lexer/split_token.c \
-        analysis/lexer/test_main.c \
         analysis/lexer/free_tokenlist.c \
         analysis/lexer/utils.c \
+		analysis/lexer/check_unclosed_quote.c \
+		analysis/lexer/make_new_tokenset_with_quote.c \
         analysis/lexer/check_tokentype/check_single_symbol.c \
         analysis/lexer/check_tokentype/check_double_symbol.c \
         analysis/lexer/check_tokentype/check_env_var.c \
         analysis/lexer/check_tokentype/check_exit_status.c \
         analysis/lexer/check_tokentype/check_squote.c \
         analysis/lexer/check_tokentype/check_dquote.c \
-        analysis/lexer/check_tokentype/check_backslash.c \
         analysis/lexer/check_tokentype/check_redirection.c \
-        #analysis/lexer/check_tokentype/check_assignment.c\
-		analysis/lexer/check_tokentype/check_ampersand.c \
 
 OBJS = $(SRCS:.c=.o)
 

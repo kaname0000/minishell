@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 16:07:03 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/02 17:38:25 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/05 00:53:14 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	set_tokentype(t_tokenset *tokenset)
 			next = tokenset->token[i + 1];
 		else
 			next = NULL;
-		get_backslash_info(tokenset->token[i], pre, next);
 		if (tokenset->token[i]->type == UNSIGNED)
 			get_quote_info(tokenset->token[i], pre);
 		get_tokentype(tokenset->token[i], pre);
