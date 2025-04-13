@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:42:44 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/29 23:41:21 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/05 00:41:58 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ static int	count_double_symbol(t_token *token, char *symbol)
 		if (token->value[i] == symbol[0] && token->value[i + 1] == symbol[1])
 		{
 			count++;
-			if (token->squote || token->dquote || (i != 0 && token->value[i
-					- 1] == '\\'))
+			if (token->squote || token->dquote)
 				break ;
 			else
 				return (count);

@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:37:21 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/03 22:40:58 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/04 23:42:25 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,20 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-enum				e_nodetype
+typedef struct s_redir
 {
-	NODE_CMD,
-	NODE_PIPE,
-	NODE_REDIR_IN,
-	NODE_REDIR_OUT
-};
+	t_token_type type; // 入出力の種類（<, >, >>, <<）
+	char *file;        // 対象ファイル名
+	struct s_redir	*next;
+}					t_redir;
 
-typedef struct s_ast
+typedef struct s_cmd
 {
-	e_nodetype		type;
-	char			**argv;
-	char			*filename;
-	struct s_ast	*left;
-	struct s_ast	*right;
-}					t_ast;
+	char **argv;        // コマンド + 引数（execveに渡せる形）
+	t_redir *redir;     // リダイレクション情報のリスト
+	int is_builtin;     // ビルトインフラグ
+	struct s_cmd *next; // パイプでつながる次のコマンド
+}					t_cmd;
 
 void				first_check(t_tokenset *tokenset);
 void				error_token(t_tokenset *tokenset, char *value);

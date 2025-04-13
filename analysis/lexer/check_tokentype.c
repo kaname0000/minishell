@@ -6,41 +6,11 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:02:03 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/02 19:59:26 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/08 22:37:32 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
-// envと一致する文字列が環境変数として有効なものかチェック
-static int	check_valid_env(t_token *token, int i, int len)
-{
-	int	value_len;
-
-	if (token->squote)
-		return (FAILED);
-	value_len = ft_strlen(token->value);
-	if (i && token->value[i - 1] == '{')
-	{
-		if (value_len > i + len && token->value[i + len] != '}')
-			return (FAILED);
-		i--;
-	}
-	if (i == 1 && token->value[i - 1] == '$')
-		return (SUCCESS);
-	if (i == 2 && token->value[i - 1] == '$' && token->value[i - 2] != '\\')
-		return (SUCCESS);
-	if (i > 2 && token->value[i - 1] == '$')
-	{
-		if (token->value[i - 2] != '\\')
-			return (SUCCESS);
-		else if (token->value[i - 3] == '\\')
-			return (SUCCESS);
-		else
-			return (FAILED);
-	}
-	return (FAILED);
-}
 
 // 何個目のenvと一致する文字列を使うべきかを返す
 static int	count_env(t_token *token, char *env)
@@ -59,7 +29,7 @@ static int	count_env(t_token *token, char *env)
 		if (!env[j])
 		{
 			count++;
-			if (check_valid_env(token, i, ft_strlen(env)))
+			if (!token->squote && i && token->value[i - 1] == '$')
 				return (count);
 		}
 		i++;
@@ -77,14 +47,10 @@ static void	search_keyword2(t_token *token, t_tokenlist *tokenlist)
 		return ;
 	if (check_redirection_in(token, tokenlist))
 		return ;
-	if (check_backslash(token, tokenlist))
-		return ;
 	if (check_squote(token, tokenlist))
 		return ;
 	if (check_dquote(token, tokenlist))
 		return ;
-	// if (check_assignment(token, tokenlist))
-	// 	return ;
 }
 
 // tokenのvalueの中から、キーワードを探し、見つけた場合はsplitする
@@ -104,16 +70,8 @@ static void	search_keyword(t_token *token, t_tokenlist *tokenlist)
 	count = check_exit_status(token);
 	if (count)
 		return (split_token(tokenlist, ft_strdup("$?"), token, count));
-	// if (check_single_symbol(token, ';', tokenlist))
-	// 	return ;
-	// if (check_ampersand(token, '&', tokenlist))
-	// 	return ;
 	if (check_single_symbol(token, '|', tokenlist))
 		return ;
-	// if (check_single_symbol(token, '{', tokenlist))
-	// 	return ;
-	// if (check_single_symbol(token, '}', tokenlist))
-	// 	return ;
 	search_keyword2(token, tokenlist);
 }
 

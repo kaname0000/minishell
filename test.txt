@@ -1,2 +1,1 @@
-ls nonexistent 2>> err<<or.log >> &>
-echo "AAA  df?dff  fd"
+echo$? ' my name is $USER' | 

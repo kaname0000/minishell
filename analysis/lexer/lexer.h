@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:10:38 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/08 22:43:32 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 15:50:23 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ enum					e_tokentype
 	TOK_DQUOTE_START,
 	TOK_DQUOTE_IN,
 	TOK_DQUOTE_END,
-	TOK_BACKSLASH,
 	TOK_ENV_VAR,
 	TOK_ENV_VAR_NAME,
 	TOK_EXIT_STATUS,
@@ -45,36 +44,6 @@ enum					e_tokentype
 	UNSIGNED
 };
 
-// enum					e_tokentype
-// {
-// 	TOK_WORD,
-// 	TOK_BUILTIN,
-// 	TOK_PIPE,
-// 	TOK_SEMICOLON,
-// 	TOK_AMPERSAND,
-// 	TOK_REDIR_IN,
-// 	TOK_REDIR_OUT,
-// 	TOK_REDIR_APPEND,
-// 	TOK_HEREDOC,
-// 	TOK_SQUOTE_START,
-// 	TOK_SQUOTE_IN,
-// 	TOK_SQUOTE_END,
-// 	TOK_DQUOTE_START,
-// 	TOK_DQUOTE_IN,
-// 	TOK_DQUOTE_END,
-// 	TOK_BACKSLASH,
-// 	TOK_LPAREN,
-// 	TOK_RPAREN,
-// 	TOK_ENV_VAR,
-// 	TOK_ENV_VAR_NAME,
-// 	TOK_EXIT_STATUS,
-// 	TOK_NEWLINE,
-// 	TOK_NULL,
-// 	TOK_EOF,
-// 	TOK_SPLIT,
-// 	UNSIGNED
-// };
-
 typedef struct s_token
 {
 	enum e_tokentype	type;
@@ -83,6 +52,7 @@ typedef struct s_token
 	int					dquote;
 	int					count;
 	struct s_token		**split_token;
+	int					is_complete;
 }						t_token;
 
 typedef struct s_tokenlist
@@ -120,13 +90,13 @@ void					split_token(t_tokenlist *tokenlist, char *str,
 t_tokenset				*analysis(char *input);
 void					get_tokentype(t_token *token, t_token *pre_token);
 t_tokenset				*reshape_tokenlist(t_tokenlist *tokenlist);
-// void					tokenize_with_quotes(t_tokenset *tokenset, char *input);
-void					free_tokenset(t_tokenset *tokenset);
+void					free_tokenset(t_tokenset *tokenset, int key);
 void					set_tokentype(t_tokenset *tokenset);
 void					get_quote_info(t_token *token, t_token *pre);
-void					get_backslash_info(t_token *token, t_token *pre,
-							t_token *next);
-int						check_env(t_token *token, t_token *pre_token,
-							char *dollar);
+char					*get_value_in_quote(t_tokenset *tokenset, int i);
+char					*expand_env_var(char *new_value);
+int						check_unclosed_quote(t_tokenset *tokenset);
+int						make_new_tokenset_with_quote(t_tokenset *tokenset,
+							int i, int j);
 
 #endif
