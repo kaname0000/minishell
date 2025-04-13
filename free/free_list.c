@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   free_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 19:01:56 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 18:18:16 by okaname          ###   ########.fr       */
+/*   Created: 2025/04/13 17:04:48 by okaname           #+#    #+#             */
+/*   Updated: 2025/04/13 17:32:44 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "free.h"
 
-# include "../libft/libft.h"
+void	free_list(t_env *head)
+{
+	t_env	*tmp;
 
-void	ft_free_split(char **arr);
-char	*ft_strjoin_free(char *s1, char *s2);
-
-#endif
+	while (head != NULL)
+	{
+		tmp = head->next;
+		free(head->key);
+		free(head->value);
+		free(head);
+		head = tmp;
+	}
+}

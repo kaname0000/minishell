@@ -6,10 +6,12 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 22:11:50 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 16:50:58 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 18:31:19 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../free/free.h"
+#include "../libft/libft.h"
 #include "error.h"
 
 void	error_accese(char *file)
@@ -29,5 +31,30 @@ void	error_open(char *file)
 void	error_close(void)
 {
 	perror("bash: close");
+	exit(1);
+}
+
+void	error_fork(t_mini *mini, t_tokenset *tokenset, int *pid)
+{
+	int	i;
+	int	status;
+
+	i = 0;
+	free_mini(mini);
+	(void)tokenset;
+	while (pid[i] != -1)
+	{
+		waitpid(pid[i], &status, 0);
+		i++;
+	}
+	perror("bash: fork");
+	exit(1);
+}
+
+void	error_malloc1(t_mini *mini)
+{
+	mini->cmd = NULL;
+	free_mini(mini);
+	ft_putstr_fd("Error: Memory allocation failed\n", 2);
 	exit(1);
 }

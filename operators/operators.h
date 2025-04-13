@@ -6,15 +6,14 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:38:22 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 19:09:14 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 18:18:34 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPERATORS_H
 # define OPERATORS_H
 
-# include "../built_in_command/built_in.h"
-# include "../error/error.h"
+# include "../struct.h"
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>

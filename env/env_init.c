@@ -6,25 +6,13 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:31:18 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 16:48:00 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 18:23:05 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../error/error.h"
+#include "../free/free.h"
 #include "../minishell.h"
-
-void	free_list(t_env *head)
-{
-	t_env	*tmp;
-
-	while (head != NULL)
-	{
-		tmp = head->next;
-		free(head->key);
-		free(head->value);
-		free(head);
-		head = tmp;
-	}
-}
 
 static t_env	*make_node(char *str)
 {

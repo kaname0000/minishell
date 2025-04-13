@@ -6,10 +6,12 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:37:03 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 16:47:27 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 18:24:07 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../analysis/analysis.h"
+#include "../error/error.h"
 #include "../minishell.h"
 
 static int	count_pipe(t_token **token)
@@ -109,6 +111,8 @@ int	run_token(t_mini *mini)
 	tokenlist = analysis(mini->input);
 	pid_count = count_pipe(tokenlist->token) + 1;
 	pid = malloc(sizeof(int) * pid_count);
+	if (pid == NULL)
+		error_malloc1(mini);
 	// print_tokenset(tokenlist);
 	mini->cmd = token_to_cmd(tokenlist->token, &(mini->exit_status));
 	while (1)

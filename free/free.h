@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   free.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/06 19:01:56 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 18:18:16 by okaname          ###   ########.fr       */
+/*   Created: 2025/04/13 17:21:41 by okaname           #+#    #+#             */
+/*   Updated: 2025/04/13 18:18:50 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef FREE_H
+# define FREE_H
 
-# include "../libft/libft.h"
+# include "../struct.h"
 
-void	ft_free_split(char **arr);
-char	*ft_strjoin_free(char *s1, char *s2);
+void	free_array(char **array);
+void	free_cmd(t_command **cmd);
+void	free_list(t_env *head);
+void	free_mini(t_mini *mini);
 
 #endif

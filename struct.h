@@ -1,0 +1,96 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/13 18:16:09 by okaname           #+#    #+#             */
+/*   Updated: 2025/04/13 18:22:24 by okaname          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef STRUCT_H
+# define STRUCT_H
+
+# include "libft/libft.h"
+# include <stdbool.h>
+
+typedef struct s_env
+{
+	char				*key;
+	char				*value;
+	struct s_env		*next;
+}						t_env;
+
+typedef struct s_command
+{
+	char				*cmd_path;
+	char				**cmd;
+	int					fd_in;
+	int					fd_out;
+	char				**envp;
+	bool				built_in;
+}						t_command;
+
+typedef struct s_mini
+{
+	t_env				*var_env;
+	t_command			**cmd;
+	int					exit_status;
+	char				*input;
+	int					origin_fd_in;
+	int					origin_fd_out;
+}						t_mini;
+
+enum					e_tokentype
+{
+	TOK_WORD,
+	TOK_BUILTIN,
+	TOK_PIPE,
+	TOK_REDIR_IN,
+	TOK_REDIR_OUT,
+	TOK_REDIR_APPEND,
+	TOK_HEREDOC,
+	TOK_SQUOTE_START,
+	TOK_SQUOTE_IN,
+	TOK_SQUOTE_END,
+	TOK_DQUOTE_START,
+	TOK_DQUOTE_IN,
+	TOK_DQUOTE_END,
+	TOK_ENV_VAR,
+	TOK_ENV_VAR_NAME,
+	TOK_EXIT_STATUS,
+	TOK_NEWLINE,
+	TOK_NULL,
+	TOK_SPLIT,
+	UNSIGNED
+};
+
+typedef struct s_token
+{
+	enum e_tokentype	type;
+	char				*value;
+	int					squote;
+	int					dquote;
+	int					count;
+	struct s_token		**split_token;
+	int					is_complete;
+}						t_token;
+
+typedef struct s_tokenlist
+{
+	t_token				***token;
+	char				*input;
+	int					set_count;
+	int					*token_count;
+}						t_tokenlist;
+
+typedef struct s_tokenset
+{
+	t_token				**token;
+	int					count;
+	char				*input;
+}						t_tokenset;
+
+#endif

@@ -18,6 +18,12 @@
         "tuple": "c",
         "utility": "c",
         "libft.h": "c",
-        "lexer.h": "c"
+        "lexer.h": "c",
+        "errno.h": "c",
+        "free.h": "c",
+        "history.h": "c",
+        "operators.h": "c",
+        "fcntl.h": "c",
+        "struct.h": "c"
     }
 }
