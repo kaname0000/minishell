@@ -6,11 +6,11 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:03:51 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 17:28:03 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:47:19 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	pipex(int *fd_in, int *fd_out)
 {

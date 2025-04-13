@@ -6,11 +6,11 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:14:56 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/08 21:56:19 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:47:01 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	built_in_prosses(t_mini *mini, int count)
 {

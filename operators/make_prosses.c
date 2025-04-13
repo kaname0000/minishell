@@ -6,11 +6,11 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 15:49:58 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 15:50:00 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:47:09 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static void	free_cmd(t_command *cmd)
 {
@@ -39,6 +39,5 @@ int	make_prosses(t_mini *mini, t_tokenset *tokenlist, int count, int **pid)
 		&& close(mini->cmd[count]->fd_out) == -1)
 		error_close();
 	free_cmd(mini->cmd[count]);
-	waitpid((*pid)[count], &mini->exit_status, 0);
 	return (0);
 }

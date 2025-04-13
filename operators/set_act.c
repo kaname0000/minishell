@@ -6,11 +6,11 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:53:45 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 18:54:21 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:47:31 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 extern t_signal	g_variable;
 

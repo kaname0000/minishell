@@ -6,11 +6,11 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 01:12:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/08 19:15:00 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:47:36 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	cmd_count(t_command **cmd, t_token **token)
 {

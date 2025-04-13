@@ -6,11 +6,11 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:37:03 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/08 22:07:58 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:47:27 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static int	count_pipe(t_token **token)
 {
@@ -56,31 +56,44 @@ static t_command	**token_to_cmd(t_token **token, int *status)
 	return (cmd);
 }
 
-const char			*token_types[] = {"TOK_WORD", "TOK_BUILTIN", "TOK_PIPE",
-				"TOK_REDIR_IN", "TOK_REDIR_OUT", "TOK_REDIR_APPEND",
-				"TOK_HEREDOC", "TOK_SQUOTE_START", "TOK_SQUOTE_IN",
-				"TOK_SQUOTE_END", "TOK_DQUOTE_START", "TOK_DQUOTE_IN",
-				"TOK_DQUOTE_END", "TOK_BACKSLASH", "TOK_ENV_VAR",
-				"TOK_ENV_VAR_NAME", "TOK_EXIT_STATUS", "TOK_NEWLINE",
-				"TOK_NULL", "TOK_SPLIT", "UNSIGNED"};
+// const char			*token_types[] = {"TOK_WORD", "TOK_BUILTIN", "TOK_PIPE",
+// 				"TOK_REDIR_IN", "TOK_REDIR_OUT", "TOK_REDIR_APPEND",
+// 				"TOK_HEREDOC", "TOK_SQUOTE_START", "TOK_SQUOTE_IN",
+// 				"TOK_SQUOTE_END", "TOK_DQUOTE_START", "TOK_DQUOTE_IN",
+// 				"TOK_DQUOTE_END", "TOK_BACKSLASH", "TOK_ENV_VAR",
+// 				"TOK_ENV_VAR_NAME", "TOK_EXIT_STATUS", "TOK_NEWLINE",
+// 				"TOK_NULL", "TOK_SPLIT", "UNSIGNED"};
 
-static void	print_tokenset(t_tokenset *tokenset)
+// static void	print_tokenset(t_tokenset *tokenset)
+// {
+// 	int		i;
+// 	t_token	*token;
+
+// 	i = 0;
+// 	while (i < tokenset->count)
+// 	{
+// 		token = tokenset->token[i];
+// 		if (!ft_strcmp(token->value, "\n"))
+// 			printf("%-20s \\n           \n", token_types[token->type]);
+// 		else
+// 			printf("%-20s %-12s\n", token_types[token->type], token->value);
+// 		// printf("squote = %d : dquote = %d\n\n", token->squote,
+// 		// token->dquote);
+// 		i++;
+// 	}
+// }
+
+static void	free_pid(int *pid, int count, int *status)
 {
-	int		i;
-	t_token	*token;
+	int	i;
 
 	i = 0;
-	while (i < tokenset->count)
+	while (i < count)
 	{
-		token = tokenset->token[i];
-		if (!ft_strcmp(token->value, "\n"))
-			printf("%-20s \\n           \n", token_types[token->type]);
-		else
-			printf("%-20s %-12s\n", token_types[token->type], token->value);
-		// printf("squote = %d : dquote = %d\n\n", token->squote,
-		// token->dquote);
+		waitpid(pid[i], status, 0);
 		i++;
 	}
+	free(pid);
 }
 
 int	run_token(t_mini *mini)
@@ -89,12 +102,14 @@ int	run_token(t_mini *mini)
 	int			i;
 	int			count;
 	int			*pid;
+	int			pid_count;
 
 	i = 0;
 	count = 0;
-	pid = malloc(sizeof(int) * 1024);
 	tokenlist = analysis(mini->input);
-	print_tokenset(tokenlist);
+	pid_count = count_pipe(tokenlist->token) + 1;
+	pid = malloc(sizeof(int) * pid_count);
+	// print_tokenset(tokenlist);
 	mini->cmd = token_to_cmd(tokenlist->token, &(mini->exit_status));
 	while (1)
 	{
@@ -110,6 +125,6 @@ int	run_token(t_mini *mini)
 		}
 		i++;
 	}
-	free(pid);
+	free_pid(pid, pid_count, &mini->exit_status);
 	return (0);
 }

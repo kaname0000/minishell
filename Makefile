@@ -6,7 +6,7 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/04/13 15:50:11 by okaname          ###   ########.fr        #
+#    Updated: 2025/04/13 16:46:31 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,17 +22,17 @@ LIBFTDIR = ./libft
 LIBFT = $(LIBFTDIR)/libft.a
 
 SRCS =  main.c \
-		input.c\
-		set_act.c\
-		env_init.c\
-		run_token.c\
-		set_fd.c\
-		set_fd_b.c\
-		set_cmd.c\
-		pipex.c\
-		make_prosses.c\
-		built_in_prosses.c\
-		only_builtin.c\
+		operators/input.c\
+		operators/set_act.c\
+		env/env_init.c\
+		operators/run_token.c\
+		operators/set_fd.c\
+		operators/set_fd_b.c\
+		operators/set_cmd.c\
+		operators/pipex.c\
+		operators/make_prosses.c\
+		operators/built_in_prosses.c\
+		operators/only_builtin.c\
 		operators/get_full_path.c\
 		operators/redirector.c\
 		operators/here_document.c\

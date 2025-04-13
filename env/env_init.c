@@ -6,11 +6,11 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:31:18 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 18:01:57 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:48:00 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	free_list(t_env *head)
 {
