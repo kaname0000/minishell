@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 23:00:40 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 19:17:30 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 22:35:14 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static char	*make_new_value(char *input, int a, int b)
 		return (NULL);
 	i = 0;
 	a++;
-	while (i < b - a - 1)
+	while (i < b - a)
 	{
 		new[i] = input[a + i];
 		i++;
@@ -85,7 +85,7 @@ static void	reshape_tokenset(t_tokenset *tokenset, int start, int end)
 	int		i;
 	int		j;
 
-	tokenset->count -= end + start - 1;
+	tokenset->count = tokenset->count - end + start + 1;
 	new_token = (t_token **)malloc(sizeof(t_token *) * tokenset->count);
 	if (!new_token)
 		free_tokenset(tokenset, FAILED);
@@ -103,11 +103,7 @@ static void	reshape_tokenset(t_tokenset *tokenset, int start, int end)
 		j++;
 	}
 	while (i < tokenset->count)
-	{
-		new_token[i] = tokenset->token[end];
-		i++;
-		end++;
-	}
+		new_token[i++] = tokenset->token[end++];
 	free(tokenset->token);
 	tokenset->token = new_token;
 }
@@ -145,7 +141,7 @@ static int	reshape_token_in_quote(t_tokenset *tokenset)
 			start = i;
 			end = i;
 			while (tokenset->token[end]->type != TOK_SQUOTE_END
-				|| tokenset->token[end]->type != TOK_DQUOTE_END)
+				&& tokenset->token[end]->type != TOK_DQUOTE_END)
 				end++;
 			if (end - start == 2)
 				break ;
