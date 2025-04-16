@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 00:52:47 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 20:07:48 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 22:53:52 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	reshape_input(t_tokenlist *tokenlist, int i, int e_len, char *value)
 	if (!new)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
 	j = 0;
-	while (j < i - 1)
+	while (j < i)
 	{
 		new[j] = tokenlist->input[j];
 		j++;
@@ -58,9 +58,9 @@ static void	reshape_input(t_tokenlist *tokenlist, int i, int e_len, char *value)
 		j++;
 		k++;
 	}
-	while (j < (int)ft_strlen(tokenlist->input) - e_len + v_len)
+	while (j < (int)ft_strlen(tokenlist->input) - e_len + v_len - 1)
 	{
-		new[j] = tokenlist->input[i + e_len];
+		new[j] = tokenlist->input[i + e_len + 1];
 		j++;
 		i++;
 	}
