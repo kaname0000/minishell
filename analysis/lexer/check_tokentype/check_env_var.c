@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:01:29 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/05 00:42:35 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/10 22:51:43 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static char	*get_env_var(char *value, int start, int end,
 }
 
 //$がvalue内に見つかるたびに呼び出され環境変数として適切かチェック
-static char	*is_valid_env_name(t_token *token, t_tokenlist *tokenlist, int i)
+static char	*is_valid_env_name(t_token *token, t_tokenlist *tokenlist, int i,
+		t_mini *mini)
 {
 	int		j;
 	char	*env;
@@ -61,13 +62,13 @@ static char	*is_valid_env_name(t_token *token, t_tokenlist *tokenlist, int i)
 		i++;
 	}
 	env = get_env_var(token->value, j, i, tokenlist);
-	if (!getenv(env))
+	if (!get_env(mini, env))
 		return (free(env), NULL);
 	return (env);
 }
 
 // 環境変数を示すTOK_ENV_VARに該当する単語が存在するかのチェック
-char	*check_env_var(t_token *token, t_tokenlist *tokenlist)
+char	*check_env_var(t_token *token, t_tokenlist *tokenlist, t_mini *mini)
 {
 	int		i;
 	char	*env;
@@ -77,7 +78,7 @@ char	*check_env_var(t_token *token, t_tokenlist *tokenlist)
 	{
 		if (token->value[i] == '$')
 		{
-			env = is_valid_env_name(token, tokenlist, i);
+			env = is_valid_env_name(token, tokenlist, i, mini);
 			if (env)
 				return (env);
 		}

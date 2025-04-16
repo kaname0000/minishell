@@ -3,14 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   free_tokenlist.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:28:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/13 18:31:59 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 18:59:38 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+
+static void	free_flag(int *flag, char *input)
+{
+	int	len;
+	int	i;
+
+	len = ft_strlen(input);
+	i = 0;
+	while (i < len)
+	{
+		free(flag[i]);
+		i++;
+	}
+	free(flag);
+}
+
+void	free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	if (!array)
+		return ;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
 
 static void	malloc_failed(void)
 {
@@ -70,6 +100,10 @@ static void	cleanup_split_token(t_tokenlist *tokenlist, int key)
 		}
 		i++;
 	}
+	if (tokenlist->sflag)
+		free_flag(tokenlist->sflag, tokenlist->input);
+	if (tokenlist->dflag)
+		free_flag(tokenlist->dflag, tokenlist->input);
 	free(tokenlist->token);
 	free(tokenlist->token_count);
 	free(tokenlist);

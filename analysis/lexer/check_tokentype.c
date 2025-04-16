@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:02:03 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/08 22:37:32 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/10 23:48:51 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ static void	search_keyword2(t_token *token, t_tokenlist *tokenlist)
 }
 
 // tokenのvalueの中から、キーワードを探し、見つけた場合はsplitする
-static void	search_keyword(t_token *token, t_tokenlist *tokenlist)
+static void	search_keyword(t_token *token, t_tokenlist *tokenlist, t_mini *mini)
 {
 	char	*env;
 	int		count;
 
-	env = check_env_var(token, tokenlist);
+	env = check_env_var(token, tokenlist, mini);
 	if (env)
 	{
 		count = count_env(token, env);
@@ -76,20 +76,20 @@ static void	search_keyword(t_token *token, t_tokenlist *tokenlist)
 }
 
 // token_typeの割当
-void	check_tokentype(t_token *token, t_tokenlist *tokenlist)
+void	check_tokentype(t_token *token, t_tokenlist *tokenlist, t_mini *mini)
 {
 	int	i;
 
 	if (!token || !token->value)
 		return ;
-	search_keyword(token, tokenlist);
+	search_keyword(token, tokenlist, mini);
 	if (token->count > 1 && token->split_token)
 	{
 		i = 0;
 		while (i < token->count)
 		{
 			if (token->split_token[i]->value)
-				check_tokentype(token->split_token[i], tokenlist);
+				check_tokentype(token->split_token[i], tokenlist, mini);
 			i++;
 		}
 	}
