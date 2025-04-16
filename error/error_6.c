@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 22:11:50 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 19:10:04 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 20:40:23 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,13 @@ void	error_fork(t_mini *mini, t_tokenset *tokenset, int *pid)
 	i = 0;
 	free_mini(mini);
 	free_tokenset1(tokenset);
-	while (pid[i] != -1)
+	if (pid != NULL)
 	{
-		waitpid(pid[i], &status, 0);
-		i++;
+		while (pid[i] != -1)
+		{
+			waitpid(pid[i], &status, 0);
+			i++;
+		}
 	}
 	perror("bash: fork");
 	exit(1);

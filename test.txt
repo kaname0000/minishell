@@ -10,3 +10,13 @@ end = 5;
 cut = 2, 3, 4 ->3ko -> end - start + 1
 i = 2;
  i ~ end - 1
+
+export HOME="home"
+
+export 
+HOME=
+home
+
+echo hello "okuda kaname"
+echo 
+hellookuda kaname

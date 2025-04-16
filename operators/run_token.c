@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:37:03 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 19:06:15 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 20:14:12 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,29 @@ static int	count_pipe(t_token **token)
 
 static t_command	**token_to_cmd(t_tokenset *tokenset, t_mini *mini)
 {
-	int			cmd_count;
-	t_command	**cmd;
-	int			i;
+	int	cmd_count;
+	int	i;
 
 	cmd_count = count_pipe(tokenset->token) + 1;
-	cmd = (t_command **)malloc(sizeof(t_command *) * (cmd_count + 1));
-	if (cmd == NULL)
+	mini->cmd = (t_command **)malloc(sizeof(t_command *) * (cmd_count + 1));
+	if (mini->cmd == NULL)
 		error_malloc1(mini, tokenset);
 	i = 0;
 	while (i < cmd_count)
 	{
-		cmd[i] = (t_command *)malloc(sizeof(t_command));
-		if (cmd[i] == NULL)
+		mini->cmd[i] = (t_command *)malloc(sizeof(t_command));
+		if (mini->cmd[i] == NULL)
 			error_malloc1(mini, tokenset);
-		cmd[i]->fd_in = 0;
-		cmd[i]->fd_out = 1;
-		cmd[i]->built_in = 0;
-		cmd[i]->cmd = NULL;
+		mini->cmd[i]->fd_in = 0;
+		mini->cmd[i]->fd_out = 1;
+		mini->cmd[i]->built_in = 0;
+		mini->cmd[i]->cmd = NULL;
 		i++;
 	}
-	cmd[cmd_count] = NULL;
-	set_cmd(cmd, tokenset->token, &mini->exit_status);
-	if (cmd_count > 1)
-		conect_pipe(cmd);
+	mini->cmd[cmd_count] = NULL;
+	set_cmd(mini, tokenset);
+	if (mini->cmd_count > 1)
+		conect_pipe(mini->cmd);
 	return (cmd);
 }
 

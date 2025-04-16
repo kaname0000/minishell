@@ -24,6 +24,7 @@
         "history.h": "c",
         "operators.h": "c",
         "fcntl.h": "c",
-        "struct.h": "c"
+        "struct.h": "c",
+        "stdbool.h": "c"
     }
 }

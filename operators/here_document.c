@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:24:05 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/08 22:33:06 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 20:55:13 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,15 @@ static void	free_close_exit(char *line, int fd)
 	exit(0);
 }
 
-static void	exit_doc(char *char_EOF, int line)
-{
-	char	*c_line;
-
-	c_line = ft_itoa(line);
-	if (c_line == NULL)
-		error_malloc(NULL, NULL);
-	ft_putstr_fd("bash: warning: here-document at line ", 2);
-	ft_putstr_fd(c_line, 2);
-	ft_putstr_fd(" delimited by end-of-file (wanted `", 2);
-	ft_putstr_fd(char_EOF, 2);
-	ft_putstr_fd("`)\n", 2);
-	free(c_line);
-	exit(0);
-}
-
-static int	get_doc(int pipefd, char *char_EOF, int *status)
+static void	get_doc(int pipefd, char *char_EOF, t_mini *mini,
+		t_tokenset **tokenset)
 {
 	char	*line;
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)
-		error_fork1();
+		return (close(pipefd), error_fork(mini, tokenset, NULL));
 	else if (pid == 0)
 	{
 		g_variable.input_mode = HERE_DOC;
@@ -53,7 +38,7 @@ static int	get_doc(int pipefd, char *char_EOF, int *status)
 		{
 			line = readline("> ");
 			if (line == NULL)
-				exit_doc(char_EOF, 1);
+				free_close_exit(line, pipefd);
 			if (!ft_strcmp(line, char_EOF))
 				free_close_exit(line, pipefd);
 			write(pipefd, line, ft_strlen(line));
@@ -61,21 +46,19 @@ static int	get_doc(int pipefd, char *char_EOF, int *status)
 			free(line);
 		}
 	}
-	waitpid(pid, status, 0);
-	return (0);
+	waitpid(pid, &mini->exit_status, 0);
 }
 
-int	here_doc(char *char_EOF, int *fd, int *status)
+int	here_doc(char *char_EOF, int *fd, t_mini *mini, t_tokenset **tokenset)
 {
 	int	pipefd[2];
 
-	if (*fd != 0 && close(*fd) == -1)
-		return (-1);
+	if (*fd != 0)
+		close(*fd);
 	if (pipe(pipefd) < 0)
 		error_pipe();
-	get_doc(pipefd[1], char_EOF, status);
-	if (close(pipefd[1]) == -1)
-		return (-1);
+	get_doc(pipefd[1], char_EOF, mini, tokenset);
+	close(pipefd[1]);
 	*fd = pipefd[0];
 	return (0);
 }

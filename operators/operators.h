@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:38:22 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 18:41:27 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 20:36:19 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 char	*get_full_path(char *cmd, char **envp);
 pid_t	redirector(t_command *cmd);
-int		here_doc(char *char_EOF, int *fd, int *status);
+int		here_doc(char *char_EOF, int *fd, t_mini *mini, t_tokenset **tokenset);
 char	**list_to_char(t_env *env);
 
 #endif

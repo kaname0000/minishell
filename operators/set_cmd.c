@@ -6,18 +6,22 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 01:12:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 16:47:36 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 20:35:38 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	cmd_count(t_command **cmd, t_token **token)
+int	cmd_count(t_mini *mini, t_tokenset **tokenset)
 {
-	int	i;
-	int	count;
-	int	pipe_count;
+	int			i;
+	int			count;
+	int			pipe_count;
+	t_command	**cmd;
+	t_token		**token;
 
+	cmd = mini->cmd;
+	token = tokenset->token;
 	i = 0;
 	count = 0;
 	pipe_count = 0;
@@ -27,7 +31,7 @@ int	cmd_count(t_command **cmd, t_token **token)
 		{
 			cmd[pipe_count]->cmd = malloc(sizeof(char *) * (count + 1));
 			if (cmd[pipe_count]->cmd == NULL)
-				error_malloc(NULL, NULL);
+				error_malloc1(mini, tokenset);
 			cmd[pipe_count]->cmd[count] = NULL;
 			count = 0;
 			pipe_count++;
@@ -50,7 +54,8 @@ int	cmd_count(t_command **cmd, t_token **token)
 	return (0);
 }
 
-static void	set_here_doc(t_command **cmd, t_token **token, int *status)
+static void	set_here_doc(t_command **cmd, t_token **token, t_mini *mini,
+		t_tokenset **tokenset)
 {
 	int	i;
 	int	pipe_count;
@@ -62,22 +67,27 @@ static void	set_here_doc(t_command **cmd, t_token **token, int *status)
 		if ((token[i])->type == TOK_PIPE)
 			pipe_count++;
 		else if ((token[i])->type == TOK_HEREDOC)
-			here_doc((token[i + 1])->value, &(cmd[pipe_count]->fd_in), status);
+			here_doc((token[i + 1])->value, &(cmd[pipe_count]->fd_in), mini,
+				tokenset);
 		i++;
 	}
 }
 
-int	set_cmd(t_command **cmd, t_token **token, int *status)
+int	set_cmd(t_mini *mini, t_tokenset **tokenset)
 {
-	int	i;
-	int	pipe_count;
-	int	count;
+	int			i;
+	int			pipe_count;
+	int			count;
+	t_command	**cmd;
+	t_token		**token;
 
 	i = 0;
+	cmd = mini->cmd;
+	token = tokenset->token;
 	pipe_count = 0;
 	count = 0;
-	cmd_count(cmd, token);
-	set_here_doc(cmd, token, status);
+	cmd_count(mini, tokenset);
+	set_here_doc(cmd, token, mini, tokenset);
 	while ((token[i])->value != NULL)
 	{
 		if ((token[i])->type == TOK_PIPE)
