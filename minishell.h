@@ -6,13 +6,16 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:21:50 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 18:18:06 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 18:41:06 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "built_in_command/built_in.h"
+# include "error/error.h"
+# include "operators/operators.h"
 # include "struct.h"
 # include <fcntl.h>
 # include <readline/history.h>

@@ -6,13 +6,15 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:38:22 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 18:18:34 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 18:41:27 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPERATORS_H
 # define OPERATORS_H
 
+# include "../error/error.h"
+# include "../free/free.h"
 # include "../struct.h"
 # include <fcntl.h>
 # include <readline/history.h>
@@ -26,11 +28,6 @@
 
 # define COMMAND_LINE 1
 # define HERE_DOC 2
-
-typedef struct s_signal
-{
-	int	input_mode;
-}		t_signal;
 
 char	*get_full_path(char *cmd, char **envp);
 pid_t	redirector(t_command *cmd);

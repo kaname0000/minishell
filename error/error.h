@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 18:55:23 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 18:30:42 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 19:10:17 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ void	error_accese(char *file);
 void	error_open(char *file);
 void	error_close(void);
 void	error_fork(t_mini *mini, t_tokenset *tokenset, int *pid);
-void	error_malloc1(t_mini *mini);
+void	error_malloc1(t_mini *mini, t_tokenset *tokenset);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:37:03 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 18:24:07 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 19:16:51 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,30 @@ static int	count_pipe(t_token **token)
 	return (count);
 }
 
-static t_command	**token_to_cmd(t_token **token, int *status)
+static t_command	**token_to_cmd(t_tokenset *tokenset, t_mini *mini)
 {
 	int			cmd_count;
 	t_command	**cmd;
 	int			i;
 
-	cmd_count = count_pipe(token) + 1;
+	cmd_count = count_pipe(tokenset->token) + 1;
 	cmd = (t_command **)malloc(sizeof(t_command *) * (cmd_count + 1));
 	if (cmd == NULL)
-		error_malloc(NULL, NULL);
+		error_malloc1(mini, tokenset);
 	i = 0;
 	while (i < cmd_count)
 	{
 		cmd[i] = (t_command *)malloc(sizeof(t_command));
 		if (cmd[i] == NULL)
-			error_malloc(NULL, NULL);
+			error_malloc1(mini, tokenset);
 		cmd[i]->fd_in = 0;
 		cmd[i]->fd_out = 1;
 		cmd[i]->built_in = 0;
+		cmd[i]->cmd = NULL;
 		i++;
 	}
 	cmd[cmd_count] = NULL;
-	set_cmd(cmd, token, status);
+	set_cmd(cmd, tokenset->token, &mini->exit_status);
 	if (cmd_count > 1)
 		conect_pipe(cmd);
 	return (cmd);
@@ -100,35 +101,35 @@ static void	free_pid(int *pid, int count, int *status)
 
 int	run_token(t_mini *mini)
 {
-	t_tokenset	*tokenlist;
+	t_tokenset	*tokenset;
 	int			i;
 	int			count;
-	int			*pid;
 	int			pid_count;
 
 	i = 0;
 	count = 0;
-	tokenlist = analysis(mini->input);
-	pid_count = count_pipe(tokenlist->token) + 1;
-	pid = malloc(sizeof(int) * pid_count);
-	if (pid == NULL)
-		error_malloc1(mini);
-	// print_tokenset(tokenlist);
-	mini->cmd = token_to_cmd(tokenlist->token, &(mini->exit_status));
+	tokenset = analysis(mini->input);
+	pid_count = count_pipe(tokenset->token) + 1;
+	mini->pid = malloc(sizeof(int) * pid_count);
+	if (mini->pid == NULL)
+		error_malloc1(mini, tokenset);
+	// print_tokenset(tokenset);
+	mini->cmd = token_to_cmd(tokenset, mini);
 	while (1)
 	{
-		if (tokenlist->token[i]->type == TOK_PIPE)
-			make_prosses(mini, tokenlist, count++, &pid);
-		else if (tokenlist->token[i]->type == TOK_NULL)
+		if (tokenset->token[i]->type == TOK_PIPE)
+			make_prosses(mini, tokenset, count++, &mini->pid);
+		else if (tokenset->token[i]->type == TOK_NULL)
 		{
 			if (count == 0 && mini->cmd[0]->built_in)
-				mini->exit_status = only_built_in(mini, tokenlist->token);
+				mini->exit_status = only_built_in(mini, tokenset->token);
 			else
-				make_prosses(mini, tokenlist, count, &pid);
+				make_prosses(mini, tokenset, count, &mini->pid);
 			break ;
 		}
 		i++;
 	}
-	free_pid(pid, pid_count, &mini->exit_status);
+	free_pid(mini->pid, pid_count, &mini->exit_status);
+	free_cmd(mini->cmd);
 	return (0);
 }

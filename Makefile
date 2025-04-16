@@ -6,7 +6,7 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/25 23:15:25 by okaname           #+#    #+#              #
-#    Updated: 2025/04/13 17:39:43 by okaname          ###   ########.fr        #
+#    Updated: 2025/04/13 19:06:16 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS =  main.c \
 		free/free_cmd.c\
 		free/free_list.c\
 		free/free_mini.c\
+		free/free_tokenset.c\
 		built_in_command/exit.c\
 		built_in_command/cd.c\
 		built_in_command/echo.c\

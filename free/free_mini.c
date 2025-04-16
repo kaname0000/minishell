@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 17:02:36 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 17:32:51 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 18:48:49 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,4 @@ void	free_mini(t_mini *mini)
 	free_list(mini->var_env);
 	free_cmd(mini->cmd);
 	free(mini->input);
-	free(mini);
 }

@@ -3,12 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 22:22:53 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/10 22:25:02 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/13 18:43:12 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+valgrind --leak-check=full --show-leak-kinds=all --suppressions=suppression.txt ./minishell
+*/
 
 #include "minishell.h"
 
