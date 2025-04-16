@@ -6,29 +6,33 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 01:46:29 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 21:54:07 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 23:49:14 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_in.h"
 
+static char	*serch_key(t_env *env, char *s)
+{
+	t_env	*temp;
+
+	temp = env;
+	while (temp->next)
+	{
+		if (!ft_strcmp(temp->key, s))
+			return (temp->value);
+		temp = temp->next;
+	}
+	return (NULL);
+}
+
 static void	append_env(t_env *env, char *s)
 {
-	int	i;
-	int	equal_flag;
-	int	plus_flag;
-
-	i = 0;
-	equal_flag = 0;
-	plus_flag = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == '+')
-			equal_flag = 1;
-		else if (s[i] == '=')
-			equal_flag = 1;
-	}
-	(void)env;
+	// if (ft_strchr(s, '=') == NULL)
+	// 	make_env(&env, s);
+	// else if (ft_strchr(s, '=') == NULL)
+	// 	make_node();
+	serch_key(env, s);
 }
 
 static int	is_invalid(char *s)
@@ -70,7 +74,7 @@ int	ft_export(t_mini *mini, int count)
 		while (mini->cmd[count]->cmd[i] != NULL)
 		{
 			if (is_invalid(mini->cmd[count]->cmd[i]))
-				break ;
+				return (1);
 			append_env(mini->var_env, mini->cmd[count]->cmd[i]);
 			i++;
 		}
