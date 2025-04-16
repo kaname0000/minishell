@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:53:55 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 19:05:30 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 19:30:38 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@
 
 t_tokenset	*lexical_analysis(t_tokenlist *tokenlist, t_mini *mini);
 void		get_tokens(t_tokenlist *tokenlist);
-void		free_array(char **array);
+// void		free_array(char **array);
 void		free_tokenlist(t_tokenlist *tokenlist, char **array1, char **array2,
 				int key);
-void		check_tokentype(t_token *token, t_tokenlist *tokenlist,
-				t_mini *mini);
+void		check_tokentype(t_token *token, t_tokenlist *tokenlist);
 char		**ft_split_custom(char *s, t_tokenlist *tokenlist, int i);
 void		init_token(t_token *token, char *str, t_tokenlist *tokenlist);
 int			ft_strcmp(const char *s1, const char *s2);
@@ -49,5 +48,6 @@ int			check_unclosed_quote(t_tokenset *tokenset);
 int			make_new_tokenset_with_quote(t_tokenset *tokenset, int i, int j);
 char		*get_env(t_mini *mini, char *env, t_tokenlist *tokenlist);
 void		process_env_var(t_tokenlist *tokenlist, t_mini *mini);
+int			make_quote_flag(t_tokenlist *tokenlist, int i);
 
 #endif

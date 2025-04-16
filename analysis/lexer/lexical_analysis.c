@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:04:00 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 12:57:12 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 20:10:32 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_tokenset	*lexical_analysis(t_tokenlist *tokenlist, t_mini *mini)
 		j = 0;
 		while (j < tokenlist->token_count[i])
 		{
-			check_tokentype(tokenlist->token[i][j], tokenlist, mini);
+			check_tokentype(tokenlist->token[i][j], tokenlist);
 			j++;
 		}
 		i++;

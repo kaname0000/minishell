@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:55:26 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 17:05:09 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 19:26:39 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ int	parser_error(t_tokenset *tokenset, char *value)
 	else
 		write(2, value, ft_strlen(value));
 	write(2, "'\n", 2);
+	free_tokenset(tokenset, SUCCESS);
 	return (FAILED);
 }

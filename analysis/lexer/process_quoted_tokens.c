@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   process_quoted_tokens.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 23:00:40 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 19:09:38 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 19:17:30 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "lexer.h"
 
 // inputの何文字目が対象のクオーテーションマークかを返す
 static int	search_quote_in_input(t_tokenset *tokenset, int count, char quote)
@@ -55,7 +55,7 @@ static int	search_quote(t_tokenset *tokenset, int x)
 		}
 		i++;
 	}
-	return (search_quote_in_quote(tokenset, count + 1, quote));
+	return (search_quote_in_input(tokenset, count + 1, quote));
 }
 
 //クオーテーションマーク配下の文字列を一つにまとめる
@@ -86,7 +86,7 @@ static void	reshape_tokenset(t_tokenset *tokenset, int start, int end)
 	int		j;
 
 	tokenset->count -= end + start - 1;
-	new_token = (t_token *)malloc(sizeof(t_token *) * tokenset->count);
+	new_token = (t_token **)malloc(sizeof(t_token *) * tokenset->count);
 	if (!new_token)
 		free_tokenset(tokenset, FAILED);
 	i = 0;
@@ -109,7 +109,7 @@ static void	reshape_tokenset(t_tokenset *tokenset, int start, int end)
 		end++;
 	}
 	free(tokenset->token);
-	tokenset->new_token;
+	tokenset->token = new_token;
 }
 
 static void	join_token(t_tokenset *tokenset, int start, int end)

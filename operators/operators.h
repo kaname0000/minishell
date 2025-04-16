@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   operators.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:38:22 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 18:41:27 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 19:14:21 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPERATORS_H
 # define OPERATORS_H
 
+# include "../analysis/lexer/lexer.h"
 # include "../error/error.h"
 # include "../free/free.h"
 # include "../struct.h"

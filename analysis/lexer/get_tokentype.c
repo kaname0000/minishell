@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 13:11:59 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/05 01:32:59 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 20:10:19 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,10 @@ static int	simple_check(t_token *token, char *cmp)
 	return (FAILED);
 }
 
-static void	get_tokentype2(t_token *token, t_token *pre_token)
+static void	get_tokentype2(t_token *token)
 {
 	if (!ft_strcmp(token->value, "\n"))
 		token->type = TOK_NEWLINE;
-	else if (!ft_strcmp(token->value, "$?") && !token->squote)
-		token->type = TOK_EXIT_STATUS;
-	else if (!ft_strcmp(token->value, "$") && !token->squote)
-		token->type = TOK_ENV_VAR;
-	else if (pre_token && pre_token->type == TOK_ENV_VAR)
-		token->type = TOK_ENV_VAR_NAME;
 	else if (simple_check(token, "echo") || simple_check(token, "cd")
 		|| simple_check(token, "pwd") || simple_check(token, "export")
 		|| simple_check(token, "unset") || simple_check(token, "env")
@@ -55,7 +49,7 @@ void	get_tokentype(t_token *token, t_token *pre_token)
 	else if (simple_check(token, ">>"))
 		token->type = TOK_REDIR_APPEND;
 	else
-		get_tokentype2(token, pre_token);
+		get_tokentype2(token);
 	if (pre_token)
 	{
 		token->squote = pre_token->squote;
