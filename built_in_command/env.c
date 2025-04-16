@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 05:46:34 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/08 21:54:02 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 22:58:16 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_env(t_mini *mini, int count)
 {
-	(void)mini;
 	(void)count;
+	print_list(mini->var_env);
 	return (0);
 }
