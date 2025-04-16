@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   analysis.h                                         :+:      :+:    :+:   */
+/*   parser_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 15:55:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 17:25:21 by yookamot         ###   ########.fr       */
+/*   Created: 2025/04/03 20:55:26 by yookamot          #+#    #+#             */
+/*   Updated: 2025/04/16 17:05:09 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANALYSIS_H
-# define ANALYSIS_H
+#include "parser.h"
 
-# include "lexer/lexer.h"
-# include "parser/parser.h"
-
-t_tokenset	*analysis(char *input, t_mini *mini);
-
-#endif
+int	parser_error(t_tokenset *tokenset, char *value)
+{
+	write(2, "bash: syntax error near unexpected token `", 42);
+	if (!ft_strcmp(value, "\n"))
+		write(2, "newline", 7);
+	else
+		write(2, value, ft_strlen(value));
+	write(2, "'\n", 2);
+	return (FAILED);
+}

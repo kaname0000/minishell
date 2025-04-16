@@ -6,12 +6,26 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:28:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/10 18:29:11 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 13:00:42 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
+static void	free_flag(int *flag, char *input)
+{
+	int	len;
+	int	i;
+
+	len = ft_strlen(input);
+	i = 0;
+	while (i < len)
+	{
+		free(flag[i]);
+		i++;
+	}
+	free(flag);
+}
 
 void	free_array(char **array)
 {
@@ -86,6 +100,10 @@ static void	cleanup_split_token(t_tokenlist *tokenlist, int key)
 		}
 		i++;
 	}
+	if (tokenlist->sflag)
+		free_flag(tokenlist->sflag, tokenlist->input);
+	if (tokenlist->dflag)
+		free_flag(tokenlist->dflag, tokenlist->input);
 	free(tokenlist->token);
 	free(tokenlist->token_count);
 	free(tokenlist);

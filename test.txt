@@ -1,1 +1,12 @@
 echo$? ' my name is $USER' | 
+hello "aa bb"
+01234567890123   6 12
+
+" hello world $ USER "
+0   1     2   3  4   5
+
+start = 1;
+end = 5;
+cut = 2, 3, 4 ->3ko -> end - start + 1
+i = 2;
+ i ~ end - 1
