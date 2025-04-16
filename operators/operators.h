@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operators.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:38:22 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 19:14:21 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 21:38:56 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define HERE_DOC 2
 
 char	*get_full_path(char *cmd, char **envp);
-pid_t	redirector(t_command *cmd);
-int		here_doc(char *char_EOF, int *fd, int *status);
+void	redirector(t_command *cmd);
+int		here_doc(char *char_EOF, int *fd, t_mini *mini, t_tokenset *tokenset);
 char	**list_to_char(t_env *env);
 
 #endif

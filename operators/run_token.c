@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:37:03 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 19:54:03 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 21:23:28 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static t_command	**token_to_cmd(t_tokenset *tokenset, t_mini *mini)
 		i++;
 	}
 	cmd[cmd_count] = NULL;
-	set_cmd(cmd, tokenset->token, &mini->exit_status);
+	set_cmd(cmd, tokenset->token, mini, tokenset);
 	if (cmd_count > 1)
-		conect_pipe(cmd);
+		conect_pipe(cmd, mini, tokenset);
 	return (cmd);
 }
 

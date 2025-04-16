@@ -6,17 +6,16 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 01:50:03 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 16:47:44 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 21:31:08 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
 static void	open_infile_normant(char *infile, int *fd_in)
 {
-	if (*fd_in != 0 && close(*fd_in) == -1)
-		error_close();
+	if (*fd_in != 0)
+		close(*fd_in);
 	*fd_in = open(infile, O_RDONLY);
 	if (*fd_in == -1)
 		error_open(infile);
@@ -24,8 +23,8 @@ static void	open_infile_normant(char *infile, int *fd_in)
 
 static void	open_file(char *file, int *fd_out, int open_type)
 {
-	if (*fd_out != 1 && close(*fd_out) == -1)
-		error_close();
+	if (*fd_out != 1)
+		close(*fd_out);
 	if (access(file, F_OK) == 0 && access(file, W_OK) == -1)
 		error_accese(file);
 	if (open_type == 4)

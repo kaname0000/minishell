@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:54:34 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 16:47:40 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 21:41:31 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,8 @@ static int	error_open_b(char *file)
 
 static int	open_infile_normant(char *infile, int *fd_in)
 {
-	if (*fd_in != 0 && close(*fd_in) == -1)
-	{
-		perror("bash: close");
-		return (1);
-	}
+	if (*fd_in != 0)
+		close(*fd_in);
 	if (access(infile, F_OK) == -1 || access(infile, R_OK) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);
@@ -44,11 +41,8 @@ static int	open_infile_normant(char *infile, int *fd_in)
 
 static int	open_file(char *file, int *fd_out, int open_type)
 {
-	if (*fd_out != 1 && close(*fd_out) == -1)
-	{
-		perror("bash: close");
-		return (1);
-	}
+	if (*fd_out != 1)
+		close(*fd_out);
 	if (access(file, F_OK) == 0 && access(file, W_OK) == -1)
 	{
 		ft_putstr_fd("bash: ", 2);

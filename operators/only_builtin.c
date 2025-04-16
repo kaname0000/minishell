@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 18:10:01 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 16:47:14 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 21:44:21 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static void	redirct_stdio(int *fd_stdin, int *fd_stdout, int *fd_in,
 		error_redirect();
 	if (dup2(*fd_in, STDIN_FILENO) == -1)
 		error_redirect();
-	if (*fd_in != STDIN_FILENO && close(*fd_in) == -1)
-		error_close();
+	if (*fd_in != STDIN_FILENO)
+		close(*fd_in);
 	if (dup2(*fd_out, STDOUT_FILENO) == -1)
 		error_redirect();
-	if (*fd_out != 1 && close(*fd_out) == -1)
-		error_close();
+	if (*fd_out != 1)
+		close(*fd_out);
 }
 
 int	run_cmd(t_mini *mini, int count)

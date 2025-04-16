@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 15:49:58 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 18:46:59 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 21:39:50 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../minishell.h"
 #include "operators.h"
 
-int	make_prosses(t_mini *mini, t_tokenset *tokenlist, int count, int **pid)
+void	make_prosses(t_mini *mini, t_tokenset *tokenlist, int count, int **pid)
 {
 	(*pid)[count] = fork();
 	if ((*pid)[count] == -1)
@@ -29,11 +29,8 @@ int	make_prosses(t_mini *mini, t_tokenset *tokenlist, int count, int **pid)
 		else
 			redirector(mini->cmd[count]);
 	}
-	if (mini->cmd[count]->fd_in != STDIN_FILENO
-		&& close(mini->cmd[count]->fd_in) == -1)
-		error_close();
-	if (mini->cmd[count]->fd_out != STDOUT_FILENO
-		&& close(mini->cmd[count]->fd_out) == -1)
-		error_close();
-	return (0);
+	if (mini->cmd[count]->fd_in != STDIN_FILENO)
+		close(mini->cmd[count]->fd_in);
+	if (mini->cmd[count]->fd_out != STDOUT_FILENO)
+		close(mini->cmd[count]->fd_out);
 }
