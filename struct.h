@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 18:16:09 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 19:34:26 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 21:59:42 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include "libft/libft.h"
 # include <stdbool.h>
+
+# define FAILED 0
+# define SUCCESS 1
 
 typedef struct s_env
 {

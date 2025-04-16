@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:53:55 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 19:30:38 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 22:06:20 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-# define FAILED 0
-# define SUCCESS 1
 
 t_tokenset	*lexical_analysis(t_tokenlist *tokenlist, t_mini *mini);
 void		get_tokens(t_tokenlist *tokenlist);
@@ -49,5 +46,6 @@ int			make_new_tokenset_with_quote(t_tokenset *tokenset, int i, int j);
 char		*get_env(t_mini *mini, char *env, t_tokenlist *tokenlist);
 void		process_env_var(t_tokenlist *tokenlist, t_mini *mini);
 int			make_quote_flag(t_tokenlist *tokenlist, int i);
+void		malloc_failed(void);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:03:51 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 21:24:59 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 22:01:11 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	pipex(int *fd_in, int *fd_out, t_mini *mini, t_tokenset *tokenset)
 	if (pipe(pipefd) < 0)
 	{
 		free_mini(mini);
-		free_tokenset1(tokenset);
+		free_tokenset(tokenset, SUCCESS);
 		error_pipe();
 	}
 	if (*fd_out != 1)

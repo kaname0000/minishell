@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_document.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:24:05 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 21:53:47 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 22:01:02 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	here_doc(char *char_EOF, int *fd, t_mini *mini, t_tokenset *tokenset)
 	if (pipe(pipefd) < 0)
 	{
 		free_mini(mini);
-		free_tokenset1(tokenset);
+		free_tokenset(tokenset, SUCCESS);
 		error_pipe();
 	}
 	get_doc(pipefd[1], char_EOF, mini, tokenset);

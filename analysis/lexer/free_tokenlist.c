@@ -6,28 +6,13 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:28:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 19:30:24 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 22:06:16 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-// void	free_array(char **array)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (!array)
-// 		return ;
-// 	while (array[i])
-// 	{
-// 		free(array[i]);
-// 		i++;
-// 	}
-// 	free(array);
-// }
-
-static void	malloc_failed(void)
+void	malloc_failed(void)
 {
 	perror("Memory allocation failed");
 	exit(EXIT_FAILURE);
@@ -111,24 +96,5 @@ void	free_tokenlist(t_tokenlist *tokenlist, char **array1, char **array2,
 	free_array(array2);
 	cleanup_split_token(tokenlist, key);
 	if (key == FAILED)
-		malloc_failed();
-}
-
-void	free_tokenset(t_tokenset *tokenset, int key)
-{
-	int	i;
-
-	if (!tokenset)
-		return ;
-	i = 0;
-	while (i < tokenset->count)
-	{
-		free(tokenset->token[i]->value);
-		free(tokenset->token[i]);
-		i++;
-	}
-	free(tokenset->input);
-	free(tokenset);
-	if (!key)
 		malloc_failed();
 }
