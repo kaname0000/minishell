@@ -6,56 +6,44 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 01:12:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 20:35:38 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 21:51:54 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	cmd_count(t_mini *mini, t_tokenset **tokenset)
+static void	cmd_count(t_command **cmd, t_token **token, t_mini *mini,
+		t_tokenset *tokenset)
 {
-	int			i;
-	int			count;
-	int			pipe_count;
-	t_command	**cmd;
-	t_token		**token;
+	int	i;
+	int	count;
+	int	pipe_count;
 
-	cmd = mini->cmd;
-	token = tokenset->token;
-	i = 0;
+	i = -1;
 	count = 0;
 	pipe_count = 0;
 	while (1)
 	{
-		if ((token[i])->type == TOK_PIPE || (token[i])->type == TOK_NULL)
+		if ((token[++i])->type == TOK_PIPE || (token[i])->type == TOK_NULL)
 		{
 			cmd[pipe_count]->cmd = malloc(sizeof(char *) * (count + 1));
 			if (cmd[pipe_count]->cmd == NULL)
 				error_malloc1(mini, tokenset);
-			cmd[pipe_count]->cmd[count] = NULL;
+			cmd[pipe_count++]->cmd[count] = NULL;
 			count = 0;
-			pipe_count++;
 			if ((token[i])->type == TOK_NULL)
 				break ;
 		}
-		else if ((token[i])->type == TOK_REDIR_APPEND
-			|| (token[i])->type == TOK_REDIR_IN
-			|| (token[i])->type == TOK_REDIR_OUT
-			|| (token[i])->type == TOK_HEREDOC)
-		{
-			i += 2;
-			continue ;
-		}
-		else if ((token[i])->type == TOK_WORD
-			|| (token[i])->type == TOK_BUILTIN)
+		else if ((token[i])->type == 5 || (token[i])->type == 3
+			|| (token[i])->type == 4 || (token[i])->type == 6)
+			i++;
+		else if ((token[i])->type == 0 || (token[i])->type == 1)
 			count++;
-		i++;
 	}
-	return (0);
 }
 
 static void	set_here_doc(t_command **cmd, t_token **token, t_mini *mini,
-		t_tokenset **tokenset)
+		t_tokenset *tokenset)
 {
 	int	i;
 	int	pipe_count;
@@ -73,47 +61,48 @@ static void	set_here_doc(t_command **cmd, t_token **token, t_mini *mini,
 	}
 }
 
-int	set_cmd(t_mini *mini, t_tokenset **tokenset)
+static void	inclement(int *count, int *pipecount)
 {
-	int			i;
-	int			pipe_count;
-	int			count;
-	t_command	**cmd;
-	t_token		**token;
+	*count = 0;
+	(*pipecount)++;
+}
 
-	i = 0;
-	cmd = mini->cmd;
-	token = tokenset->token;
+static char	*ft_strdup_error(char *s, t_mini *mini, t_tokenset *tokenset)
+{
+	char	*result;
+
+	result = ft_strdup(s);
+	if (result == NULL)
+		error_malloc1(mini, tokenset);
+	return (result);
+}
+
+void	set_cmd(t_command **cmd, t_token **token, t_mini *mini,
+		t_tokenset *tokenset)
+{
+	int	i;
+	int	pipe_count;
+	int	count;
+
+	i = -1;
 	pipe_count = 0;
 	count = 0;
-	cmd_count(mini, tokenset);
+	cmd_count(cmd, token, mini, tokenset);
 	set_here_doc(cmd, token, mini, tokenset);
-	while ((token[i])->value != NULL)
+	while ((token[++i])->value != NULL)
 	{
 		if ((token[i])->type == TOK_PIPE)
-		{
-			count = 0;
-			pipe_count++;
-		}
-		else if ((token[i])->type == TOK_REDIR_APPEND
-			|| (token[i])->type == TOK_REDIR_IN
-			|| (token[i])->type == TOK_REDIR_OUT
-			|| (token[i])->type == TOK_HEREDOC)
-		{
-			i += 2;
-			continue ;
-		}
-		else if ((token[i])->type == TOK_WORD
-			|| (token[i])->type == TOK_DQUOTE_IN
-			|| (token[i])->type == TOK_SQUOTE_IN
-			|| (token[i])->type == TOK_BUILTIN)
+			inclement(&count, &pipe_count);
+		else if ((token[i])->type == 5 || (token[i])->type == 3
+			|| (token[i])->type == 4 || (token[i])->type == 6)
+			i++;
+		else if ((token[i])->type == 0 || (token[i])->type == 11
+			|| (token[i])->type == 8 || (token[i])->type == 1)
 		{
 			if ((token[i])->type == TOK_BUILTIN && count == 0)
 				cmd[pipe_count]->built_in = 1;
-			cmd[pipe_count]->cmd[count] = ft_strdup(token[i]->value);
-			count++;
+			cmd[pipe_count]->cmd[count++] = ft_strdup_error(token[i]->value,
+					mini, tokenset);
 		}
-		i++;
 	}
-	return (0);
 }

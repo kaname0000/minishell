@@ -25,6 +25,8 @@
         "operators.h": "c",
         "fcntl.h": "c",
         "struct.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "algorithm": "c",
+        "wait.h": "c"
     }
 }

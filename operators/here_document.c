@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:24:05 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 20:55:13 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 21:53:47 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ static void	free_close_exit(char *line, int fd)
 	exit(0);
 }
 
-static void	get_doc(int pipefd, char *char_EOF, t_mini *mini,
-		t_tokenset **tokenset)
+static int	get_doc(int pipefd, char *char_EOF, t_mini *mini,
+		t_tokenset *tokenset)
 {
 	char	*line;
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)
-		return (close(pipefd), error_fork(mini, tokenset, NULL));
+		error_fork(mini, tokenset, NULL);
 	else if (pid == 0)
 	{
 		g_variable.input_mode = HERE_DOC;
@@ -47,16 +47,21 @@ static void	get_doc(int pipefd, char *char_EOF, t_mini *mini,
 		}
 	}
 	waitpid(pid, &mini->exit_status, 0);
+	return (0);
 }
 
-int	here_doc(char *char_EOF, int *fd, t_mini *mini, t_tokenset **tokenset)
+int	here_doc(char *char_EOF, int *fd, t_mini *mini, t_tokenset *tokenset)
 {
 	int	pipefd[2];
 
 	if (*fd != 0)
 		close(*fd);
 	if (pipe(pipefd) < 0)
+	{
+		free_mini(mini);
+		free_tokenset1(tokenset);
 		error_pipe();
+	}
 	get_doc(pipefd[1], char_EOF, mini, tokenset);
 	close(pipefd[1]);
 	*fd = pipefd[0];

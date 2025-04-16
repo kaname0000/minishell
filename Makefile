@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
+#    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 18:55:13 by yookamot          #+#    #+#              #
-#    Updated: 2025/04/16 19:04:45 by okaname          ###   ########.fr        #
+#    Updated: 2025/04/16 19:28:51 by yookamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,17 +75,16 @@ SRCS =  main.c \
 		analysis/lexer/make_new_tokenset_with_quote.c \
 		analysis/lexer/process_quoted_tokens.c \
 		analysis/lexer/process_env_var.c \
+		analysis/lexer/make_quote_flag.c \
         analysis/lexer/check_tokentype/check_single_symbol.c \
         analysis/lexer/check_tokentype/check_double_symbol.c \
-        analysis/lexer/check_tokentype/check_env_var.c \
-        analysis/lexer/check_tokentype/check_exit_status.c \
         analysis/lexer/check_tokentype/check_squote.c \
         analysis/lexer/check_tokentype/check_dquote.c \
         analysis/lexer/check_tokentype/check_redirection.c \
 		analysis/parser/check_pipe.c \
 		analysis/parser/check_redirect.c \
 		analysis/parser/parser_error.c \
-		analysis/syntax_analysis.c
+		analysis/parser/syntax_analysis.c
 
 OBJS = $(SRCS:.c=.o)
 

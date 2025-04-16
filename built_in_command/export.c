@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 01:46:29 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 19:51:48 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 21:54:07 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	append_env(t_env *env, char *s)
 		else if (s[i] == '=')
 			equal_flag = 1;
 	}
+	(void)env;
 }
 
 static int	is_invalid(char *s)

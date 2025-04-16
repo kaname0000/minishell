@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 18:16:09 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 19:08:15 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 19:34:26 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,6 @@ enum					e_tokentype
 	TOK_DQUOTE_START,
 	TOK_DQUOTE_IN,
 	TOK_DQUOTE_END,
-	TOK_ENV_VAR,
-	TOK_ENV_VAR_NAME,
-	TOK_EXIT_STATUS,
 	TOK_NEWLINE,
 	TOK_NULL,
 	TOK_SPLIT,

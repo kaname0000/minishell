@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 00:52:47 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 12:59:59 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 20:07:48 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	reshape_input(t_tokenlist *tokenlist, int i, int e_len, char *value)
 		j++;
 		k++;
 	}
-	while (j < ft_strlen(tokenlist->input) - e_len + v_len)
+	while (j < (int)ft_strlen(tokenlist->input) - e_len + v_len)
 	{
 		new[j] = tokenlist->input[i + e_len];
 		j++;
@@ -75,7 +75,6 @@ static int	get_new_input(t_tokenlist *tokenlist, t_mini *mini, int i, int len)
 	int		j;
 	char	env[len + 1];
 	char	*value;
-	int		v_len;
 
 	if (!len)
 		return (FAILED);
@@ -103,7 +102,7 @@ static int	expand_env_var(t_tokenlist *tokenlist, t_mini *mini)
 	{
 		if (tokenlist->input[i] == '$' && !tokenlist->sflag[i])
 		{
-			if (i == ft_strlen(tokenlist->input) - 1)
+			if (i == (int)ft_strlen(tokenlist->input) - 1)
 				return (FAILED);
 			if (tokenlist->input[i + 1] == '?')
 				key = get_new_input(tokenlist, mini, i, 1);
@@ -121,19 +120,31 @@ static int	expand_env_var(t_tokenlist *tokenlist, t_mini *mini)
 void	process_env_var(t_tokenlist *tokenlist, t_mini *mini)
 {
 	int	key;
+	int	i;
+	int	count;
 
-	tokenlist->sflag = (int *)ft_calloc(sizeof(int)
-			* ft_strlen(tokenlist->input));
+	i = 0;
+	count = 0;
+	while (tokenlist->input[i])
+	{
+		if (tokenlist->input[i] == '$')
+			count++;
+		i++;
+	}
+	if (!count)
+		return ;
+	tokenlist->sflag = (int *)ft_calloc(sizeof(int),
+			ft_strlen(tokenlist->input));
 	if (!tokenlist->sflag)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
-	tokenlist->dflag = (int *)ft_calloc(sizeof(int)
-			* ft_strlen(tokenlist->input));
+	tokenlist->dflag = (int *)ft_calloc(sizeof(int),
+			ft_strlen(tokenlist->input));
 	if (!tokenlist->dflag)
 		return (free_tokenlist(tokenlist, NULL, NULL, FAILED));
-	key = make_quote_flags(tokenlist, 0);
+	key = make_quote_flag(tokenlist, 0);
 	while (key)
-		key = make_quote_flags(tokenlist, key);
-	key = expand_env_var(tokenlist);
+		key = make_quote_flag(tokenlist, key);
+	key = expand_env_var(tokenlist, mini);
 	while (key)
 		key = expand_env_var(tokenlist, mini);
 }
