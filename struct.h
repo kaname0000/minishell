@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 18:16:09 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 18:22:24 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/16 19:08:15 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_mini
 	char				*input;
 	int					origin_fd_in;
 	int					origin_fd_out;
+	int					*pid;
 }						t_mini;
 
 enum					e_tokentype
@@ -84,6 +85,8 @@ typedef struct s_tokenlist
 	char				*input;
 	int					set_count;
 	int					*token_count;
+	int					*sflag;
+	int					*dflag;
 }						t_tokenlist;
 
 typedef struct s_tokenset
@@ -92,5 +95,10 @@ typedef struct s_tokenset
 	int					count;
 	char				*input;
 }						t_tokenset;
+
+typedef struct s_signal
+{
+	int					input_mode;
+}						t_signal;
 
 #endif

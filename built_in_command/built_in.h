@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:15:28 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 18:19:15 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/13 18:41:53 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUILT_IN_H
 
 # include "../struct.h"
+# include "../utils/utils.h"
 # include <limits.h>
 # include <stdbool.h>
 # include <stdio.h>

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
+#    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 18:55:13 by yookamot          #+#    #+#              #
-#    Updated: 2025/04/16 18:55:19 by yookamot         ###   ########.fr        #
+#    Updated: 2025/04/16 19:04:45 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS =  main.c \
 		free/free_cmd.c\
 		free/free_list.c\
 		free/free_mini.c\
+		free/free_tokenset.c\
 		built_in_command/exit.c\
 		built_in_command/cd.c\
 		built_in_command/echo.c\

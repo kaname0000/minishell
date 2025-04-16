@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_tokenlist.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:28:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 18:59:38 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 19:09:17 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
-static void	free_flag(int *flag, char *input)
-{
-	int	len;
-	int	i;
-
-	len = ft_strlen(input);
-	i = 0;
-	while (i < len)
-	{
-		free(flag[i]);
-		i++;
-	}
-	free(flag);
-}
 
 void	free_array(char **array)
 {
@@ -101,9 +86,9 @@ static void	cleanup_split_token(t_tokenlist *tokenlist, int key)
 		i++;
 	}
 	if (tokenlist->sflag)
-		free_flag(tokenlist->sflag, tokenlist->input);
+		free(tokenlist->sflag);
 	if (tokenlist->dflag)
-		free_flag(tokenlist->dflag, tokenlist->input);
+		free(tokenlist->dflag);
 	free(tokenlist->token);
 	free(tokenlist->token_count);
 	free(tokenlist);

@@ -12,6 +12,7 @@
 
 #include "../minishell.h"
 
+
 static void	open_infile_normant(char *infile, int *fd_in)
 {
 	if (*fd_in != 0 && close(*fd_in) == -1)

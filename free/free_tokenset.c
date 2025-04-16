@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_cmd.c                                         :+:      :+:    :+:   */
+/*   free_tokenset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/13 17:06:24 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 18:47:56 by okaname          ###   ########.fr       */
+/*   Created: 2025/04/13 19:01:57 by okaname           #+#    #+#             */
+/*   Updated: 2025/04/13 19:04:26 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "free.h"
 
-void	free_cmd(t_command **cmd)
+void	free_tokenset1(t_tokenset *tokenset)
 {
-	int	i;
-
-	if (cmd == NULL)
-		return ;
-	i = 0;
-	while (cmd[i] != NULL)
-	{
-		free_array(cmd[i]->cmd);
-		free(cmd[i]);
-		i++;
-	}
-	free(cmd);
-	cmd = NULL;
+	(void)tokenset;
 }

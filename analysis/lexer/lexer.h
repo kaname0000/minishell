@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:53:55 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 18:56:59 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 19:05:30 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../../built_in_command/built_in.h"
 # include "../../free/free.h"
-# include "../../get_next_line.h"
 # include "../../libft/libft.h"
 # include "../../struct.h"
 # include "../analysis.h"

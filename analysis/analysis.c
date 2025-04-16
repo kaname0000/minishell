@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   analysis.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:56:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 17:24:44 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/16 19:06:46 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "lexer/lexer.h"
 
 //字句解析と構文解析
 t_tokenset	*analysis(char *input, t_mini *mini)
