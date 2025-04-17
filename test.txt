@@ -20,3 +20,11 @@ home
 echo hello "okuda kaname"
 echo 
 hellookuda kaname
+
+  "   "
+a b c d e f 
+
+a+c e f  FRONT  i = 2; join(i-1, i+1)->i-1 remove(i, i+1, i+2)
+a c+e f  BACK   i = 4; join(i-1, i+1)->i+1 remove(i-2, i-1, i)
+ 
+" hello"

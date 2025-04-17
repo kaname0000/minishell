@@ -6,11 +6,11 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 03:25:14 by okamotoyota       #+#    #+#             */
-/*   Updated: 2025/04/10 21:54:30 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/17 20:14:54 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "check_tokentype.h"
+#include "../lexer.h"
 
 static int	count_squote(t_token *token)
 {

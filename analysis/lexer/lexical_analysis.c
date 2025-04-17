@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:04:00 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 20:10:32 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/17 22:24:51 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ t_tokenset	*lexical_analysis(t_tokenlist *tokenlist, t_mini *mini)
 	}
 	tokenset = reshape_tokenlist(tokenlist);
 	set_tokentype(tokenset);
-	while (check_unclosed_quote(tokenset))
-		set_tokentype(tokenset);
-	process_quoted_tokens(tokenset);
+	handle_quote(tokenset);
 	return (tokenset);
 }

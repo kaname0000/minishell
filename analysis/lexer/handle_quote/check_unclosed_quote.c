@@ -6,11 +6,11 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 01:43:57 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/10 18:36:50 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/17 23:31:56 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../lexer.h"
 
 // QUOTE_INのまま終了したクオートの情報をリセット
 static void	reset_quote_info(t_tokenset *tokenset)
@@ -48,7 +48,7 @@ static int	search_quote(char *value, char *quote)
 }
 
 //何個目のクオート文字が対象かを返す。
-static int	count_quote_in_input(t_tokenset *tokenset, int i, char *quote)
+int	count_quote_in_input(t_tokenset *tokenset, int i, char *quote)
 {
 	int	j;
 	int	count;
@@ -64,7 +64,7 @@ static int	count_quote_in_input(t_tokenset *tokenset, int i, char *quote)
 }
 
 //クオート文字がinputの何文字目かを返す。
-static int	check_input(char *input, int count, char *value)
+int	check_input(char *input, int count, char *value)
 {
 	int	i;
 
