@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 03:25:14 by okamotoyota       #+#    #+#             */
-/*   Updated: 2025/04/17 20:14:54 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/23 20:40:44 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	count_squote(t_token *token)
 		if (token->value[i] == '\'')
 		{
 			count++;
-			if (token->dquote || token->is_complete)
+			if (token->dquote)
 				break ;
 			else
 				return (count);

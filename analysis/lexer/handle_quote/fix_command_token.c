@@ -6,11 +6,22 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:19:02 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/23 17:31:42 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/23 21:17:23 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lexer.h"
+
+static int	check_both(t_tokenset *tokenset, int i, int j)
+{
+	int	len;
+
+	len = ft_strlen(tokenset->token[i + 1]->value);
+	if (tokenset->input[j + len + 2] != ' ' && tokenset->input[j + len
+		+ 2] != '\'' && tokenset->input[j + len + 2] != '"')
+		return (SUCCESS);
+	return (FAILED);
+}
 
 //対象が結合すべきであるか判別
 static int	inspect_quote_edges(t_tokenset *tokenset, int i, int j)
@@ -20,6 +31,8 @@ static int	inspect_quote_edges(t_tokenset *tokenset, int i, int j)
 	{
 		if (!j || tokenset->input[j - 1] == ' ')
 			return (NO_JOIN);
+		else if (check_both(tokenset, i, j))
+			return (BOTH);
 		else
 			return (FRONT);
 	}
@@ -34,13 +47,13 @@ static int	inspect_quote_edges(t_tokenset *tokenset, int i, int j)
 }
 
 // quoteや不要になったquoteの中身のtokenを削除
-static void	remove_token(t_tokenset *tokenset, int i)
+void	remove_token(t_tokenset *tokenset, int i, int minus)
 {
 	t_token	**new;
 	int		j;
 	int		k;
 
-	new = (t_token **)malloc(sizeof(t_token *) * (tokenset->count - 3));
+	new = (t_token **)malloc(sizeof(t_token *) * (tokenset->count - minus));
 	if (!new)
 		free_tokenset(tokenset, FAILED);
 	j = 0;
@@ -50,50 +63,47 @@ static void	remove_token(t_tokenset *tokenset, int i)
 		j++;
 	}
 	k = 0;
-	while (k < 3)
+	while (k < minus)
 	{
 		free(tokenset->token[i + k]->value);
 		free(tokenset->token[i + k]);
 		k++;
 	}
-	i += 3;
-	while (j < tokenset->count - 3)
+	i += minus;
+	while (j < tokenset->count - minus)
 		new[j++] = tokenset->token[i++];
 	free(tokenset->token);
 	tokenset->token = new;
-}
-
-static int	is_builtin(t_token *token)
-{
-	if (!ft_strcmp(token->value, "echo") || !ft_strcmp(token->value, "cd")
-		|| !ft_strcmp(token->value, "pwd") || !ft_strcmp(token->value, "export")
-		|| !ft_strcmp(token->value, "unset") || !ft_strcmp(token->value, "env")
-		|| !ft_strcmp(token->value, "exit"))
-		token->type = TOK_BUILTIN;
-	else
-		token->type = TOK_WORD;
 }
 
 // quoteのtokenを削除しつつ、前後どちらかと合体させる
 static void	remove_quote_and_merge(t_tokenset *tokenset, int i, int key)
 {
 	char	*new_value;
+	int		n;
 
+	if (key == BOTH)
+		return (remove_quote_and_merge_ex(tokenset, i));
+	if (!ft_strcmp(tokenset->token[i + 1]->value, "'")
+		|| !ft_strcmp(tokenset->token[i + 1]->value, "\""))
+		n = 2;
+	else
+		n = 1;
 	new_value = ft_strjoin(tokenset->token[i - 1]->value, tokenset->token[i
-			+ 1]->value);
+			+ n]->value);
 	if (!new_value)
 		free_tokenset(tokenset, FAILED);
 	if (key == BACK)
 		i += 2;
-	free(tokenset->token[i - 1]->value);
-	tokenset->token[i - 1]->value = new_value;
+	free(tokenset->token[i + n - 2]->value);
+	tokenset->token[i + n - 2]->value = new_value;
 	if (key == BACK)
 		i -= 4;
-	remove_token(tokenset, i);
+	remove_token(tokenset, i + n - 1, 3);
 	tokenset->count -= 3;
-	if (key == BACK)
-		i++;
-	is_builtin(tokenset->token[i - 1]);
+	i = 0;
+	while (i < tokenset->count)
+		tokenset->token[i++]->type = UNSIGNED;
 }
 
 // ec"ho"やecho"oo"に対応
@@ -116,6 +126,7 @@ int	fix_command_token(t_tokenset *tokenset)
 			key = inspect_quote_edges(tokenset, i, j);
 			if (key)
 			{
+				reset_input(tokenset, i, j, key);
 				remove_quote_and_merge(tokenset, i, key);
 				return (SUCCESS);
 			}

@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:53:55 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/17 23:32:02 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/23 21:08:25 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ int			count_quote_in_input(t_tokenset *tokenset, int i, char *quote);
 int			check_input(char *input, int count, char *value);
 int			fix_command_token(t_tokenset *tokenset);
 void		handle_quote(t_tokenset *tokenset);
+void		reset_input(t_tokenset *tokenset, int i, int j, int key);
+void		remove_token(t_tokenset *tokenset, int i, int minus);
+void		remove_quote_and_merge_ex(t_tokenset *tokenset, int i);
 
 #endif

@@ -28,3 +28,34 @@ a+c e f  FRONT  i = 2; join(i-1, i+1)->i-1 remove(i, i+1, i+2)
 a c+e f  BACK   i = 4; join(i-1, i+1)->i+1 remove(i-2, i-1, i)
  
 " hello"
+
+"ec""ho"
+
+" echo "
+0  1 2 3  4 5
+
+i = 4 
+
+
+
+"ec"ho aa
+key = BACK i = 2 iとそのまえ
+
+ec"ho"
+key = FRONT i = 1 i とその次
+
+" ec " echo aa
+0  1 2   3    4
+i = 0 new_value = 1 + 3 = echo
+
+"ec""ho"
+
+" ec " " ho "
+0  1 2 3  4 5
+key = BACK i = 2 iとそのつぎ
+
+
+i = 2
+
+" echo " 
+0   1  2

@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:56:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 22:22:52 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:40:34 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ const char	*token_types[] = {"TOK_WORD", "TOK_BUILTIN", "TOK_PIPE",
 		"TOK_DQUOTE_START", "TOK_DQUOTE_IN", "TOK_DQUOTE_END", "TOK_NEWLINE",
 		"TOK_NULL", "TOK_SPLIT", "UNSIGNED"};
 
-static void	print_tokenset(t_tokenset *tokenset)
+void	print_tokenset(t_tokenset *tokenset)
 {
 	int		i;
 	t_token	*token;
