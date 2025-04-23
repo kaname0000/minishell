@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:19:02 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/17 23:18:15 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:31:42 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,15 @@ static void	remove_token(t_tokenset *tokenset, int i)
 	tokenset->token = new;
 }
 
-static int	is_builtin(char *value)
+static int	is_builtin(t_token *token)
 {
-	if (!ft_strcmp(value, "echo") || !ft_strcmp(value, "cd")
-		|| !ft_strcmp(value, "pwd") || !ft_strcmp(value, "export")
-		|| !ft_strcmp(value, "unset") || !ft_strcmp(value, "env")
-		|| !ft_strcmp(value, "exit"))
-		return (SUCCESS);
+	if (!ft_strcmp(token->value, "echo") || !ft_strcmp(token->value, "cd")
+		|| !ft_strcmp(token->value, "pwd") || !ft_strcmp(token->value, "export")
+		|| !ft_strcmp(token->value, "unset") || !ft_strcmp(token->value, "env")
+		|| !ft_strcmp(token->value, "exit"))
+		token->type = TOK_BUILTIN;
 	else
-		return (FAILED);
+		token->type = TOK_WORD;
 }
 
 // quoteのtokenを削除しつつ、前後どちらかと合体させる
@@ -81,7 +81,6 @@ static void	remove_quote_and_merge(t_tokenset *tokenset, int i, int key)
 
 	new_value = ft_strjoin(tokenset->token[i - 1]->value, tokenset->token[i
 			+ 1]->value);
-	printf("%s\n", tokenset->token[i + 1]->value);
 	if (!new_value)
 		free_tokenset(tokenset, FAILED);
 	if (key == BACK)
@@ -94,10 +93,7 @@ static void	remove_quote_and_merge(t_tokenset *tokenset, int i, int key)
 	tokenset->count -= 3;
 	if (key == BACK)
 		i++;
-	if (is_builtin(tokenset->token[i - 1]->value))
-		tokenset->token[i - 1]->type = TOK_BUILTIN;
-	else
-		tokenset->token[i - 1]->type = TOK_WORD;
+	is_builtin(tokenset->token[i - 1]);
 }
 
 // ec"ho"やecho"oo"に対応

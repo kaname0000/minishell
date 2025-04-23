@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 23:00:40 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/18 00:44:31 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:18:22 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,6 @@ static int	handle_single_token_with_space(t_tokenset *tokenset, int i)
 	return (SUCCESS);
 }
 
-// quoteに囲われた文字列を一つのトークンにまとめる、まとめるものがなかったらFAILED
 static int	reshape_token_in_quote(t_tokenset *tokenset)
 {
 	int	i;
@@ -181,6 +180,7 @@ static int	reshape_token_in_quote(t_tokenset *tokenset)
 	return (FAILED);
 }
 
+// quoteに囲われた文字列を一つのトークンにまとめる
 void	process_quoted_tokens(t_tokenset *tokenset)
 {
 	int	key;

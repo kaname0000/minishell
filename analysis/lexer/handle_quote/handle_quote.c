@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:01:08 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/17 22:56:27 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:28:26 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ void	handle_quote(t_tokenset *tokenset)
 		set_tokentype(tokenset);
 	process_quoted_tokens(tokenset);
 	while (fix_command_token(tokenset))
-		;
+		printf("A\n");
 }
