@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 18:16:09 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 21:59:42 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/23 20:41:10 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct s_token
 	int					dquote;
 	int					count;
 	struct s_token		**split_token;
-	int					is_complete;
 }						t_token;
 
 typedef struct s_tokenlist

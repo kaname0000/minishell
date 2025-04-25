@@ -6,11 +6,11 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 23:00:40 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 22:35:14 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:18:22 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../lexer.h"
 
 // inputの何文字目が対象のクオーテーションマークかを返す
 static int	search_quote_in_input(t_tokenset *tokenset, int count, char quote)
@@ -108,12 +108,14 @@ static void	reshape_tokenset(t_tokenset *tokenset, int start, int end)
 	tokenset->token = new_token;
 }
 
-static void	join_token(t_tokenset *tokenset, int start, int end)
+static int	join_token(t_tokenset *tokenset, int start, int end)
 {
 	int		a;
 	int		b;
 	char	*new_value;
 
+	if (end - start == 2)
+		return (FAILED);
 	a = search_quote(tokenset, start);
 	b = search_quote(tokenset, end);
 	new_value = make_new_value(tokenset->input, a, b);
@@ -123,13 +125,40 @@ static void	join_token(t_tokenset *tokenset, int start, int end)
 	free(tokenset->token[start]->value);
 	tokenset->token[start]->value = new_value;
 	reshape_tokenset(tokenset, start, end);
+	return (SUCCESS);
 }
 
-// quoteに囲われた文字列を一つのトークンにまとめる、まとめるものがなかったらFAILED
+static int	handle_single_token_with_space(t_tokenset *tokenset, int i)
+{
+	int		j;
+	int		k;
+	int		l;
+	char	*new_value;
+
+	j = check_input(tokenset->input, count_quote_in_input(tokenset, i,
+				tokenset->token[i]->value), tokenset->token[i]->value);
+	k = check_input(tokenset->input, count_quote_in_input(tokenset, i + 2,
+				tokenset->token[i + 2]->value), tokenset->token[i + 2]->value);
+	if (tokenset->input[j + 1] != ' ' && tokenset->input[k - 1] != ' ')
+		return (FAILED);
+	l = 0;
+	while (tokenset->token[i + 1]->value[l])
+	{
+		if (tokenset->token[i + 1]->value[l] == ' ')
+			return (FAILED);
+		l++;
+	}
+	new_value = make_new_value(tokenset->input, j, k);
+	if (!new_value)
+		free_tokenset(tokenset, FAILED);
+	free(tokenset->token[i + 1]->value);
+	tokenset->token[i + 1]->value = new_value;
+	return (SUCCESS);
+}
+
 static int	reshape_token_in_quote(t_tokenset *tokenset)
 {
 	int	i;
-	int	start;
 	int	end;
 
 	i = 0;
@@ -138,21 +167,20 @@ static int	reshape_token_in_quote(t_tokenset *tokenset)
 		if (tokenset->token[i]->type == TOK_SQUOTE_START
 			|| tokenset->token[i]->type == TOK_DQUOTE_START)
 		{
-			start = i;
 			end = i;
 			while (tokenset->token[end]->type != TOK_SQUOTE_END
 				&& tokenset->token[end]->type != TOK_DQUOTE_END)
 				end++;
-			if (end - start == 2)
-				break ;
-			join_token(tokenset, start, end);
-			return (SUCCESS);
+			if (join_token(tokenset, i, end)
+				|| handle_single_token_with_space(tokenset, i))
+				return (SUCCESS);
 		}
 		i++;
 	}
 	return (FAILED);
 }
 
+// quoteに囲われた文字列を一つのトークンにまとめる
 void	process_quoted_tokens(t_tokenset *tokenset)
 {
 	int	key;

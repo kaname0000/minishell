@@ -6,16 +6,11 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:40:23 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/10 19:19:00 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/17 20:33:35 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-
-#define FRONT 1   //クオートとその前をくっつける場合（hello" world）
-#define BACK 2    //クオートとその後をくっつける場合（hello "world）
-#define BOTH 3    //クオートとその前後をくっつける場合（hello"world）
-#define NO_JOIN 0 //何もくっつけない場合（hello " world）
+#include "../lexer.h"
 
 //前後とクオーテーションマークを結合したかの判定
 static int	check_quote_neighbors(t_tokenset *tokenset, int j)
@@ -25,8 +20,9 @@ static int	check_quote_neighbors(t_tokenset *tokenset, int j)
 	if (j && tokenset->input[j - 1] == ' ' && ft_strlen(tokenset->input) - j > 1
 		&& tokenset->input[j + 1] != ' ')
 		return (BACK);
-	if (j && tokenset->input[j - 1] != ' ' && ft_strlen(tokenset->input) - j > 1
-		&& tokenset->input[j + 1] == ' ')
+	if (j && tokenset->input[j - 1] != ' ' && ((ft_strlen(tokenset->input)
+				- j > 1 && tokenset->input[j + 1] == ' ')
+			|| ft_strlen(tokenset->input) - j == 1))
 		return (FRONT);
 	if (j && tokenset->input[j - 1] != ' ' && ft_strlen(tokenset->input) - j > 1
 		&& tokenset->input[j + 1] != ' ')

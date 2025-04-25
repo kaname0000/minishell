@@ -6,11 +6,11 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 17:09:00 by okamotoyota       #+#    #+#             */
-/*   Updated: 2025/04/16 19:50:28 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/17 20:15:42 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../lexer.h"
 
 void	get_quote_info(t_token *token, t_token *pre)
 {

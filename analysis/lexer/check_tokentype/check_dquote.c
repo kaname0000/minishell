@@ -6,11 +6,11 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 03:25:14 by okamotoyota       #+#    #+#             */
-/*   Updated: 2025/04/10 21:54:21 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/23 20:40:38 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "check_tokentype.h"
+#include "../lexer.h"
 
 static int	count_dquote(t_token *token)
 {
@@ -24,7 +24,7 @@ static int	count_dquote(t_token *token)
 		if (token->value[i] == '"')
 		{
 			count++;
-			if (token->squote || token->is_complete)
+			if (token->squote)
 				break ;
 			return (count);
 		}

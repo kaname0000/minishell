@@ -6,7 +6,7 @@
 #    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 18:55:13 by yookamot          #+#    #+#              #
-#    Updated: 2025/04/16 19:28:51 by yookamot         ###   ########.fr        #
+#    Updated: 2025/04/23 21:09:48 by yookamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,6 @@ SRCS =  main.c \
 		built_in_command/sort_env.c\
 		built_in_command/unset.c\
 		analysis/analysis.c \
-        analysis/lexer/get_quote_info.c \
         analysis/lexer/check_tokentype.c \
         analysis/lexer/ft_split_custom.c \
         analysis/lexer/get_tokens.c \
@@ -71,16 +70,21 @@ SRCS =  main.c \
         analysis/lexer/free_tokenlist.c \
         analysis/lexer/utils.c \
 		analysis/lexer/get_env.c \
-		analysis/lexer/check_unclosed_quote.c \
-		analysis/lexer/make_new_tokenset_with_quote.c \
-		analysis/lexer/process_quoted_tokens.c \
 		analysis/lexer/process_env_var.c \
-		analysis/lexer/make_quote_flag.c \
         analysis/lexer/check_tokentype/check_single_symbol.c \
         analysis/lexer/check_tokentype/check_double_symbol.c \
         analysis/lexer/check_tokentype/check_squote.c \
         analysis/lexer/check_tokentype/check_dquote.c \
         analysis/lexer/check_tokentype/check_redirection.c \
+		analysis/lexer/handle_quote/check_unclosed_quote.c \
+		analysis/lexer/handle_quote/make_new_tokenset_with_quote.c \
+		analysis/lexer/handle_quote/process_quoted_tokens.c \
+		analysis/lexer/handle_quote/make_quote_flag.c \
+		analysis/lexer/handle_quote/get_quote_info.c \
+		analysis/lexer/handle_quote/handle_quote.c \
+		analysis/lexer/handle_quote/fix_command_token.c \
+		analysis/lexer/handle_quote/reset_input.c \
+		analysis/lexer/handle_quote/remove_quote_and_merge.c \
 		analysis/parser/check_pipe.c \
 		analysis/parser/check_redirect.c \
 		analysis/parser/parser_error.c \

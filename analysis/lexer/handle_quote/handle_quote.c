@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   analysis.h                                         :+:      :+:    :+:   */
+/*   handle_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 15:55:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/23 17:40:38 by yookamot         ###   ########.fr       */
+/*   Created: 2025/04/17 20:01:08 by yookamot          #+#    #+#             */
+/*   Updated: 2025/04/23 21:46:33 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANALYSIS_H
-# define ANALYSIS_H
+#include "../lexer.h"
 
-# include "lexer/lexer.h"
-# include "parser/parser.h"
-
-t_tokenset	*analysis(char *input, t_mini *mini);
-void		print_tokenset(t_tokenset *tokenset);
-
-#endif
+void	handle_quote(t_tokenset *tokenset)
+{
+	while (check_unclosed_quote(tokenset))
+		set_tokentype(tokenset);
+	process_quoted_tokens(tokenset);
+	while (fix_command_token(tokenset))
+		set_tokentype(tokenset);
+}

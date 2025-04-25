@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 00:53:09 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 20:09:56 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/23 20:41:07 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,4 @@ void	init_token(t_token *token, char *str, t_tokenlist *tokenlist)
 	token->dquote = 0;
 	token->count = 1;
 	token->type = UNSIGNED;
-	token->is_complete = 0;
 }

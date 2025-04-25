@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:10:48 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/10 21:53:16 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/23 20:41:03 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ t_tokenset	*reshape_tokenlist(t_tokenlist *tokenlist)
 	while (n < tokenset->count)
 	{
 		tokenset->token[n] = get_nth_token(tokenlist, n);
-		tokenset->token[n]->is_complete = 0;
 		n++;
 	}
 	tokenset->input = tokenlist->input;
