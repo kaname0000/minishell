@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 01:12:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 21:51:54 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/25 22:12:55 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static void	cmd_count(t_command **cmd, t_token **token, t_mini *mini,
 		else if ((token[i])->type == 5 || (token[i])->type == 3
 			|| (token[i])->type == 4 || (token[i])->type == 6)
 			i++;
-		else if ((token[i])->type == 0 || (token[i])->type == 1)
+		else if ((token[i])->type == 0 || (token[i])->type == 11
+			|| (token[i])->type == 8 || (token[i])->type == 1)
 			count++;
 	}
 }

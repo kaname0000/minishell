@@ -6,32 +6,32 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:33:13 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/06 16:46:57 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:59:55 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operators.h"
 
-static char	*check_file_or_directory(char **cmd_parts)
+static char	*check_file_or_directory(char *cmd)
 {
 	int		fd;
 	char	*full_path;
 	char	*buffer;
 
 	buffer = NULL;
-	if (access(cmd_parts[0], F_OK) != 0)
-		return (error_command1_nonexistent(cmd_parts), NULL);
-	fd = open(cmd_parts[0], O_RDONLY);
+	if (access(cmd, F_OK) != 0)
+		return (error_command1_nonexistent(NULL), NULL);
+	fd = open(cmd, O_RDONLY);
 	read(fd, buffer, sizeof(buffer));
 	if (errno == EISDIR)
-		return (error_command1_directory(cmd_parts), close(fd), NULL);
+		return (error_command1_directory(NULL), close(fd), NULL);
 	close(fd);
-	if (access(cmd_parts[0], X_OK) != 0)
-		return (error_command1(cmd_parts), NULL);
-	full_path = ft_strdup(cmd_parts[0]);
+	if (access(cmd, X_OK) != 0)
+		return (error_command1(cmd), NULL);
+	full_path = ft_strdup(cmd);
 	if (!full_path)
-		error_malloc(cmd_parts, NULL);
-	return (ft_free_split(cmd_parts), full_path);
+		error_malloc(NULL, NULL);
+	return (ft_free_split(NULL), full_path);
 }
 
 static char	*search_envp_path(char **envp)
@@ -53,7 +53,7 @@ static char	*search_envp_path(char **envp)
 	return (path);
 }
 
-static char	*find_executable_path1(char **cmd_parts, char **path_parts)
+static char	*find_executable_path1(char *cmd, char **path_parts)
 {
 	int		i;
 	char	*full_path;
@@ -64,43 +64,38 @@ static char	*find_executable_path1(char **cmd_parts, char **path_parts)
 	{
 		temp = ft_strjoin(path_parts[i], "/");
 		if (!temp)
-			error_malloc(cmd_parts, path_parts);
-		full_path = ft_strjoin_free(temp, cmd_parts[0]);
+			error_malloc(NULL, path_parts);
+		full_path = ft_strjoin_free(temp, cmd);
 		if (!full_path)
-			error_malloc(cmd_parts, path_parts);
+			error_malloc(NULL, path_parts);
 		if (access(full_path, X_OK) == 0)
-			return (ft_free_split(cmd_parts), ft_free_split(path_parts),
-				full_path);
+			return (ft_free_split(path_parts), full_path);
 		free(full_path);
 		full_path = NULL;
 		i++;
 	}
 	ft_free_split(path_parts);
-	error_command1(cmd_parts);
+	error_command1(cmd);
 	return (NULL);
 }
 
 char	*get_full_path(char *cmd, char **envp)
 {
-	char	**cmd_parts;
 	char	*full_path;
 	char	*path;
 	char	**path_parts;
 
-	cmd_parts = ft_split(cmd, ' ');
-	if (!cmd_parts)
-		error_malloc(NULL, NULL);
-	if (ft_strchr(cmd_parts[0], '/'))
+	if (ft_strchr(cmd, '/'))
 	{
-		full_path = check_file_or_directory(cmd_parts);
+		full_path = check_file_or_directory(cmd);
 		return (full_path);
 	}
 	path = search_envp_path(envp);
 	if (!path)
-		return (error_command1(cmd_parts), NULL);
+		return (error_command1(cmd), NULL);
 	path_parts = ft_split(path, ':');
 	if (!path_parts)
-		error_malloc(cmd_parts, NULL);
-	full_path = find_executable_path1(cmd_parts, path_parts);
+		error_malloc(NULL, NULL);
+	full_path = find_executable_path1(cmd, path_parts);
 	return (full_path);
 }
