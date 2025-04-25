@@ -17,6 +17,6 @@ export
 HOME=
 home
 
-echo hello "okuda kaname"
-echo 
-hellookuda kaname
+export aa="aa"
+
+export aa= "aa"
