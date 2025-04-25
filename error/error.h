@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 18:55:23 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 19:10:17 by okaname          ###   ########.fr       */
+/*   Updated: 2025/04/25 21:59:13 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	error_infile_open_failed(char *infile);
 void	error_infile_close_failed(void);
 void	error_redirect(void);
 void	error_malloc(char **arr1, char **arr2);
-void	error_command1(char **cmd_parts);
+void	error_command1(char *cmd_parts);
 void	error_execve1(void);
 void	error_fork1(void);
 void	error_outfile_invalid(pid_t pid1, char *outfile);

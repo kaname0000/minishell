@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
+#    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 18:55:13 by yookamot          #+#    #+#              #
-#    Updated: 2025/04/23 21:09:48 by yookamot         ###   ########.fr        #
+#    Updated: 2025/04/25 22:08:45 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,9 @@ bonus: $(BONUS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+run:all
+	./$(MANDATORY)
 
 clean:
 	rm -f $(OBJS) 
