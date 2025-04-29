@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:19:02 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/23 21:17:23 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/29 18:57:54 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int	check_both(t_tokenset *tokenset, int i, int j)
 
 	len = ft_strlen(tokenset->token[i + 1]->value);
 	if (tokenset->input[j + len + 2] != ' ' && tokenset->input[j + len
-		+ 2] != '\'' && tokenset->input[j + len + 2] != '"')
+		+ 2] != '\'' && tokenset->input[j + len + 2] != '"' && tokenset->input[j
+		+ len + 2])
 		return (SUCCESS);
 	return (FAILED);
 }
