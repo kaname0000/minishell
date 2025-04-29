@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:53:55 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/29 17:24:16 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/29 22:41:19 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ t_tokenset	*reshape_tokenlist(t_tokenlist *tokenlist);
 void		free_tokenset(t_tokenset *tokenset, int key);
 void		set_tokentype(t_tokenset *tokenset);
 void		get_quote_info(t_token *token, t_token *pre);
-void		process_quoted_tokens(t_tokenset *tokenset);
+int			merge_quoted_tokens(t_tokenset *tokenset);
 int			check_unclosed_quote(t_tokenset *tokenset);
 int			make_new_tokenset_with_quote(t_tokenset *tokenset, int i, int j);
 char		*get_env(t_mini *mini, char *env, t_tokenlist *tokenlist);
 void		process_env_var(t_tokenlist *tokenlist, t_mini *mini);
-int			make_quote_flag(t_tokenlist *tokenlist, int i);
+int			make_quote_flag(t_tokenlist *tokenlist);
 void		malloc_failed(void);
 int			check_single_symbol(t_token *token, int c, t_tokenlist *tokenlist);
 int			check_double_symbol(t_token *token, char *symbol,
@@ -66,5 +66,8 @@ void		reset_input(t_tokenset *tokenset, int i, int j, int key);
 void		remove_token(t_tokenset *tokenset, int i, int minus);
 void		remove_quote_and_merge_ex(t_tokenset *tokenset, int i);
 int			delete_quotes(t_tokenset *tokenset);
+int			search_quote(t_tokenset *tokenset, int x);
+char		*make_new_empty_value(t_tokenset *tokenset, int i);
+char		*make_new_value(char *input, int a, int b);
 
 #endif

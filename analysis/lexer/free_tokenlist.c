@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:28:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 22:06:16 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/29 22:43:36 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,32 +42,38 @@ static void	free_split_token(t_token *token, int key)
 	free(token);
 }
 
+static void	gyousuu_sakugenn_kun(t_tokenlist *tokenlist, int key, int i)
+{
+	int	j;
+
+	if (tokenlist->token[i])
+	{
+		j = 0;
+		while (j < tokenlist->token_count[i])
+		{
+			if (tokenlist->token[i][j])
+			{
+				if (key == FAILED || tokenlist->token[i][j]->count != 1)
+					free_split_token(tokenlist->token[i][j], key);
+				tokenlist->token[i][j] = NULL;
+			}
+			j++;
+		}
+		free(tokenlist->token[i]);
+		tokenlist->token[i] = NULL;
+	}
+}
+
 static void	cleanup_split_token(t_tokenlist *tokenlist, int key)
 {
 	int	i;
-	int	j;
 
 	if (!tokenlist || !tokenlist->token)
 		return ;
 	i = 0;
 	while (i < tokenlist->set_count)
 	{
-		if (tokenlist->token[i])
-		{
-			j = 0;
-			while (j < tokenlist->token_count[i])
-			{
-				if (tokenlist->token[i][j])
-				{
-					if (key == FAILED || tokenlist->token[i][j]->count != 1)
-						free_split_token(tokenlist->token[i][j], key);
-					tokenlist->token[i][j] = NULL;
-				}
-				j++;
-			}
-			free(tokenlist->token[i]);
-			tokenlist->token[i] = NULL;
-		}
+		gyousuu_sakugenn_kun(tokenlist, key, i);
 		i++;
 	}
 	if (tokenlist->sflag)

@@ -6,21 +6,29 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:19:02 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/29 18:57:54 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/29 22:46:52 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lexer.h"
 
+//前後がスペースなしでくっついているか確認
 static int	check_both(t_tokenset *tokenset, int i, int j)
 {
 	int	len;
 
 	len = ft_strlen(tokenset->token[i + 1]->value);
-	if (tokenset->input[j + len + 2] != ' ' && tokenset->input[j + len
-		+ 2] != '\'' && tokenset->input[j + len + 2] != '"' && tokenset->input[j
-		+ len + 2])
-		return (SUCCESS);
+	if (tokenset->input[j + len + 2] != ' ')
+	{
+		if (tokenset->input[j + len + 2] != '\'')
+		{
+			if (tokenset->input[j + len + 2] != '"')
+			{
+				if (tokenset->input[j + len + 2])
+					return (SUCCESS);
+			}
+		}
+	}
 	return (FAILED);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:30:13 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 20:10:23 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/29 22:24:43 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ static int	count_word(char **array)
 		count++;
 	count++;
 	return (count);
+}
+
+//行数を削減してくれてありがとう
+static void	gyousuu_sakugen_kun(t_tokenlist *tokenlist, char **lines,
+		char **array, t_token *token)
+{
+	if (!token)
+		free_tokenlist(tokenlist, lines, array, FAILED);
 }
 
 //各行をトークン化する（valueの値）
@@ -44,14 +52,12 @@ static void	tokenize_command(char *command, t_tokenlist *tokenlist, int i,
 	while (j < tokenlist->token_count[i] - 1)
 	{
 		tokenlist->token[i][j] = (t_token *)malloc(sizeof(t_token));
-		if (!tokenlist->token[i][j])
-			free_tokenlist(tokenlist, lines, array, FAILED);
+		gyousuu_sakugen_kun(tokenlist, lines, array, tokenlist->token[i][j]);
 		init_token(tokenlist->token[i][j], array[j], tokenlist);
 		j++;
 	}
 	tokenlist->token[i][j] = (t_token *)malloc(sizeof(t_token));
-	if (!tokenlist->token[i][j])
-		free_tokenlist(tokenlist, lines, array, FAILED);
+	gyousuu_sakugen_kun(tokenlist, lines, array, tokenlist->token[i][j]);
 	init_token(tokenlist->token[i][j], NULL, tokenlist);
 	free_array(array);
 }

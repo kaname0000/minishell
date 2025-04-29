@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 18:15:40 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/17 20:15:57 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/29 22:40:39 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,10 @@ static void	print_flag(t_tokenlist *tokenlist)
 }
 
 // quoteのフラグ配列作成、返り値は修正した先頭、次の呼び出しではそこからスタートする。
-int	make_quote_flag(t_tokenlist *tokenlist, int i)
+int	make_quote_flag(t_tokenlist *tokenlist)
 {
-	int	j;
+	static int	i;
+	int			j;
 
 	while (tokenlist->input[i])
 	{
@@ -101,5 +102,6 @@ int	make_quote_flag(t_tokenlist *tokenlist, int i)
 	else if (tokenlist->dflag[i - 1])
 		j = fix_quote_flag(tokenlist, tokenlist->dflag);
 	print_flag(tokenlist);
+	i = j;
 	return (j);
 }

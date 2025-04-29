@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 00:52:47 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 22:53:52 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/29 22:56:37 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ static void	reshape_input(t_tokenlist *tokenlist, int i, int e_len, char *value)
 	int		j;
 	int		k;
 
-	if (!value)
-		v_len = 0;
-	else
-		v_len = ft_strlen(value);
+	v_len = ft_strlen(value);
 	new = (char *)malloc(sizeof(char) * (ft_strlen(tokenlist->input) - e_len
 				+ v_len));
 	if (!new)
@@ -53,17 +50,9 @@ static void	reshape_input(t_tokenlist *tokenlist, int i, int e_len, char *value)
 	}
 	k = 0;
 	while (k < v_len)
-	{
-		new[j] = value[k];
-		j++;
-		k++;
-	}
+		new[j++] = value[k++];
 	while (j < (int)ft_strlen(tokenlist->input) - e_len + v_len - 1)
-	{
-		new[j] = tokenlist->input[i + e_len + 1];
-		j++;
-		i++;
-	}
+		new[j++] = tokenlist->input[i++ + e_len + 1];
 	new[j] = '\0';
 	free(tokenlist->input);
 	tokenlist->input = new;
@@ -73,11 +62,14 @@ static void	reshape_input(t_tokenlist *tokenlist, int i, int e_len, char *value)
 static int	get_new_input(t_tokenlist *tokenlist, t_mini *mini, int i, int len)
 {
 	int		j;
-	char	env[len + 1];
+	char	*env;
 	char	*value;
 
 	if (!len)
 		return (FAILED);
+	env = (char *)malloc(sizeof(char) * (len + 1));
+	if (!env)
+		free_tokenlist(tokenlist, NULL, NULL, FAILED);
 	j = 0;
 	while (j < len)
 	{
@@ -86,6 +78,7 @@ static int	get_new_input(t_tokenlist *tokenlist, t_mini *mini, int i, int len)
 	}
 	env[j] = '\0';
 	value = get_env(mini, env, tokenlist);
+	free(env);
 	reshape_input(tokenlist, i, len, value);
 	return (SUCCESS);
 }
@@ -110,7 +103,7 @@ static int	expand_env_var(t_tokenlist *tokenlist, t_mini *mini)
 				key = get_new_input(tokenlist, mini, i,
 						check_env_var(tokenlist->input, i + 1));
 			if (key)
-				return (key);
+				return (SUCCESS);
 		}
 		i++;
 	}
@@ -119,7 +112,6 @@ static int	expand_env_var(t_tokenlist *tokenlist, t_mini *mini)
 
 void	process_env_var(t_tokenlist *tokenlist, t_mini *mini)
 {
-	int	key;
 	int	i;
 	int	count;
 
@@ -133,18 +125,15 @@ void	process_env_var(t_tokenlist *tokenlist, t_mini *mini)
 	}
 	if (!count)
 		return ;
-	tokenlist->sflag = (int *)ft_calloc(sizeof(int),
-			ft_strlen(tokenlist->input));
+	i = ft_strlen(tokenlist->input);
+	tokenlist->sflag = (int *)ft_calloc(sizeof(int), i);
 	if (!tokenlist->sflag)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
-	tokenlist->dflag = (int *)ft_calloc(sizeof(int),
-			ft_strlen(tokenlist->input));
+	tokenlist->dflag = (int *)ft_calloc(sizeof(int), i);
 	if (!tokenlist->dflag)
 		return (free_tokenlist(tokenlist, NULL, NULL, FAILED));
-	key = make_quote_flag(tokenlist, 0);
-	while (key)
-		key = make_quote_flag(tokenlist, key);
-	key = expand_env_var(tokenlist, mini);
-	while (key)
-		key = expand_env_var(tokenlist, mini);
+	while (make_quote_flag(tokenlist))
+		;
+	while (expand_env_var(tokenlist, mini))
+		;
 }

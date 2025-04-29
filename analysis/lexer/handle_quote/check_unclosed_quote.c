@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 01:43:57 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/23 19:29:20 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/04/29 21:51:52 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,24 @@ static void	reset_quote_info(t_tokenset *tokenset)
 	}
 }
 
-//一つのvalueの中にクオートが何文字あるかカウント
-static int	search_quote(char *value, char *quote)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (value[i])
-	{
-		if (value[i] == quote[0])
-			count++;
-		i++;
-	}
-	return (count);
-}
-
 //何個目のクオート文字が対象かを返す。
 int	count_quote_in_input(t_tokenset *tokenset, int i, char *quote)
 {
 	int	j;
 	int	count;
+	int	k;
 
 	j = 0;
 	count = 0;
 	while (j < i)
 	{
-		count += search_quote(tokenset->token[j]->value, quote);
+		k = 0;
+		while (tokenset->token[j]->value[k])
+		{
+			if (tokenset->token[j]->value[k] == quote[0])
+				count++;
+			k++;
+		}
 		j++;
 	}
 	return (count + 1);
@@ -104,6 +94,7 @@ static int	resolve_unclosed_quote(t_tokenset *tokenset)
 	return (FAILED);
 }
 
+// quote未閉じの場合、対応する
 int	check_unclosed_quote(t_tokenset *tokenset)
 {
 	int	key;
