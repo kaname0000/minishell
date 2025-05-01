@@ -20,3 +20,15 @@ home
 export aa="aa"
 
 export aa= "aa"
+
+
+"l""s"
+012345
+
+pre = "l
+
+"ec"ho aa
+
+pre = "ec
+inner = ho
+post = 
