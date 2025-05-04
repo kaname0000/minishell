@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to minishell process",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "${workspaceFolder}/minishell", // 必要に応じて実行ファイルのパスに変更
+            "processId": "${command:pickProcess}",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb", // 必要に応じてgdbのパスを変更
+            "stopAtEntry": false
+        }
+    ]
+}

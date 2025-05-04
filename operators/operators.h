@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:38:22 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 21:53:33 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/04 21:43:22 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # include <unistd.h>
 
 # define COMMAND_LINE 1
-# define HERE_DOC 2
+# define C_HERE_DOC 2
+# define P_HERE_DOC 3
 
 char	*get_full_path(char *cmd, char **envp);
 void	redirector(t_command *cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 05:44:39 by okaname           #+#    #+#             */
-/*   Updated: 2025/03/26 01:16:32 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/04 18:19:30 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,22 @@ static void	sort_array(t_env **array, int size)
 	}
 }
 
-void	print_sorted_env(t_env *head)
+void	print_env(t_env **array, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (array[i]->value)
+			printf("declare -x %s=\"%s\"\n", array[i]->key, array[i]->value);
+		else
+			printf("declare -x %s\n", array[i]->key);
+		i++;
+	}
+}
+
+int	print_sorted_env(t_env *head)
 {
 	int		size;
 	t_env	**array;
@@ -59,10 +74,10 @@ void	print_sorted_env(t_env *head)
 	i = 0;
 	size = list_size(head);
 	if (size == 0)
-		return ;
+		return (0);
 	array = malloc(sizeof(t_env *) * size);
 	if (!array)
-		return ;
+		return (1);
 	tmp = head;
 	while (i < size)
 	{
@@ -71,10 +86,9 @@ void	print_sorted_env(t_env *head)
 		i++;
 	}
 	sort_array(array, size);
-	i = -1;
-	while (++i < size)
-		printf("declare -x %s=\"%s\"\n", array[i]->key, array[i]->value);
+	print_env(array, size);
 	free(array);
+	return (0);
 }
 
 void	print_list(t_env *head)

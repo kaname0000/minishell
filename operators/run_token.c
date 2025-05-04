@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 21:37:03 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 21:23:28 by okaname          ###   ########.fr       */
+/*   Created: 2025/05/01 12:18:48 by okaname           #+#    #+#             */
+/*   Updated: 2025/05/04 21:44:04 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,38 +59,16 @@ static t_command	**token_to_cmd(t_tokenset *tokenset, t_mini *mini)
 	return (cmd);
 }
 
-// const char			*token_types[] = {"TOK_WORD", "TOK_BUILTIN", "TOK_PIPE",
-// 				"TOK_REDIR_IN", "TOK_REDIR_OUT", "TOK_REDIR_APPEND",
-// 				"TOK_HEREDOC", "TOK_SQUOTE_START", "TOK_SQUOTE_IN",
-// 				"TOK_SQUOTE_END", "TOK_DQUOTE_START", "TOK_DQUOTE_IN",
-// 				"TOK_DQUOTE_END", "TOK_NEWLINE", "TOK_NULL", "TOK_SPLIT",
-// 				"UNSIGNED"};
-
-// static void	print_tokenset(t_tokenset *tokenset)
-// {
-// 	int		i;
-// 	t_token	*token;
-
-// 	i = 0;
-// 	while (i < tokenset->count)
-// 	{
-// 		token = tokenset->token[i];
-// 		if (!ft_strcmp(token->value, "\n"))
-// 			printf("%-20s \\n           \n", token_types[token->type]);
-// 		else
-// 			printf("%-20s %-12s\n", token_types[token->type], token->value);
-// 		i++;
-// 	}
-// }
-
 static void	free_pid(int *pid, int count, int *status)
 {
 	int	i;
+	int	s;
 
 	i = 0;
 	while (i < count)
 	{
-		waitpid(pid[i], status, 0);
+		waitpid(pid[i], &s, 0);
+		*status = WEXITSTATUS(s);
 		i++;
 	}
 	free(pid);
@@ -108,11 +85,12 @@ int	run_token(t_mini *mini)
 	count = 0;
 	tokenset = analysis(mini->input, mini);
 	pid_count = count_pipe(tokenset->token) + 1;
+	mini->cmd = token_to_cmd(tokenset, mini);
+	if (mini->exit_status == 130)
+		return (free_cmd(mini->cmd), 0);
 	mini->pid = malloc(sizeof(int) * pid_count);
 	if (mini->pid == NULL)
 		error_malloc1(mini, tokenset);
-	// print_tokenset(tokenset);
-	mini->cmd = token_to_cmd(tokenset, mini);
 	while (1)
 	{
 		if (tokenset->token[i]->type == TOK_PIPE)
@@ -129,5 +107,6 @@ int	run_token(t_mini *mini)
 	}
 	free_pid(mini->pid, pid_count, &mini->exit_status);
 	free_cmd(mini->cmd);
+	// free_tokenset(tokenset, 1);
 	return (0);
 }

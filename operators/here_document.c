@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_document.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:24:05 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 22:01:02 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/04 22:38:10 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static int	get_doc(int pipefd, char *char_EOF, t_mini *mini,
 		error_fork(mini, tokenset, NULL);
 	else if (pid == 0)
 	{
-		g_variable.input_mode = HERE_DOC;
+		g_variable.heredoc_int = 0;
+		g_variable.mode = C_HERE_DOC;
 		line = NULL;
 		while (1)
 		{
@@ -54,6 +55,7 @@ int	here_doc(char *char_EOF, int *fd, t_mini *mini, t_tokenset *tokenset)
 {
 	int	pipefd[2];
 
+	g_variable.mode = P_HERE_DOC;
 	if (*fd != 0)
 		close(*fd);
 	if (pipe(pipefd) < 0)
@@ -63,6 +65,11 @@ int	here_doc(char *char_EOF, int *fd, t_mini *mini, t_tokenset *tokenset)
 		error_pipe();
 	}
 	get_doc(pipefd[1], char_EOF, mini, tokenset);
+	if (WIFEXITED(mini->exit_status))
+		mini->exit_status = WEXITSTATUS(mini->exit_status);
+	printf("%d\n", g_variable.heredoc_int);
+	if (g_variable.heredoc_int)
+		mini->exit_status = 130;
 	close(pipefd[1]);
 	*fd = pipefd[0];
 	return (0);

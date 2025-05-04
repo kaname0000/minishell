@@ -6,11 +6,25 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 01:12:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/25 22:12:55 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/04 19:47:43 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void	in(int *count, int *pipecount, char **cmd, int swich)
+{
+	if (swich == 1)
+	{
+		*count = 0;
+		(*pipecount)++;
+	}
+	if (swich == 2)
+	{
+		*count = 0;
+		*cmd = NULL;
+	}
+}
 
 static void	cmd_count(t_command **cmd, t_token **token, t_mini *mini,
 		t_tokenset *tokenset)
@@ -29,8 +43,7 @@ static void	cmd_count(t_command **cmd, t_token **token, t_mini *mini,
 			cmd[pipe_count]->cmd = malloc(sizeof(char *) * (count + 1));
 			if (cmd[pipe_count]->cmd == NULL)
 				error_malloc1(mini, tokenset);
-			cmd[pipe_count++]->cmd[count] = NULL;
-			count = 0;
+			in(&count, &i, &cmd[pipe_count++]->cmd[count], 2);
 			if ((token[i])->type == TOK_NULL)
 				break ;
 		}
@@ -62,12 +75,6 @@ static void	set_here_doc(t_command **cmd, t_token **token, t_mini *mini,
 	}
 }
 
-static void	inclement(int *count, int *pipecount)
-{
-	*count = 0;
-	(*pipecount)++;
-}
-
 static char	*ft_strdup_error(char *s, t_mini *mini, t_tokenset *tokenset)
 {
 	char	*result;
@@ -93,7 +100,7 @@ void	set_cmd(t_command **cmd, t_token **token, t_mini *mini,
 	while ((token[++i])->value != NULL)
 	{
 		if ((token[i])->type == TOK_PIPE)
-			inclement(&count, &pipe_count);
+			in(&count, &pipe_count, &mini->input, 1);
 		else if ((token[i])->type == 5 || (token[i])->type == 3
 			|| (token[i])->type == 4 || (token[i])->type == 6)
 			i++;
