@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
+#    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 18:55:13 by yookamot          #+#    #+#              #
-#    Updated: 2025/04/29 22:04:33 by yookamot         ###   ########.fr        #
+#    Updated: 2025/05/01 14:26:58 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ SRCS =  main.c \
 		built_in_command/cd.c\
 		built_in_command/echo.c\
 		built_in_command/env.c\
-		built_in_command/export.c\
+		built_in_command/export1.c\
+		built_in_command/export2.c\
 		built_in_command/pwd.c\
 		built_in_command/sort_env.c\
 		built_in_command/unset.c\
