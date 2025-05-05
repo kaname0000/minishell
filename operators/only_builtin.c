@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 18:10:01 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/04 19:49:54 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/05 22:01:38 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	only_built_in(t_mini *mini, t_token **token)
 	int	fd_stdin;
 	int	fd_stdout;
 
+	set_sig_parent();
 	fd_stdin = 0;
 	fd_stdout = 0;
 	if (set_fd_b(mini->cmd[0], token) == 1)

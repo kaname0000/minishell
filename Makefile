@@ -6,7 +6,7 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 18:55:13 by yookamot          #+#    #+#              #
-#    Updated: 2025/05/01 14:26:58 by okaname          ###   ########.fr        #
+#    Updated: 2025/05/05 22:18:22 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ LIBFT = $(LIBFTDIR)/libft.a
 
 SRCS =  main.c \
 		operators/input.c\
-		operators/set_act.c\
 		env/env_init.c\
 		operators/run_token.c\
 		operators/set_fd.c\
@@ -37,6 +36,9 @@ SRCS =  main.c \
 		operators/redirector.c\
 		operators/here_document.c\
 		operators/envp_list_to_char.c\
+		signal/signal.c\
+		signal/for_heredoc.c\
+		signal/for_prompt.c\
 		error/error_1.c\
 		error/error_2.c\
 		error/error_3.c\

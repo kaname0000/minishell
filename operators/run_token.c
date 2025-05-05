@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:18:48 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/04 21:44:04 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/05 22:40:35 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,53 +59,65 @@ static t_command	**token_to_cmd(t_tokenset *tokenset, t_mini *mini)
 	return (cmd);
 }
 
-static void	free_pid(int *pid, int count, int *status)
+static void	all_wait(t_mini *mini)
 {
 	int	i;
 	int	s;
 
 	i = 0;
-	while (i < count)
+	if (mini->exit_status == -1)
 	{
-		waitpid(pid[i], &s, 0);
-		*status = WEXITSTATUS(s);
-		i++;
+		while (mini->cmd[i] != NULL)
+		{
+			waitpid(mini->cmd[i]->pid, &s, 0);
+			if (WIFEXITED(s))
+				mini->exit_status = WEXITSTATUS(s);
+			else if (WIFSIGNALED(s))
+				mini->exit_status = 128 + WTERMSIG(s);
+			i++;
+		}
 	}
-	free(pid);
+	if (mini->exit_status == 131)
+		printf("Quit (core dumped)\n");
+	if (mini->exit_status == 130)
+		printf("\n");
 }
 
-int	run_token(t_mini *mini)
+static void	excute(t_mini *mini, t_tokenset *tokenset)
 {
-	t_tokenset	*tokenset;
-	int			i;
-	int			count;
-	int			pid_count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
-	tokenset = analysis(mini->input, mini);
-	pid_count = count_pipe(tokenset->token) + 1;
-	mini->cmd = token_to_cmd(tokenset, mini);
-	if (mini->exit_status == 130)
-		return (free_cmd(mini->cmd), 0);
-	mini->pid = malloc(sizeof(int) * pid_count);
-	if (mini->pid == NULL)
-		error_malloc1(mini, tokenset);
 	while (1)
 	{
 		if (tokenset->token[i]->type == TOK_PIPE)
-			make_prosses(mini, tokenset, count++, &mini->pid);
+			make_prosses(mini, tokenset, count++);
 		else if (tokenset->token[i]->type == TOK_NULL)
 		{
 			if (count == 0 && mini->cmd[0]->built_in)
 				mini->exit_status = only_built_in(mini, tokenset->token);
 			else
-				make_prosses(mini, tokenset, count, &mini->pid);
+				make_prosses(mini, tokenset, count);
 			break ;
 		}
 		i++;
 	}
-	free_pid(mini->pid, pid_count, &mini->exit_status);
+}
+
+int	run_token(t_mini *mini)
+{
+	t_tokenset	*tokenset;
+
+	set_sig_code();
+	tokenset = analysis(mini->input, mini);
+	mini->exit_status = -1;
+	mini->cmd = token_to_cmd(tokenset, mini);
+	if (mini->exit_status == 130)
+		return (free_cmd(mini->cmd), 0);
+	excute(mini, tokenset);
+	all_wait(mini);
 	free_cmd(mini->cmd);
 	// free_tokenset(tokenset, 1);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_6.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 22:11:50 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 22:00:44 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/05 21:48:05 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,13 @@ void	error_close(void)
 	exit(1);
 }
 
-void	error_fork(t_mini *mini, t_tokenset *tokenset, int *pid)
+void	error_fork(t_mini *mini, t_tokenset *tokenset)
 {
 	int	i;
-	int	status;
 
 	i = 0;
 	free_mini(mini);
 	free_tokenset(tokenset, SUCCESS);
-	if (pid != NULL)
-	{
-		while (pid[i] != -1)
-		{
-			waitpid(pid[i], &status, 0);
-			i++;
-		}
-	}
 	perror("bash: fork");
 	exit(1);
 }

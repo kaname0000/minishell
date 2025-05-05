@@ -1,50 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_act.c                                          :+:      :+:    :+:   */
+/*   for_prompt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 15:53:45 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/04 22:37:22 by okaname          ###   ########.fr       */
+/*   Created: 2025/05/05 19:03:35 by okaname           #+#    #+#             */
+/*   Updated: 2025/05/05 21:53:18 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include "operators.h"
+#include <readline/readline.h>
+#include <stdio.h>
 
 extern t_signal	g_variable;
 
-static void	handle_signal(int sig, siginfo_t *info, void *context)
+static void	sigint_handler_for_prompt(int sig)
 {
-	(void)info;
-	(void)context;
-	if (sig != SIGINT)
-		return ;
-	if (g_variable.mode == COMMAND_LINE)
+	if (sig == SIGINT)
 	{
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (g_variable.mode == C_HERE_DOC)
-	{
-		printf("呼ばれたよ\n");
-		g_variable.heredoc_int = 1;
-		exit(130);
-	}
 }
 
-void	set_act(void)
+void	set_sig_prompt(void)
 {
-	struct sigaction	sa;
+	struct sigaction	sa_int;
+	struct sigaction	sa_quit;
 
-	sa.sa_sigaction = handle_signal;
-	sa.sa_flags = SA_SIGINFO;
-	sigemptyset(&sa.sa_mask);
-	if (sigaction(SIGINT, &sa, NULL) == -1)
-		exit(1);
-	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-		exit(1);
+	sa_int.sa_handler = sigint_handler_for_prompt;
+	sigemptyset(&(sa_int.sa_mask));
+	sigemptyset(&(sa_quit.sa_mask));
+	sa_int.sa_flags = 0;
+	sa_quit.sa_flags = 0;
+	if (sigaction(SIGINT, &sa_int, NULL) == -1)
+		perror("sigaction SIGINT");
+	sa_quit.sa_handler = SIG_IGN;
+	if (sigaction(SIGQUIT, &sa_quit, NULL) == -1)
+		perror("sigaction SIGQUIT");
 }

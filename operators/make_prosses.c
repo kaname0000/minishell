@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 15:49:58 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/04 19:15:14 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/05 22:12:35 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 #include "../minishell.h"
 #include "operators.h"
 
-void	make_prosses(t_mini *mini, t_tokenset *tokenlist, int count, int **pid)
+void	make_prosses(t_mini *mini, t_tokenset *tokenlist, int count)
 {
-	(*pid)[count] = fork();
-	if ((*pid)[count] == -1)
-		return (error_fork(mini, tokenlist, *pid));
-	else if ((*pid)[count] == 0)
+	mini->cmd[count]->pid = fork();
+	if (mini->cmd[count]->pid == -1)
+		return (error_fork(mini, tokenlist));
+	else if (mini->cmd[count]->pid == 0)
 	{
+		set_sig_child();
 		set_fd(&(mini->cmd[count]), tokenlist->token, count);
 		mini->cmd[count]->envp = list_to_char(mini->var_env);
 		if (mini->cmd[count]->built_in)

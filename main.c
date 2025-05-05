@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 22:22:53 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/04 19:50:34 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/05 21:48:26 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int argc, char *argv[], char **envp)
 	(void)argv;
 	minishell.var_env = env_init(envp);
 	minishell.exit_status = 0;
-	set_act();
 	input(&minishell);
 	free_list(minishell.var_env);
 	return (0);

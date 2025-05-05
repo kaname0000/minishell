@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 18:55:23 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/25 21:59:13 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/05 21:47:12 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	error_command2_nonexistent(pid_t pid1, char **cmd_parts);
 void	error_accese(char *file);
 void	error_open(char *file);
 void	error_close(void);
-void	error_fork(t_mini *mini, t_tokenset *tokenset, int *pid);
+void	error_fork(t_mini *mini, t_tokenset *tokenset);
 void	error_malloc1(t_mini *mini, t_tokenset *tokenset);
 
 #endif
