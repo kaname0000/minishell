@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 00:52:47 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/29 22:56:37 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/08 19:21:32 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ static int	get_new_input(t_tokenlist *tokenlist, t_mini *mini, int i, int len)
 	env[j] = '\0';
 	value = get_env(mini, env, tokenlist);
 	free(env);
+	if (!value)
+		value = ft_strdup("");
+	if (!value)
+		free_tokenlist(tokenlist, NULL, NULL, FAILED);
 	reshape_input(tokenlist, i, len, value);
 	return (SUCCESS);
 }
