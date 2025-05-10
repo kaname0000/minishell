@@ -6,98 +6,11 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 23:00:40 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/10 18:29:20 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 20:25:42 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lexer.h"
-
-// new_valueをもとにtokensetを更新する
-// static void	reshape_tokenset(t_tokenset *tokenset, int start, int end)
-// {
-// 	t_token	**new_token;
-// 	int		i;
-// 	int		j;
-
-// 	tokenset->count = tokenset->count - end + start + 1;
-// 	new_token = (t_token **)malloc(sizeof(t_token *) * tokenset->count);
-// 	if (!new_token)
-// 		free_tokenset(tokenset, FAILED);
-// 	i = 0;
-// 	while (i <= start)
-// 	{
-// 		new_token[i] = tokenset->token[i];
-// 		i++;
-// 	}
-// 	j = 0;
-// 	while (i + j < end - 1)
-// 	{
-// 		free(tokenset->token[i + j]->value);
-// 		free(tokenset->token[i + j]);
-// 		j++;
-// 	}
-// 	while (i < tokenset->count)
-// 		new_token[i++] = tokenset->token[end++];
-// 	free(tokenset->token);
-// 	tokenset->token = new_token;
-// }
-
-static void	reshape_tokenset(t_tokenset *tokenset, int start, int end)
-{
-	int		new_count;
-	t_token	**new_arr;
-	int		i;
-	int		j;
-
-	new_count = tokenset->count - end + start - 1;
-	new_arr = (t_token **)malloc(sizeof(t_token *) * new_count);
-	if (!new_arr)
-		free_tokenset(tokenset, FAILED);
-	i = 0;
-	while (i < start - 1)
-	{
-		new_arr[i] = tokenset->token[i];
-		i++;
-	}
-	new_arr[i++] = tokenset->token[start];
-	j = end + 1;
-	while (j < tokenset->count)
-		new_arr[i++] = tokenset->token[j++];
-	j = start - 1;
-	while (j <= end)
-	{
-		if (j != start)
-		{
-			free(tokenset->token[j]->value);
-			free(tokenset->token[j]);
-		}
-		j++;
-	}
-	free(tokenset->token);
-	tokenset->token = new_arr;
-	tokenset->count = new_count;
-}
-
-// "hello world"に対応
-static int	join_token(t_tokenset *tokenset, int start, int end)
-{
-	int		a;
-	int		b;
-	char	*new_value;
-
-	if (end - start == 2)
-		return (FAILED);
-	a = search_quote(tokenset, start);
-	b = search_quote(tokenset, end);
-	new_value = make_new_value(tokenset->input, a, b);
-	if (!new_value)
-		free_tokenset(tokenset, FAILED);
-	start++;
-	free(tokenset->token[start]->value);
-	tokenset->token[start]->value = new_value;
-	reshape_tokenset(tokenset, start, end);
-	return (SUCCESS);
-}
 
 // " hello"に対応
 static int	handle_single_token_with_space(t_tokenset *tokenset, int i)

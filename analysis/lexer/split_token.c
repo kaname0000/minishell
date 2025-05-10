@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 01:59:24 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/10 14:41:36 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 20:19:16 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void	split_token(t_tokenlist *tokenlist, char *str, t_token *token,
 		int count)
 {
 	char	**values;
-	char	*tmp;
 
 	values = (char **)malloc(sizeof(char *) * 4);
 	if (!values)
@@ -120,8 +119,7 @@ void	split_token(t_tokenlist *tokenlist, char *str, t_token *token,
 	values[1] = ft_strdup(str);
 	if (!values[1])
 		free_tokenlist(tokenlist, &str, values, FAILED);
-	tmp = ft_strstr(token->value, str);
-	if (*(tmp + ft_strlen(str)))
+	if (*(ft_strstr(token->value, str) + ft_strlen(str)))
 	{
 		values[2] = get_new_post_value(token->value, str, count);
 		if (!values[2])

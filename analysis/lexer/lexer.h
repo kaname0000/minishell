@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:53:55 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/10 17:46:34 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 20:26:09 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ int			search_quote(t_tokenset *tokenset, int x);
 void		make_new_empty_value(t_tokenset *tokenset, t_token *token, int i);
 char		*make_new_value(char *input, int a, int b);
 void		search_daller(t_tokenset *tokenset);
+int			join_token(t_tokenset *tokenset, int start, int end);
 
 #endif

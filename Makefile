@@ -6,7 +6,7 @@
 #    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 18:55:13 by yookamot          #+#    #+#              #
-#    Updated: 2025/05/08 20:08:43 by yookamot         ###   ########.fr        #
+#    Updated: 2025/05/10 20:26:38 by yookamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ SRCS =  main.c \
 		analysis/lexer/handle_quote/remove_quote_and_merge.c \
 		analysis/lexer/handle_quote/delete_quote.c \
 		analysis/lexer/handle_quote/make_new_value_in_quote.c \
+		analysis/lexer/handle_quote/join_token.c \
 		analysis/parser/check_pipe.c \
 		analysis/parser/check_redirect.c \
 		analysis/parser/parser_error.c \
