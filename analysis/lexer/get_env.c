@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 22:43:57 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 12:38:52 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:30:09 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ char	*get_env(t_mini *mini, char *env, t_tokenlist *tokenlist)
 	while (temp->next)
 	{
 		if (!ft_strcmp(temp->key, env))
-			return (temp->value);
+			return (ft_strdup((temp->value)));
 		temp = temp->next;
 	}
-	return (NULL);
+	return (ft_strdup(""));
 }

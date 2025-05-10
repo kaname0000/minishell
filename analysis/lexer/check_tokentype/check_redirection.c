@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:48:33 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/17 20:14:44 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 14:43:27 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	check_redirection_in(t_token *token, t_tokenlist *tokenlist)
 	if (!symbol)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
 	split_token(tokenlist, symbol, token, count);
+	free(symbol);
 	if (token->type != TOK_SPLIT)
 		return (FAILED);
 	return (SUCCESS);
@@ -88,6 +89,7 @@ int	check_redirection_out(t_token *token, t_tokenlist *tokenlist)
 	if (!symbol)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
 	split_token(tokenlist, symbol, token, count);
+	free(symbol);
 	if (token->type != TOK_SPLIT)
 		return (FAILED);
 	return (SUCCESS);

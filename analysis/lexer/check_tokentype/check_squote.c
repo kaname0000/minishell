@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 03:25:14 by okamotoyota       #+#    #+#             */
-/*   Updated: 2025/05/08 21:00:31 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 14:43:49 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	check_squote(t_token *token, t_tokenlist *tokenlist)
 	if (!symbol)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
 	split_token(tokenlist, symbol, token, count);
+	free(symbol);
 	if (token->type != TOK_SPLIT)
 		return (FAILED);
 	return (SUCCESS);

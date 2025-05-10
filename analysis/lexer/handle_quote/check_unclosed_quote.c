@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 01:43:57 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/29 21:51:52 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 19:09:46 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	reset_quote_info(t_tokenset *tokenset)
 	int	i;
 
 	i = tokenset->count - 1;
-	while (tokenset->token[i]->type != TOK_SQUOTE_START
+	while (i >= 0 && tokenset->token[i]->type != TOK_SQUOTE_START
 		&& tokenset->token[i]->type != TOK_DQUOTE_START)
 		i--;
 	while (i < tokenset->count)
@@ -86,6 +86,8 @@ static int	resolve_unclosed_quote(t_tokenset *tokenset)
 			count = count_quote_in_input(tokenset, i,
 					tokenset->token[i]->value);
 			j = check_input(tokenset->input, count, tokenset->token[i]->value);
+			if (!j)
+				return (FAILED);
 			if (make_new_tokenset_with_quote(tokenset, i, j))
 				return (SUCCESS);
 		}
@@ -94,17 +96,40 @@ static int	resolve_unclosed_quote(t_tokenset *tokenset)
 	return (FAILED);
 }
 
-// quote未閉じの場合、対応する
+// // quote未閉じの場合、対応する
+// int	check_unclosed_quote(t_tokenset *tokenset)
+// {
+// 	int	key;
+
+// 	if (!tokenset->token[tokenset->count - 1]->squote
+// 		&& !tokenset->token[tokenset->count - 1]->dquote)
+// 		return (FAILED);
+// 	reset_quote_info(tokenset);
+// 	key = SUCCESS;
+// 	while (key)
+// 		key = resolve_unclosed_quote(tokenset);
+// 	return (SUCCESS);
+// }
+
 int	check_unclosed_quote(t_tokenset *tokenset)
 {
 	int	key;
+	int	iterations;
 
+	int max_iterations = 100; // 無限ループ防止のための最大試行回数
+	iterations = 0;
 	if (!tokenset->token[tokenset->count - 1]->squote
 		&& !tokenset->token[tokenset->count - 1]->dquote)
 		return (FAILED);
 	reset_quote_info(tokenset);
 	key = SUCCESS;
-	while (key)
+	while (key && iterations < max_iterations)
+	{
 		key = resolve_unclosed_quote(tokenset);
+		iterations++;
+	}
+	// 最大試行回数に達した場合はエラー
+	if (iterations >= max_iterations)
+		return (FAILED);
 	return (SUCCESS);
 }

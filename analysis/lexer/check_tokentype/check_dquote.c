@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 03:25:14 by okamotoyota       #+#    #+#             */
-/*   Updated: 2025/05/08 20:58:02 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 14:42:53 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	check_dquote(t_token *token, t_tokenlist *tokenlist)
 	if (!symbol)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
 	split_token(tokenlist, symbol, token, count);
+	free(symbol);
 	if (token->type != TOK_SPLIT)
 		return (FAILED);
 	return (SUCCESS);

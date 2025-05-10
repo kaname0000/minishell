@@ -127,6 +127,7 @@ int	run_token(t_mini *mini)
 		}
 		i++;
 	}
+	free_tokenset(tokenset, SUCCESS);
 	free_pid(mini->pid, pid_count, &mini->exit_status);
 	free_cmd(mini->cmd);
 	return (0);
