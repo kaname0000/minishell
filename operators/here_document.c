@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:24:05 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/11 20:22:00 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 21:47:44 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static int	get_doc(int pipefd, char *char_EOF, t_mini *mini,
 		line = NULL;
 		while (1)
 		{
-			line = expand_line(readline("> "), mini);
+			line = readline("> ");
+			line = expand_line(line, mini);
 			if (!line || !ft_strcmp(line, char_EOF))
 				free_close_exit(line, pipefd, 0);
 			write(pipefd, line, ft_strlen(line));

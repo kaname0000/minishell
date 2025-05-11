@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 18:10:01 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/05 22:01:38 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 22:24:51 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,15 @@ int	only_built_in(t_mini *mini, t_token **token)
 	redirct_stdio(&fd_stdin, &fd_stdout, &mini->cmd[0]->fd_in,
 		&mini->cmd[0]->fd_out);
 	mini->cmd[0]->envp = list_to_char(mini->var_env);
-	run_cmd(mini, 0);
+	if (run_cmd(mini, 0))
+	{
+		free_array(mini->cmd[0]->envp);
+		reset_stdio(&fd_stdin, &fd_stdout);
+		mini->cmd[0]->pid = -1;
+		return (1);
+	}
 	free_array(mini->cmd[0]->envp);
 	reset_stdio(&fd_stdin, &fd_stdout);
+	mini->cmd[0]->pid = -1;
 	return (0);
 }

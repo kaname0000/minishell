@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:46:28 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/11 20:16:10 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 22:21:52 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ int	ft_echo(t_mini *mini, int count)
 
 	i = 1;
 	nflag = false;
-	while (mini->cmd[count]->cmd[i] != NULL)
+	while (1)
 	{
 		if (!ft_strcmp(mini->cmd[count]->cmd[i], "-n"))
 			nflag = true;
 		else
-			printf("%s ", mini->cmd[count]->cmd[i]);
+			printf("%s", mini->cmd[count]->cmd[i]);
 		i++;
+		if (mini->cmd[count]->cmd[i] == NULL)
+			break ;
+		printf(" ");
 	}
 	if (!nflag)
 		printf("\n");

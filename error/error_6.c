@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 22:11:50 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/05 21:48:05 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 22:31:58 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@
 
 void	error_accese(char *file)
 {
-	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	perror(file);
 	exit(1);
 }
 
 void	error_open(char *file)
 {
-	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	perror(file);
 	exit(1);
 }
 
 void	error_close(void)
 {
-	perror("bash: close");
+	perror("minishell: close");
 	exit(1);
 }
 
@@ -41,7 +41,7 @@ void	error_fork(t_mini *mini, t_tokenset *tokenset)
 	i = 0;
 	free_mini(mini);
 	free_tokenset(tokenset, SUCCESS);
-	perror("bash: fork");
+	perror("minishell: fork");
 	exit(1);
 }
 

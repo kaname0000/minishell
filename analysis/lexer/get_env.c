@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 22:43:57 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/10 16:30:09 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/11 22:06:05 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_env(t_mini *mini, char *env, t_tokenlist *tokenlist)
 		return (status);
 	}
 	temp = mini->var_env;
-	while (temp->next)
+	while (temp)
 	{
 		if (!ft_strcmp(temp->key, env))
 			return (ft_strdup((temp->value)));

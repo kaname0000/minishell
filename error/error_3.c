@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:51:14 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/06 20:49:37 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 22:31:06 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_outfile_invalid(pid_t pid1, char *outfile)
 {
-	write(2, "bash: ", ft_strlen("bash: "));
+	write(2, "minishell: ", ft_strlen("minishell: "));
 	perror(outfile);
 	if (pid1 != -1)
 		waitpid(pid1, NULL, 0);
@@ -23,7 +23,7 @@ void	error_outfile_invalid(pid_t pid1, char *outfile)
 
 void	error_outfile_open_failed(pid_t pid1, char *outfile)
 {
-	write(2, "bash: ", ft_strlen("bash: "));
+	write(2, "minishell: ", ft_strlen("minishell: "));
 	perror(outfile);
 	if (pid1 != -1)
 		waitpid(pid1, NULL, 0);
@@ -32,7 +32,7 @@ void	error_outfile_open_failed(pid_t pid1, char *outfile)
 
 void	error_outfile_close_failed(pid_t pid1)
 {
-	perror("bash: close");
+	perror("minishell: close");
 	if (pid1 != -1)
 		waitpid(pid1, NULL, 0);
 	exit(1);
@@ -53,7 +53,7 @@ void	error_execve2(pid_t pid1, char *full_path, char **cmd_args)
 	free(full_path);
 	ft_free_split(cmd_args);
 	cmd_args = NULL;
-	perror("bash");
+	perror("minishell");
 	if (pid1 != -1)
 		waitpid(pid1, NULL, 0);
 	if (errno == ENOENT)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   analysis.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:56:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/10 17:49:27 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/11 22:16:50 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ t_tokenset	*analysis(char *input, t_mini *mini)
 	tokenset = lexical_analysis(tokenlist, mini);
 	if (!syntax_analysis(tokenset))
 		return (NULL);
-	print_tokenset(tokenset);
+	// print_tokenset(tokenset);
 	return (tokenset);
 }

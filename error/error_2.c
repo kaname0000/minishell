@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 13:49:29 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/25 21:58:27 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 22:30:38 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_redirect(void)
 {
-	perror("bash");
+	perror("minishell");
 	exit(1);
 }
 

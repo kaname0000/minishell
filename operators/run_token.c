@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:18:48 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/11 20:15:42 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 22:35:47 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,16 @@ static void	all_wait(t_mini *mini)
 	int	s;
 
 	i = 0;
-	if (mini->exit_status == -1)
+	if (mini->cmd[i]->pid == -1)
+		return ;
+	while (mini->cmd[i] != NULL)
 	{
-		while (mini->cmd[i] != NULL)
-		{
-			waitpid(mini->cmd[i]->pid, &s, 0);
-			if (WIFEXITED(s))
-				mini->exit_status = WEXITSTATUS(s);
-			else if (WIFSIGNALED(s))
-				mini->exit_status = 128 + WTERMSIG(s);
-			i++;
-		}
+		waitpid(mini->cmd[i]->pid, &s, 0);
+		if (WIFEXITED(s))
+			mini->exit_status = WEXITSTATUS(s);
+		else if (WIFSIGNALED(s))
+			mini->exit_status = 128 + WTERMSIG(s);
+		i++;
 	}
 	if (mini->exit_status == 131)
 		printf("Quit (core dumped)\n");
@@ -112,13 +111,15 @@ int	run_token(t_mini *mini)
 
 	set_sig_code();
 	tokenset = analysis(mini->input, mini);
-	mini->exit_status = -1;
+	if (!tokenset)
+		return (0);
+	mini->exit_status = 0;
 	mini->cmd = token_to_cmd(tokenset, mini);
 	if (mini->exit_status > 0)
 		return (free_cmd(mini->cmd), 0);
 	excute(mini, tokenset);
 	all_wait(mini);
 	free_cmd(mini->cmd);
-	// free_tokenset(tokenset, 1);
+	free_tokenset(tokenset, 1);
 	return (0);
 }
