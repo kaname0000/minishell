@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:17:51 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/06 20:49:40 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 22:31:39 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_fork2(pid_t pid1)
 {
-	perror("bash: fork");
+	perror("minishell: fork");
 	if (pid1 != -1)
 		waitpid(pid1, NULL, 0);
 	exit(1);
@@ -22,7 +22,7 @@ void	error_fork2(pid_t pid1)
 
 void	error_redirect_out(pid_t pid1)
 {
-	perror("bash");
+	perror("minishell");
 	if (pid1 != -1)
 		waitpid(pid1, NULL, 0);
 	exit(1);
@@ -30,14 +30,14 @@ void	error_redirect_out(pid_t pid1)
 
 void	error_command1_directory(char **cmd_parts)
 {
-	write(2, "bash: ", 6);
+	write(2, "minishell: ", 6);
 	perror(cmd_parts[0]);
 	ft_free_split(cmd_parts);
 }
 
 void	error_command2_directory(pid_t pid1, char **cmd_parts)
 {
-	write(2, "bash: ", 6);
+	write(2, "minishell: ", 6);
 	perror(cmd_parts[0]);
 	ft_free_split(cmd_parts);
 	if (pid1 != -1)
