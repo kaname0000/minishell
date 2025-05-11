@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 01:59:24 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/10 20:19:16 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/11 21:18:11 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static void	remake_token(t_tokenlist *tokenlist, char **values, t_token *token,
 	int	k;
 	int	l;
 
+	if (!values[0][0] && !values[2][0])
+		return ;
 	token->count = 3;
 	if (!values[0][0] || !values[2][0])
 		token->count = 2;
@@ -100,7 +102,6 @@ static void	remake_token(t_tokenlist *tokenlist, char **values, t_token *token,
 		}
 		k++;
 	}
-	free_array(values);
 	token->type = TOK_SPLIT;
 }
 
@@ -120,17 +121,12 @@ void	split_token(t_tokenlist *tokenlist, char *str, t_token *token,
 	if (!values[1])
 		free_tokenlist(tokenlist, &str, values, FAILED);
 	if (*(ft_strstr(token->value, str) + ft_strlen(str)))
-	{
 		values[2] = get_new_post_value(token->value, str, count);
-		if (!values[2])
-			free_tokenlist(tokenlist, &str, values, FAILED);
-	}
 	else
-	{
 		values[2] = ft_strdup("");
-		if (!values[2])
-			free_tokenlist(tokenlist, &str, values, FAILED);
-	}
+	if (!values[2])
+		free_tokenlist(tokenlist, &str, values, FAILED);
 	values[3] = NULL;
 	remake_token(tokenlist, values, token, str);
+	free_array(values);
 }
