@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operators.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:38:22 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/04 21:43:22 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 20:16:56 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ char	*get_full_path(char *cmd, char **envp);
 void	redirector(t_command *cmd);
 int		here_doc(char *char_EOF, int *fd, t_mini *mini, t_tokenset *tokenset);
 char	**list_to_char(t_env *env);
+char	*expand_line(char *input, t_mini *mini);
 
 #endif

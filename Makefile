@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
+#    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 18:55:13 by yookamot          #+#    #+#              #
-#    Updated: 2025/05/11 15:46:07 by okaname          ###   ########.fr        #
+#    Updated: 2025/05/11 20:17:15 by yookamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS =  main.c \
 		operators/redirector.c\
 		operators/here_document.c\
 		operators/envp_list_to_char.c\
+		operators/expand_line.c \
 		signal/signal.c\
 		signal/for_heredoc.c\
 		signal/for_prompt.c\
