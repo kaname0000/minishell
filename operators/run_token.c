@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:18:48 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/11 20:15:42 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 22:40:40 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int	run_token(t_mini *mini)
 
 	set_sig_code();
 	tokenset = analysis(mini->input, mini);
+	if (!tokenset)
+		return (0);
 	mini->exit_status = -1;
 	mini->cmd = token_to_cmd(tokenset, mini);
 	if (mini->exit_status > 0)

@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 20:00:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/08 20:15:34 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/11 22:35:52 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	search_daller(t_tokenset *tokenset)
 	while (i < tokenset->count)
 	{
 		if (tokenset->token[i]->type == TOK_WORD
-			&& tokenset->token[i]->value[0] == '$')
+			&& tokenset->token[i]->value[0] == '$'
+			&& tokenset->token[i]->value[1])
 		{
 			new = (char *)malloc(sizeof(char)
 					* ft_strlen(tokenset->token[i]->value));
