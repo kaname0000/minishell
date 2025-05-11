@@ -6,14 +6,12 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:24:05 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/05 22:32:17 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 15:48:55 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "operators.h"
-
-extern volatile t_signal	g_variable;
 
 static void	free_close_exit(char *line, int fd, int status)
 {

@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 17:17:57 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/29 18:03:04 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 17:45:29 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ static t_token	*make_empty_token(t_tokenset *tokenset, int i)
 		free_tokenset(tokenset, FAILED);
 	new->value = ft_strdup("");
 	if (!new->value)
+	{
+		free(new);
 		free_tokenset(tokenset, FAILED);
+	}
 	if (tokenset->token[i]->type == TOK_SQUOTE_START)
 		new->type = TOK_SQUOTE_IN;
 	else

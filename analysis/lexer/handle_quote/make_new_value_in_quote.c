@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 22:00:45 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/29 22:03:30 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 17:39:06 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*make_new_value(char *input, int a, int b)
 }
 
 // 空文字列もしくはスペースのみの文字列を生成する
-char	*make_new_empty_value(t_tokenset *tokenset, int i)
+void	make_new_empty_value(t_tokenset *tokenset, t_token *token, int i)
 {
 	int		j;
 	char	quote;
@@ -97,9 +97,12 @@ char	*make_new_empty_value(t_tokenset *tokenset, int i)
 	}
 	value = (char *)malloc(sizeof(char) * (count + 1));
 	if (!value)
+	{
+		free(token);
 		free_tokenset(tokenset, FAILED);
+	}
 	if (count)
 		ft_memset(value, ' ', count);
 	value[count] = '\0';
-	return (value);
+	token->value = value;
 }

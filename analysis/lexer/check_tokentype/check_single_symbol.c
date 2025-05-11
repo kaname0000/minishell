@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:32:49 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/17 20:14:48 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 14:43:37 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	check_single_symbol(t_token *token, int c, t_tokenlist *tokenlist)
 	symbol[0] = (char)c;
 	symbol[1] = '\0';
 	split_token(tokenlist, symbol, token, count);
+	free(symbol);
 	if (token->type != TOK_SPLIT)
 		return (FAILED);
 	return (SUCCESS);

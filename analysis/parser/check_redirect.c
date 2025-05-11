@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:05:30 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 17:21:50 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:50:33 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 int	check_redirect(t_tokenset *tokenset, int i)
 {
-	if (tokenset->token[i]->type == TOK_REDIR_IN
-		|| tokenset->token[i]->type == TOK_REDIR_OUT
-		|| tokenset->token[i]->type == TOK_REDIR_APPEND
-		|| tokenset->token[i]->type == TOK_HEREDOC)
+	int	pre;
+	int	cur;
+	int	next;
+
+	cur = tokenset->token[i]->type;
+	if (cur == TOK_REDIR_IN || cur == TOK_REDIR_OUT || cur == TOK_REDIR_APPEND
+		|| cur == TOK_HEREDOC)
 	{
 		if (i == tokenset->count - 1)
 			return (parser_error(tokenset, tokenset->token[i]->value));
-		else if (tokenset->token[i - 1]->type != TOK_WORD && tokenset->token[i
-			- 1]->type != TOK_BUILTIN)
+		pre = tokenset->token[i - 1]->type;
+		if (pre != TOK_WORD && pre != TOK_BUILTIN)
 			return (parser_error(tokenset, tokenset->token[i]->value));
-		else if (tokenset->token[i + 1]->type != TOK_WORD && tokenset->token[i
-			+ 1]->type != TOK_BUILTIN)
+		next = tokenset->token[i + 1]->type;
+		if (next != TOK_WORD && next != TOK_BUILTIN)
 			return (parser_error(tokenset, tokenset->token[i + 1]->value));
 	}
 	return (SUCCESS);

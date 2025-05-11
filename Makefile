@@ -6,7 +6,7 @@
 #    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 18:55:13 by yookamot          #+#    #+#              #
-#    Updated: 2025/05/05 22:18:22 by okaname          ###   ########.fr        #
+#    Updated: 2025/05/11 15:46:07 by okaname          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ SRCS =  main.c \
         analysis/lexer/utils.c \
 		analysis/lexer/get_env.c \
 		analysis/lexer/process_env_var.c \
+		analysis/lexer/search_daller.c \
         analysis/lexer/check_tokentype/check_single_symbol.c \
         analysis/lexer/check_tokentype/check_double_symbol.c \
         analysis/lexer/check_tokentype/check_squote.c \
@@ -90,6 +91,7 @@ SRCS =  main.c \
 		analysis/lexer/handle_quote/remove_quote_and_merge.c \
 		analysis/lexer/handle_quote/delete_quote.c \
 		analysis/lexer/handle_quote/make_new_value_in_quote.c \
+		analysis/lexer/handle_quote/join_token.c \
 		analysis/parser/check_pipe.c \
 		analysis/parser/check_redirect.c \
 		analysis/parser/parser_error.c \

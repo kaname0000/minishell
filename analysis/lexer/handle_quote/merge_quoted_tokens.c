@@ -6,62 +6,11 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 23:00:40 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/29 22:02:51 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 20:25:42 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lexer.h"
-
-// new_valueをもとにtokensetを更新する
-static void	reshape_tokenset(t_tokenset *tokenset, int start, int end)
-{
-	t_token	**new_token;
-	int		i;
-	int		j;
-
-	tokenset->count = tokenset->count - end + start + 1;
-	new_token = (t_token **)malloc(sizeof(t_token *) * tokenset->count);
-	if (!new_token)
-		free_tokenset(tokenset, FAILED);
-	i = 0;
-	while (i <= start)
-	{
-		new_token[i] = tokenset->token[i];
-		i++;
-	}
-	j = 0;
-	while (i + j < end - 1)
-	{
-		free(tokenset->token[i + j]->value);
-		free(tokenset->token[i + j]);
-		j++;
-	}
-	while (i < tokenset->count)
-		new_token[i++] = tokenset->token[end++];
-	free(tokenset->token);
-	tokenset->token = new_token;
-}
-
-// "hello world"に対応
-static int	join_token(t_tokenset *tokenset, int start, int end)
-{
-	int		a;
-	int		b;
-	char	*new_value;
-
-	if (end - start == 2)
-		return (FAILED);
-	a = search_quote(tokenset, start);
-	b = search_quote(tokenset, end);
-	new_value = make_new_value(tokenset->input, a, b);
-	if (!new_value)
-		free_tokenset(tokenset, FAILED);
-	start++;
-	free(tokenset->token[start]->value);
-	tokenset->token[start]->value = new_value;
-	reshape_tokenset(tokenset, start, end);
-	return (SUCCESS);
-}
 
 // " hello"に対応
 static int	handle_single_token_with_space(t_tokenset *tokenset, int i)
@@ -111,7 +60,7 @@ static void	handle_empty_in_quote(t_tokenset *tokenset, int i)
 	new[j] = (t_token *)malloc(sizeof(t_token));
 	if (!new[j])
 		free_tokenset(tokenset, FAILED);
-	new[j]->value = make_new_empty_value(tokenset, i);
+	make_new_empty_value(tokenset, new[j], i);
 	if (tokenset->token[i++]->type == TOK_SQUOTE_START)
 		new[j++]->type = TOK_SQUOTE_IN;
 	else

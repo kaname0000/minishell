@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 01:43:57 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/29 21:51:52 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 20:20:19 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	reset_quote_info(t_tokenset *tokenset)
 	int	i;
 
 	i = tokenset->count - 1;
-	while (tokenset->token[i]->type != TOK_SQUOTE_START
+	while (i >= 0 && tokenset->token[i]->type != TOK_SQUOTE_START
 		&& tokenset->token[i]->type != TOK_DQUOTE_START)
 		i--;
 	while (i < tokenset->count)
@@ -86,6 +86,8 @@ static int	resolve_unclosed_quote(t_tokenset *tokenset)
 			count = count_quote_in_input(tokenset, i,
 					tokenset->token[i]->value);
 			j = check_input(tokenset->input, count, tokenset->token[i]->value);
+			if (!j)
+				return (FAILED);
 			if (make_new_tokenset_with_quote(tokenset, i, j))
 				return (SUCCESS);
 		}

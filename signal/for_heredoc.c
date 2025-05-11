@@ -6,15 +6,13 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:03:03 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/05 22:00:00 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 15:49:12 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <readline/readline.h>
 #include <stdio.h>
-
-extern t_signal	g_variable;
 
 static void	sigint_handler_for_heredoc(int sig)
 {

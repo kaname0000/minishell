@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:40:23 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/17 20:33:35 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 20:22:29 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,28 +87,47 @@ static int	reshape_tokenset(t_tokenset *tokenset, int i, int key)
 	return (SUCCESS);
 }
 
+static void	free_left_and_right(char *orig, t_token *left, t_token *right)
+{
+	free(orig);
+	if (left)
+	{
+		free(left->value);
+		free(left);
+	}
+	if (right)
+	{
+		free(right->value);
+		free(right);
+	}
+}
+
 // クオートで閉じられていない場合、tokensetを作り直す
 int	make_new_tokenset_with_quote(t_tokenset *tokenset, int i, int j)
 {
 	int		key;
-	char	*temp;
+	char	*orig;
+	t_token	*left;
+	t_token	*right;
 
+	left = NULL;
+	right = NULL;
 	key = check_quote_neighbors(tokenset, j);
 	if (!key)
-	{
-		tokenset->token[i]->type = TOK_WORD;
-		return (FAILED);
-	}
-	temp = ft_strdup(tokenset->token[i]->value);
-	if (!temp)
+		return (tokenset->token[i]->type = TOK_WORD, FAILED);
+	orig = ft_strdup(tokenset->token[i]->value);
+	if (!orig)
 		free_tokenset(tokenset, FAILED);
+	if (key == FRONT || key == BOTH)
+		left = tokenset->token[i - 1];
+	if (key == BACK || key == BOTH)
+		right = tokenset->token[i + 1];
 	if (!make_new_value_with_quote(tokenset, i, key))
-		return (free(temp), free_tokenset(tokenset, FAILED), FAILED);
-	if (!tokenset->token[i]->value)
-		return (free(temp), free_tokenset(tokenset, FAILED), FAILED);
-	if (!ft_strcmp(temp, tokenset->token[i]->value))
-		return (free(temp), FAILED);
+		return (free(orig), free_tokenset(tokenset, FAILED), FAILED);
+	if (!ft_strcmp(orig, tokenset->token[i]->value))
+		return (free(orig), FAILED);
+	free_left_and_right(orig, left, right);
 	if (!reshape_tokenset(tokenset, i, key))
-		return (free(temp), free_tokenset(tokenset, FAILED), FAILED);
+		return (free_tokenset(tokenset, FAILED), FAILED);
 	return (SUCCESS);
 }

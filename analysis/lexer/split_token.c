@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 01:59:24 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/29 22:56:02 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 20:19:16 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,22 @@
 // １つめのvalue作る
 static char	*get_new_pre_value(const char *s1, const char *s2, int count)
 {
-	int		i;
-	int		j;
-	char	*new;
+	const char	*p = s1;
+	const char	*found = NULL;
+	size_t		sl;
 
-	i = 0;
-	while (s1[i])
+	sl = ft_strlen(s2);
+	while (count > 0)
 	{
-		j = 0;
-		while (s1[i + j] == s2[j] && s2[j])
-			j++;
-		if (!s2[j])
-			count--;
-		if (!count)
+		found = ft_strnstr(p, s2, ft_strlen(p));
+		if (!found)
 			break ;
-		i++;
+		p = found + sl;
+		count--;
 	}
-	if (!i)
-		return (ft_strdup(""));
-	new = (char *)malloc(sizeof(char) * (i + 1));
-	if (!new)
-		return (NULL);
-	j = 0;
-	while (j < i)
-	{
-		new[j] = s1[j];
-		j++;
-	}
-	new[j] = '\0';
-	return (new);
+	if (count > 0)
+		return (ft_strdup(s1));
+	return (ft_substr(s1, 0, found - s1));
 }
 
 // ３つめのvalue作る
@@ -94,10 +81,9 @@ static void	remake_token(t_tokenlist *tokenlist, char **values, t_token *token,
 	int	k;
 	int	l;
 
+	token->count = 3;
 	if (!values[0][0] || !values[2][0])
 		token->count = 2;
-	else
-		token->count = 3;
 	token->split_token = (t_token **)malloc(sizeof(t_token *) * token->count);
 	if (!token->split_token)
 		free_tokenlist(tokenlist, &str, values, FAILED);
@@ -110,13 +96,11 @@ static void	remake_token(t_tokenlist *tokenlist, char **values, t_token *token,
 			token->split_token[l] = (t_token *)malloc(sizeof(t_token));
 			if (!token->split_token[l])
 				free_tokenlist(tokenlist, &str, values, FAILED);
-			init_token(token->split_token[l], values[k], tokenlist);
-			l++;
+			init_token(token->split_token[l++], values[k], tokenlist);
 		}
 		k++;
 	}
 	free_array(values);
-	free(str);
 	token->type = TOK_SPLIT;
 }
 
@@ -125,10 +109,7 @@ void	split_token(t_tokenlist *tokenlist, char *str, t_token *token,
 		int count)
 {
 	char	**values;
-	char	*tmp;
 
-	if (!str || !ft_strcmp(token->value, str))
-		return (free(str));
 	values = (char **)malloc(sizeof(char *) * 4);
 	if (!values)
 		free_tokenlist(tokenlist, &str, NULL, FAILED);
@@ -138,8 +119,7 @@ void	split_token(t_tokenlist *tokenlist, char *str, t_token *token,
 	values[1] = ft_strdup(str);
 	if (!values[1])
 		free_tokenlist(tokenlist, &str, values, FAILED);
-	tmp = ft_strstr(token->value, str);
-	if (*(tmp + ft_strlen(str)))
+	if (*(ft_strstr(token->value, str) + ft_strlen(str)))
 	{
 		values[2] = get_new_post_value(token->value, str, count);
 		if (!values[2])

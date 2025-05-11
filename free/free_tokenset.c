@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:01:57 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/04 19:40:06 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 15:46:20 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_tokenset(t_tokenset *tokenset, int key)
 		free(tokenset->token[i]);
 		i++;
 	}
+	free(tokenset->token);
 	free(tokenset->input);
 	free(tokenset);
 	if (!key)

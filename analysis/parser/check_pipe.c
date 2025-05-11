@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 16:35:36 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 17:21:39 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:51:02 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,20 @@
 
 int	check_pipe(t_tokenset *tokenset, int i)
 {
-	if (tokenset->token[i]->type == TOK_PIPE)
+	int	pre;
+	int	cur;
+	int	next;
+
+	cur = tokenset->token[i]->type;
+	if (cur == TOK_PIPE)
 	{
 		if (!i || i == tokenset->count - 1)
 			return (parser_error(tokenset, tokenset->token[i]->value));
-		else if (tokenset->token[i - 1]->type != TOK_WORD && tokenset->token[i
-			- 1]->type != TOK_BUILTIN)
+		pre = tokenset->token[i - 1]->type;
+		if (pre != TOK_WORD && pre != TOK_BUILTIN)
 			return (parser_error(tokenset, tokenset->token[i]->value));
-		else if (tokenset->token[i + 1]->type != TOK_WORD && tokenset->token[i
-			+ 1]->type != TOK_BUILTIN)
+		next = tokenset->token[i + 1]->type;
+		if (next != TOK_WORD && next != TOK_BUILTIN)
 			return (parser_error(tokenset, tokenset->token[i + 1]->value));
 	}
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:28:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/29 22:43:36 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 19:22:20 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ static void	cleanup_split_token(t_tokenlist *tokenlist, int key)
 		free(tokenlist->dflag);
 	free(tokenlist->token);
 	free(tokenlist->token_count);
-	free(tokenlist);
 	if (key == FAILED)
 		free(tokenlist->input);
+	free(tokenlist);
 }
 
 void	free_tokenlist(t_tokenlist *tokenlist, char **array1, char **array2,

@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:42:44 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/17 20:14:34 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/10 14:43:05 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	check_double_symbol(t_token *token, char *symbol, t_tokenlist *tokenlist)
 	if (!str)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
 	split_token(tokenlist, str, token, count);
+	free(str);
 	if (token->type != TOK_SPLIT)
 		return (FAILED);
 	return (SUCCESS);

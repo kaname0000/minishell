@@ -6,15 +6,13 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:03:35 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/05 21:53:18 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 15:49:19 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <readline/readline.h>
 #include <stdio.h>
-
-extern t_signal	g_variable;
 
 static void	sigint_handler_for_prompt(int sig)
 {
