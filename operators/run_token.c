@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:18:48 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/11 15:47:53 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 20:15:42 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	run_token(t_mini *mini)
 	tokenset = analysis(mini->input, mini);
 	mini->exit_status = -1;
 	mini->cmd = token_to_cmd(tokenset, mini);
-	if (mini->exit_status == 130)
+	if (mini->exit_status > 0)
 		return (free_cmd(mini->cmd), 0);
 	excute(mini, tokenset);
 	all_wait(mini);
