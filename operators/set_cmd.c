@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 01:12:53 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/05 21:52:14 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/11 20:07:44 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	set_here_doc(t_command **cmd, t_token **token, t_mini *mini,
 		else if ((token[i])->type == TOK_HEREDOC)
 			here_doc((token[i + 1])->value, &(cmd[pipe_count]->fd_in), mini,
 				tokenset);
-		if (mini->exit_status == 130)
+		if (mini->exit_status != 0)
 			return ;
 		i++;
 	}
