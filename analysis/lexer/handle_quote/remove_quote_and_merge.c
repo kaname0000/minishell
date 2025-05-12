@@ -6,31 +6,31 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:57:26 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/29 18:57:45 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/12 21:33:16 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lexer.h"
 
-// e"ch"oのように前後とくっつけるべき場合に対応
-void	remove_quote_and_merge_ex(t_tokenset *tokenset, int i)
+// e"ch"o のような BOTH ケース
+void	remove_quote_and_merge_ex(t_tokenset *tokenset, int open)
 {
-	char	*temp;
+	char	*tmp;
 	char	*new_value;
+	int		k;
 
-	temp = ft_strjoin(tokenset->token[i - 1]->value, tokenset->token[i
+	tmp = ft_strjoin(tokenset->token[open - 1]->value, tokenset->token[open
 			+ 1]->value);
-	if (!temp)
+	if (!tmp)
 		free_tokenset(tokenset, FAILED);
-	new_value = ft_strjoin(temp, tokenset->token[i + 3]->value);
-	free(temp);
+	new_value = ft_strjoin(tmp, tokenset->token[open + 3]->value);
+	free(tmp);
 	if (!new_value)
 		free_tokenset(tokenset, FAILED);
-	free(tokenset->token[i - 1]->value);
-	tokenset->token[i - 1]->value = new_value;
-	remove_token(tokenset, i, 4);
-	tokenset->count -= 4;
-	i = 0;
-	while (i < tokenset->count)
-		tokenset->token[i++]->type = UNSIGNED;
+	free(tokenset->token[open - 1]->value);
+	tokenset->token[open - 1]->value = new_value;
+	remove_token(tokenset, open, 4);
+	k = 0;
+	while (k < tokenset->count)
+		tokenset->token[k++]->type = UNSIGNED;
 }

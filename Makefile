@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: okaname <okaname@student.42.fr>            +#+  +:+       +#+         #
+#    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 18:55:13 by yookamot          #+#    #+#              #
-#    Updated: 2025/05/11 20:23:05 by okaname          ###   ########.fr        #
+#    Updated: 2025/05/12 20:07:55 by yookamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,6 +93,7 @@ SRCS =  main.c \
 		analysis/lexer/handle_quote/delete_quote.c \
 		analysis/lexer/handle_quote/make_new_value_in_quote.c \
 		analysis/lexer/handle_quote/join_token.c \
+		analysis/lexer/handle_quote/add_quote.c \
 		analysis/parser/check_pipe.c \
 		analysis/parser/check_redirect.c \
 		analysis/parser/parser_error.c \

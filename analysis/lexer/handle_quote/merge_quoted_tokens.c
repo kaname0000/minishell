@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 23:00:40 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/10 20:25:42 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/12 21:37:49 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,32 +71,48 @@ static void	handle_empty_in_quote(t_tokenset *tokenset, int i)
 	tokenset->token = new;
 }
 
-// quoteに囲われた文字列を一つのトークンにまとめる
+static int	return_key(t_tokenset *tokenset, int i, int end)
+{
+	int	key;
+
+	if (end == i + 1 && !ft_strchr(tokenset->token[end]->value, ' '))
+	{
+		handle_empty_in_quote(tokenset, i);
+		key = SUCCESS;
+	}
+	else if (join_token(tokenset, i, end)
+		|| handle_single_token_with_space(tokenset, i))
+		key = SUCCESS;
+	else
+		key = FAILED;
+	return (key);
+}
+
+// ── 3) merge_quoted_tokens の書き換え ──
 int	merge_quoted_tokens(t_tokenset *tokenset)
 {
 	int	i;
+	int	key;
 	int	end;
 
 	i = 0;
+	key = 0;
 	while (i < tokenset->count)
 	{
-		if (tokenset->token[i]->type == TOK_SQUOTE_START
-			|| tokenset->token[i]->type == TOK_DQUOTE_START)
+		if (tokenset->token[i]->type == 7 || tokenset->token[i]->type == 10)
 		{
-			end = i;
-			while (tokenset->token[end]->type != TOK_SQUOTE_END
+			end = i + 1;
+			while (end < tokenset->count
+				&& tokenset->token[end]->type != TOK_SQUOTE_END
 				&& tokenset->token[end]->type != TOK_DQUOTE_END)
 				end++;
-			if (end == i + 1)
-			{
-				handle_empty_in_quote(tokenset, i);
-				return (SUCCESS);
-			}
-			if (join_token(tokenset, i, end)
-				|| handle_single_token_with_space(tokenset, i))
-				return (SUCCESS);
+			if (end >= tokenset->count)
+				break ;
+			if (return_key(tokenset, i, end))
+				add_quote(tokenset);
+			i = -1;
 		}
 		i++;
 	}
-	return (FAILED);
+	return (key);
 }
