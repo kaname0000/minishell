@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:33:13 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/25 21:59:55 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/12 20:39:09 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,13 @@ static char	*check_file_or_directory(char *cmd)
 {
 	int		fd;
 	char	*full_path;
-	char	*buffer;
+	char	buffer[1];
 
-	buffer = NULL;
 	if (access(cmd, F_OK) != 0)
-		return (error_command1_nonexistent(NULL), NULL);
+		return (error_command1_nonexistent(cmd), NULL);
 	fd = open(cmd, O_RDONLY);
-	read(fd, buffer, sizeof(buffer));
-	if (errno == EISDIR)
-		return (error_command1_directory(NULL), close(fd), NULL);
+	if (read(fd, buffer, 1) < 0 && errno == EISDIR)
+		return (error_command1_directory(cmd), close(fd), NULL);
 	close(fd);
 	if (access(cmd, X_OK) != 0)
 		return (error_command1(cmd), NULL);
