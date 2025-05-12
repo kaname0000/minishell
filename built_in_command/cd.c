@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:18:34 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/08 21:53:47 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/12 18:23:22 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,16 @@ int	ft_cd(t_mini *mini, int count)
 
 	count_a = count_array(mini->cmd[count]->cmd);
 	if (count_a > 2)
-		return (ft_putstr_fd("bash: cd: too many arguments\n", 2), 1);
+		return (ft_putstr_fd("minishell: cd: too many arguments\n", 2), 1);
 	else if (count_a == 1)
 	{
 		home_path = get_home_path(mini->var_env);
 		if (home_path == NULL)
-			return (ft_putstr_fd("bash: cd: HOME not set\n", 2), 1);
+			return (ft_putstr_fd("minishell: cd: HOME not set\n", 2), 1);
 		else if (chdir(home_path) == -1)
 			return (perror("chdir failed"), 1);
 	}
 	else if (chdir(mini->cmd[count]->cmd[1]) == -1)
 		return (perror("chdir failed"), 1);
-	return (ft_pwd(mini, 0));
+	return (0);
 }

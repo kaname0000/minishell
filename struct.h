@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 18:16:09 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/05 21:43:28 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/12 18:41:55 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,6 @@ typedef struct s_command
 	bool				built_in;
 	int					pid;
 }						t_command;
-
-typedef struct s_mini
-{
-	t_env				*var_env;
-	t_command			**cmd;
-	int					exit_status;
-	char				*input;
-	int					origin_fd_in;
-	int					origin_fd_out;
-}						t_mini;
 
 enum					e_tokentype
 {
@@ -100,5 +90,16 @@ typedef struct s_signal
 	int					mode;
 	int					heredoc_int;
 }						t_signal;
+
+typedef struct s_mini
+{
+	t_env				*var_env;
+	t_command			**cmd;
+	int					exit_status;
+	char				*input;
+	t_tokenset			*tokenset;
+	int					origin_fd_in;
+	int					origin_fd_out;
+}						t_mini;
 
 #endif
