@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:57:26 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/12 21:33:16 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:12:27 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	remove_quote_and_merge_ex(t_tokenset *tokenset, int open)
 	free(tokenset->token[open - 1]->value);
 	tokenset->token[open - 1]->value = new_value;
 	remove_token(tokenset, open, 4);
+	tokenset->count -= 4;
 	k = 0;
 	while (k < tokenset->count)
 		tokenset->token[k++]->type = UNSIGNED;

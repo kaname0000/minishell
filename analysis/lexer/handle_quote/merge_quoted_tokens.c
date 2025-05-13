@@ -6,25 +6,25 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 23:00:40 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/12 21:37:49 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:05:41 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lexer.h"
 
-// " hello"に対応
+// "    hello"に対応
 static int	handle_single_token_with_space(t_tokenset *tokenset, int i)
 {
-	int		j;
-	int		k;
+	int		start;
+	int		end;
 	int		l;
 	char	*new_value;
 
-	j = check_input(tokenset->input, count_quote_in_input(tokenset, i,
+	start = check_input(tokenset->input, count_quote_in_input(tokenset, i,
 				tokenset->token[i]->value), tokenset->token[i]->value);
-	k = check_input(tokenset->input, count_quote_in_input(tokenset, i + 2,
+	end = check_input(tokenset->input, count_quote_in_input(tokenset, i + 2,
 				tokenset->token[i + 2]->value), tokenset->token[i + 2]->value);
-	if (tokenset->input[j + 1] != ' ' && tokenset->input[k - 1] != ' ')
+	if (tokenset->input[start + 1] != ' ' && tokenset->input[end - 1] != ' ')
 		return (FAILED);
 	l = 0;
 	while (tokenset->token[i + 1]->value[l])
@@ -33,7 +33,7 @@ static int	handle_single_token_with_space(t_tokenset *tokenset, int i)
 			return (FAILED);
 		l++;
 	}
-	new_value = make_new_value(tokenset->input, j, k);
+	new_value = make_new_value(tokenset->input, start, end);
 	if (!new_value)
 		free_tokenset(tokenset, FAILED);
 	free(tokenset->token[i + 1]->value);
@@ -71,24 +71,26 @@ static void	handle_empty_in_quote(t_tokenset *tokenset, int i)
 	tokenset->token = new;
 }
 
-static int	return_key(t_tokenset *tokenset, int i, int end)
+static int	return_key(t_tokenset *tokenset, int start, int end)
 {
 	int	key;
 
-	if (end == i + 1 && !ft_strchr(tokenset->token[end]->value, ' '))
+	if (end == start + 1)
 	{
-		handle_empty_in_quote(tokenset, i);
+		handle_empty_in_quote(tokenset, start);
 		key = SUCCESS;
 	}
-	else if (join_token(tokenset, i, end)
-		|| handle_single_token_with_space(tokenset, i))
+	else if (join_token(tokenset, start, end)
+		|| handle_single_token_with_space(tokenset, start))
 		key = SUCCESS;
 	else
 		key = FAILED;
+	if (key)
+		add_quote(tokenset);
 	return (key);
 }
 
-// ── 3) merge_quoted_tokens の書き換え ──
+// "hello world"のような文字列を一つのトークンにまとめる
 int	merge_quoted_tokens(t_tokenset *tokenset)
 {
 	int	i;
@@ -99,7 +101,8 @@ int	merge_quoted_tokens(t_tokenset *tokenset)
 	key = 0;
 	while (i < tokenset->count)
 	{
-		if (tokenset->token[i]->type == 7 || tokenset->token[i]->type == 10)
+		if (tokenset->token[i]->type == TOK_SQUOTE_START
+			|| tokenset->token[i]->type == TOK_DQUOTE_START)
 		{
 			end = i + 1;
 			while (end < tokenset->count
@@ -109,8 +112,7 @@ int	merge_quoted_tokens(t_tokenset *tokenset)
 			if (end >= tokenset->count)
 				break ;
 			if (return_key(tokenset, i, end))
-				add_quote(tokenset);
-			i = -1;
+				i--;
 		}
 		i++;
 	}
