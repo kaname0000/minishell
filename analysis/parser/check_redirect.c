@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:05:30 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/12 19:09:44 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/15 23:48:34 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_redirect(t_tokenset *tokenset, int i)
 			return (parser_error(tokenset, tokenset->token[i]->value));
 		pre = tokenset->token[i - 1]->type;
 		if (pre != TOK_WORD && pre != TOK_BUILTIN && pre != TOK_SQUOTE_IN
-			&& pre != TOK_DQUOTE_IN)
+			&& pre != TOK_DQUOTE_IN && pre != TOK_PIPE)
 			return (parser_error(tokenset, tokenset->token[i]->value));
 		next = tokenset->token[i + 1]->type;
 		if (next != TOK_WORD && next != TOK_BUILTIN && next != TOK_SQUOTE_IN
