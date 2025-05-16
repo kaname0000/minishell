@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 18:10:01 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/11 22:24:51 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/12 19:19:41 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	only_built_in(t_mini *mini, t_token **token)
 	int	fd_stdout;
 
 	set_sig_parent();
+	mini->cmd[0]->pid = -1;
 	fd_stdin = 0;
 	fd_stdout = 0;
 	if (set_fd_b(mini->cmd[0], token) == 1)
@@ -82,6 +83,5 @@ int	only_built_in(t_mini *mini, t_token **token)
 	}
 	free_array(mini->cmd[0]->envp);
 	reset_stdio(&fd_stdin, &fd_stdout);
-	mini->cmd[0]->pid = -1;
 	return (0);
 }

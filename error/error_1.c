@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:37:54 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/11 22:30:33 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/12 20:21:11 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	error_pipe(void)
 
 void	error_infile_invalid(char *infile)
 {
-	write(2, "minishell: ", 6);
+	write(2, "minishell: ", 11);
 	perror(infile);
 }
 
 void	error_infile_open_failed(char *infile)
 {
-	write(2, "minishell: ", 6);
+	write(2, "minishell: ", 11);
 	perror(infile);
 }
 

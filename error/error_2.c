@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 13:49:29 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/11 22:30:38 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/12 20:34:38 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	error_command1(char *cmd_parts)
 
 void	error_execve1(void)
 {
-	perror("bash");
+	perror("minishell");
 }
 
 void	error_fork1(void)
 {
-	perror("bash: fork");
+	perror("minishell: fork");
 }

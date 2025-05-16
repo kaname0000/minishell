@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:01:08 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/12 21:27:18 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/12 21:41:23 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	handle_quote(t_tokenset *tokenset)
 		set_tokentype(tokenset);
 	while (merge_quoted_tokens(tokenset))
 		;
-	print_tokenset(tokenset);
 	while (fix_command_token(tokenset))
 		set_tokentype(tokenset);
 	while (delete_quotes(tokenset))

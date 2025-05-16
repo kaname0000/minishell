@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 18:37:12 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/11 22:12:52 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/12 20:37:22 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	redirector(t_command *cmd)
 {
+	if (cmd->cmd[0] == NULL)
+		exit(0);
 	cmd->cmd_path = get_full_path(cmd->cmd[0], cmd->envp);
 	if (cmd->cmd_path == NULL)
 		exit(1);
@@ -26,6 +28,6 @@ void	redirector(t_command *cmd)
 	if (cmd->fd_out != STDOUT_FILENO)
 		close(cmd->fd_out);
 	execve(cmd->cmd_path, cmd->cmd, cmd->envp);
-	perror("bash");
+	perror("minishell");
 	exit(1);
 }

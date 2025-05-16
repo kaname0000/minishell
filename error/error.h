@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 18:55:23 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/05 21:47:12 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/12 20:23:09 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	error_command2(pid_t pid1, char **cmd_parts);
 void	error_execve2(pid_t pid1, char *full_path, char **cmd_args);
 void	error_fork2(pid_t pid1);
 void	error_redirect_out(pid_t pid1);
-void	error_command1_directory(char **cmd_parts);
+void	error_command1_directory(char *cmd_parts);
 void	error_command2_directory(pid_t pid1, char **cmd_parts);
-void	error_command1_nonexistent(char **cmd_parts);
+void	error_command1_nonexistent(char *cmd_parts);
 void	error_command2_nonexistent(pid_t pid1, char **cmd_parts);
 
 void	error_accese(char *file);

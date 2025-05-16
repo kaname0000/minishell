@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:54:34 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/16 21:41:31 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/12 19:12:58 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	error_open_b(char *file)
 {
-	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	perror(file);
 	return (1);
 }
@@ -25,14 +25,14 @@ static int	open_infile_normant(char *infile, int *fd_in)
 		close(*fd_in);
 	if (access(infile, F_OK) == -1 || access(infile, R_OK) == -1)
 	{
-		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd("minishell: ", 2);
 		perror(infile);
 		return (1);
 	}
 	*fd_in = open(infile, O_RDONLY);
 	if (*fd_in == -1)
 	{
-		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd("minishell: ", 2);
 		perror(infile);
 		return (1);
 	}
@@ -45,7 +45,7 @@ static int	open_file(char *file, int *fd_out, int open_type)
 		close(*fd_out);
 	if (access(file, F_OK) == 0 && access(file, W_OK) == -1)
 	{
-		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd("minishell: ", 2);
 		perror(file);
 		return (1);
 	}
@@ -69,7 +69,7 @@ static char	*can_acsses(char *infile, int *last_in)
 	*last_in = REDIR_IN;
 	if (access(infile, F_OK) == -1 || access(infile, R_OK) == -1)
 	{
-		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd("minishell: ", 2);
 		perror(infile);
 		return (NULL);
 	}

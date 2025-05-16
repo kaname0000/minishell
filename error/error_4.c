@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:17:51 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/11 22:31:39 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/12 20:31:24 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,17 @@ void	error_redirect_out(pid_t pid1)
 	exit(1);
 }
 
-void	error_command1_directory(char **cmd_parts)
+void	error_command1_directory(char *cmd_parts)
 {
-	write(2, "minishell: ", 6);
-	perror(cmd_parts[0]);
-	ft_free_split(cmd_parts);
+	ft_putstr_fd("minishell: ", 2);
+	perror(cmd_parts);
+	free(cmd_parts);
+	exit(126);
 }
 
 void	error_command2_directory(pid_t pid1, char **cmd_parts)
 {
-	write(2, "minishell: ", 6);
+	ft_putstr_fd("minishell: ", 2);
 	perror(cmd_parts[0]);
 	ft_free_split(cmd_parts);
 	if (pid1 != -1)
@@ -45,11 +46,11 @@ void	error_command2_directory(pid_t pid1, char **cmd_parts)
 	exit(126);
 }
 
-void	error_command1_nonexistent(char **cmd_parts)
+void	error_command1_nonexistent(char *cmd_parts)
 {
-	write(2, "bash: ", 6);
-	write(2, cmd_parts[0], ft_strlen(cmd_parts[0]));
-	write(2, ": No such file or directory\n",
-		ft_strlen(": No such file or directory\n"));
-	ft_free_split(cmd_parts);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd_parts, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
+	free(cmd_parts);
+	exit(127);
 }

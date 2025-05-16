@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:18:48 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/11 22:44:32 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/12 19:22:36 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,12 @@ int	run_token(t_mini *mini)
 
 	set_sig_code();
 	tokenset = analysis(mini->input, mini);
+	mini->tokenset = tokenset;
 	if (!tokenset)
+	{
+		mini->exit_status = 2;
 		return (0);
+	}
 	mini->exit_status = 0;
 	mini->cmd = token_to_cmd(tokenset, mini);
 	if (mini->exit_status > 0)

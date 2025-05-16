@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 01:46:29 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/04 18:16:53 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/12 19:30:07 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	print_invalid(char *s)
 {
-	ft_putstr_fd(("bash: export: `"), 2);
+	ft_putstr_fd(("minishell: export: `"), 2);
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd((": not a valid identifier\n"), 2);
 	return (1);
@@ -22,11 +22,11 @@ static int	print_invalid(char *s)
 
 static int	is_invalid(char *s)
 {
-	if (s[0] == '=' || s[0] == '+')
+	if (s[0] == '=' || s[0] == '+' || ft_isdigit(s[0]))
 		return (print_invalid(s));
 	if (!ft_strchr(s, '+') && !(ft_strchr(s, '-')))
 		return (0);
-	if (!ft_strchr(s, '=') && (ft_strchr(s, '-') || ft_strchr(s, '+')))
+	if (!ft_strchr(s, '=') && ((ft_strchr(s, '-') || ft_strchr(s, '+'))))
 		return (print_invalid(s));
 	if ((ft_strchr(s, '-') && ft_strchr(s, '=') - ft_strchr(s, '-') > 0)
 		|| ((ft_strchr(s, '+') && ft_strchr(s, '=') - ft_strchr(s, '+') > 1)))
