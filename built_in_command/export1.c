@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 01:46:29 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/12 19:30:07 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/19 20:35:19 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	print_invalid(char *s)
 {
 	ft_putstr_fd(("minishell: export: `"), 2);
 	ft_putstr_fd(s, 2);
-	ft_putstr_fd((": not a valid identifier\n"), 2);
+	ft_putstr_fd(("': not a valid identifier\n"), 2);
 	return (1);
 }
 

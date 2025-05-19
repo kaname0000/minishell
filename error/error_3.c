@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:51:14 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/11 22:31:06 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/19 21:01:19 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,10 @@ void	error_outfile_close_failed(pid_t pid1)
 	exit(1);
 }
 
-void	error_command2(pid_t pid1, char **cmd_parts)
+void	error_command2(char *cmd_parts)
 {
-	write(2, cmd_parts[0], ft_strlen(cmd_parts[0]));
-	write(2, ": command not found\n", 21);
-	ft_free_split(cmd_parts);
-	if (pid1 != -1)
-		waitpid(pid1, NULL, 0);
-	exit(127);
+	write(2, cmd_parts, ft_strlen(cmd_parts));
+	ft_putstr_fd(": No such file or directory\n", 2);
 }
 
 void	error_execve2(pid_t pid1, char *full_path, char **cmd_args)

@@ -6,11 +6,25 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:46:28 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/12 18:09:36 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/19 20:14:45 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built_in.h"
+
+int	is_all_n(char *n)
+{
+	int	i;
+
+	i = 0;
+	while (n[i] != '\0')
+	{
+		if (n[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	ft_echo(t_mini *mini, int count)
 {
@@ -19,12 +33,12 @@ int	ft_echo(t_mini *mini, int count)
 
 	i = 1;
 	nflag = false;
+	if (!ft_strcmp(mini->cmd[count]->cmd[i], "-n")
+		&& is_all_n(&(mini->cmd[count]->cmd[i][2])))
+		nflag = true;
 	while (mini->cmd[count]->cmd[i] != NULL)
 	{
-		if (!ft_strcmp(mini->cmd[count]->cmd[i], "-n"))
-			nflag = true;
-		else
-			printf("%s", mini->cmd[count]->cmd[i]);
+		printf("%s", mini->cmd[count]->cmd[i]);
 		i++;
 		if (mini->cmd[count]->cmd[i] == NULL)
 			break ;

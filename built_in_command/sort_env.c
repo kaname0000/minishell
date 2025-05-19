@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 05:44:39 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/04 18:19:30 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/19 20:31:44 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,13 @@ int	print_sorted_env(t_env *head)
 
 void	print_list(t_env *head)
 {
-	while (head)
+	t_env	*tmp;
+
+	tmp = head;
+	while (tmp)
 	{
-		printf("%s=%s\n", head->key, head->value);
-		head = head->next;
+		if (tmp->value != NULL)
+			printf("%s=%s\n", tmp->key, tmp->value);
+		tmp = tmp->next;
 	}
 }

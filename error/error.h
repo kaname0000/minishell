@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 18:55:23 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/12 20:23:09 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/19 21:01:30 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	error_fork1(void);
 void	error_outfile_invalid(pid_t pid1, char *outfile);
 void	error_outfile_open_failed(pid_t pid1, char *outfile);
 void	error_outfile_close_failed(pid_t pid1);
-void	error_command2(pid_t pid1, char **cmd_parts);
+void	error_command2(char *cmd_parts);
 void	error_execve2(pid_t pid1, char *full_path, char **cmd_args);
 void	error_fork2(pid_t pid1);
 void	error_redirect_out(pid_t pid1);

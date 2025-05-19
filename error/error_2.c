@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 13:49:29 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/12 20:34:38 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/19 20:58:41 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	error_malloc(char **arr1, char **arr2)
 void	error_command1(char *cmd_parts)
 {
 	write(2, cmd_parts, ft_strlen(cmd_parts));
-	write(2, ": command not found\n", 21);
+	ft_putstr_fd(": command not found\n", 2);
 }
 
 void	error_execve1(void)

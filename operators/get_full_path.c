@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 20:33:13 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/12 20:39:09 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/19 21:01:41 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*get_full_path(char *cmd, char **envp)
 	}
 	path = search_envp_path(envp);
 	if (!path)
-		return (error_command1(cmd), NULL);
+		return (error_command2(cmd), NULL);
 	path_parts = ft_split(path, ':');
 	if (!path_parts)
 		error_malloc(NULL, NULL);

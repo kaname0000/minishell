@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:18:48 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/12 19:22:36 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/19 20:17:26 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ int	run_token(t_mini *mini)
 	all_wait(mini);
 	free_cmd(mini->cmd);
 	free_tokenset(tokenset, 1);
+	free(mini->input);
 	return (0);
 }
