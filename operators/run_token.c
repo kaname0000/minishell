@@ -6,13 +6,15 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:18:48 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/19 20:17:26 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/23 23:28:02 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../analysis/analysis.h"
 #include "../error/error.h"
 #include "../minishell.h"
+
+extern sig_atomic_t	g_sig;
 
 static int	count_pipe(t_token **token)
 {
@@ -110,6 +112,11 @@ int	run_token(t_mini *mini)
 	t_tokenset	*tokenset;
 
 	set_sig_code();
+	if (g_sig == 1)
+	{
+		g_sig = 0;
+		mini->exit_status = 130;
+	}
 	tokenset = analysis(mini->input, mini);
 	mini->tokenset = tokenset;
 	if (!tokenset)
