@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 18:16:09 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/23 23:12:35 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/24 00:06:27 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,7 @@ typedef struct s_mini
 	int					exit_status;
 	char				*input;
 	t_tokenset			*tokenset;
-	int					origin_fd_in;
-	int					origin_fd_out;
+	int					expand_flag;
 }						t_mini;
 
 #endif

@@ -6,13 +6,12 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 22:22:53 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/23 23:18:30 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/23 23:34:50 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-valgrind --leak-check=full --show-leak-kinds=all
- --suppressions=suppression.txt ./minishell
+valgrind --leak-check=full --show-leak-kinds=all --suppressions=suppression.txt ./minishell
 */
 
 #include "minishell.h"
