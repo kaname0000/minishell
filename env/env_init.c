@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 03:31:18 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/13 18:23:05 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/24 00:24:48 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@ static t_env	*make_node(char *str)
 	return (new_node);
 }
 
+static t_env	*make_empty_node(void)
+{
+	t_env	*env;
+
+	env = (t_env *)malloc(sizeof(t_env));
+	if (env == NULL)
+		return (NULL);
+	env->key = NULL;
+	env->value = NULL;
+	env->next = NULL;
+	return (env);
+}
+
 t_env	*env_init(char **env)
 {
 	t_env	*head;
@@ -42,6 +55,8 @@ t_env	*env_init(char **env)
 	t_env	*new_node;
 	int		i;
 
+	if (env[0] == NULL)
+		return (make_empty_node());
 	head = make_node(env[0]);
 	if (head == NULL)
 		error_malloc(NULL, NULL);

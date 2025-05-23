@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 04:04:43 by okaname           #+#    #+#             */
-/*   Updated: 2025/04/01 04:52:31 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/24 00:41:18 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	count_list(t_env *list)
 	t_env	*tmp;
 
 	count = 0;
+	if (list->key == NULL)
+		return (count);
 	tmp = list;
 	while (tmp != NULL)
 	{

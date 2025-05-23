@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 05:44:39 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/19 20:31:44 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/24 00:54:41 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static void	sort_array(t_env **array, int size)
 		j = 0;
 		while (j < size - 1 - i)
 		{
-			if (ft_strncmp(array[j]->key, array[j + 1]->key, INT_MAX) > 0)
+			if (!array[j]->key || ft_strncmp(array[j]->key, array[j + 1]->key,
+					INT_MAX) > 0)
 			{
 				tmp = array[j];
 				array[j] = array[j + 1];
@@ -56,6 +57,11 @@ void	print_env(t_env **array, int size)
 	i = 0;
 	while (i < size)
 	{
+		if (array[i]->key == NULL)
+		{
+			i++;
+			continue ;
+		}
 		if (array[i]->value)
 			printf("declare -x %s=\"%s\"\n", array[i]->key, array[i]->value);
 		else
