@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 18:16:09 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/12 18:41:55 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/23 23:12:35 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ typedef struct s_tokenset
 
 typedef struct s_signal
 {
-	int					mode;
-	int					heredoc_int;
+	int					signal;
 }						t_signal;
 
 typedef struct s_mini

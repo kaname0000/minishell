@@ -6,13 +6,15 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:03:35 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/11 15:49:19 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/23 23:21:17 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <readline/readline.h>
 #include <stdio.h>
+
+volatile sig_atomic_t	g_sig;
 
 static void	sigint_handler_for_prompt(int sig)
 {
@@ -22,6 +24,7 @@ static void	sigint_handler_for_prompt(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_sig = 1;
 	}
 }
 
