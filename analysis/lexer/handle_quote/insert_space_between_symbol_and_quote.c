@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:27:58 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/15 23:57:30 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/24 18:26:31 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ static void	insert_space_around_symbol(t_tokenset *tokenset, int i, int key)
 void	insert_space_between_symbol_and_quote(t_tokenset *tokenset)
 {
 	int	i;
-	int	pre_type;
-	int	next_type;
 
 	i = 0;
 	while (i < tokenset->count)
@@ -111,12 +109,11 @@ void	insert_space_between_symbol_and_quote(t_tokenset *tokenset)
 			|| tokenset->token[i]->type == TOK_REDIR_IN
 			|| tokenset->token[i]->type == TOK_REDIR_OUT)
 		{
-			pre_type = tokenset->token[i - 1]->type;
-			next_type = tokenset->token[i + 1]->type;
-			if (i && (pre_type == TOK_SQUOTE_END || pre_type == TOK_DQUOTE_END))
+			if (i && (tokenset->token[i - 1]->type == TOK_SQUOTE_END
+					|| tokenset->token[i - 1]->type == TOK_DQUOTE_END))
 				insert_space_around_symbol(tokenset, i, FRONT);
-			if (i < tokenset->count - 1 && (next_type == TOK_SQUOTE_START
-					|| next_type == TOK_DQUOTE_START))
+			if (i < tokenset->count - 1 && (tokenset->token[i + 1]->type == 7
+					|| tokenset->token[i + 1]->type == 10))
 				insert_space_around_symbol(tokenset, i, BACK);
 		}
 		i++;

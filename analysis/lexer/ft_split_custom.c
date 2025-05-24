@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:18:05 by yookamot          #+#    #+#             */
-/*   Updated: 2025/03/10 16:38:57 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/24 18:11:12 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,14 @@ char	**ft_split_custom(char *s, t_tokenlist *tokenlist, int i)
 	size_t	count;
 
 	if (i == tokenlist->set_count - 1)
-		return (ft_split(s, ' '));
+		return (ft_split_for_tab(s));
 	if (!s)
 		return (NULL);
-	count = ft_word_count(s, ' ');
+	count = ft_word_count(s, ' ') + ft_word_count(s, '\t');
 	result = (char **)malloc(sizeof(char *) * (count + 2));
 	if (!result)
 		return (NULL);
-	return (ft_split_words(result, s, ' ', 0));
+	ft_split_words(result, s, ' ', 0);
+	ft_split_words(result, s, '\t', 0);
+	return (result);
 }

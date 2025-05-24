@@ -6,7 +6,7 @@
 #    By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/16 18:55:13 by yookamot          #+#    #+#              #
-#    Updated: 2025/05/13 15:53:34 by yookamot         ###   ########.fr        #
+#    Updated: 2025/05/24 18:17:52 by yookamot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,11 +76,13 @@ SRCS =  main.c \
 		analysis/lexer/get_env.c \
 		analysis/lexer/process_env_var.c \
 		analysis/lexer/search_daller.c \
+		analysis/lexer/ft_split_for_tab.c \
         analysis/lexer/check_tokentype/check_single_symbol.c \
         analysis/lexer/check_tokentype/check_double_symbol.c \
         analysis/lexer/check_tokentype/check_squote.c \
         analysis/lexer/check_tokentype/check_dquote.c \
         analysis/lexer/check_tokentype/check_redirection.c \
+		analysis/lexer/check_tokentype/check_env_noval.c \
 		analysis/lexer/handle_quote/check_unclosed_quote.c \
 		analysis/lexer/handle_quote/make_new_tokenset_with_quote.c \
 		analysis/lexer/handle_quote/merge_quoted_tokens.c \

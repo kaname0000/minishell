@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 20:02:03 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/16 19:22:03 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:27:45 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	search_keyword(t_token *token, t_tokenlist *tokenlist)
 	if (check_squote(token, tokenlist))
 		return ;
 	if (check_dquote(token, tokenlist))
+		return ;
+	if (check_env_noval(token, tokenlist))
 		return ;
 }
 
