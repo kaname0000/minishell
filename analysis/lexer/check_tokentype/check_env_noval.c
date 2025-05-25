@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:28:22 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/24 17:26:50 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/25 18:07:21 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_env_noval(t_token *token, t_tokenlist *tokenlist)
 	if (!symbol)
 		free_tokenlist(tokenlist, NULL, NULL, FAILED);
 	if (!count_noval(token, symbol))
-		return (FAILED);
+		return (free(symbol), FAILED);
 	split_token(tokenlist, symbol, token, 1);
 	free(symbol);
 	if (token->type != TOK_SPLIT)
