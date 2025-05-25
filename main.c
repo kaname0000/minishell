@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 22:22:53 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/23 23:34:50 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/25 18:10:27 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ valgrind --leak-check=full --show-leak-kinds=all --suppressions=suppression.txt 
 
 #include "minishell.h"
 
-extern t_signal	g_sig;
-
 int	main(int argc, char *argv[], char **envp)
 {
 	t_mini	minishell;
@@ -26,6 +24,7 @@ int	main(int argc, char *argv[], char **envp)
 	(void)argv;
 	minishell.var_env = env_init(envp);
 	minishell.exit_status = 0;
+	minishell.line = 0;
 	input(&minishell);
 	free_list(minishell.var_env);
 	return (0);

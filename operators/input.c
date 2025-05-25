@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 15:17:08 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/24 00:24:28 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/25 18:21:37 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	input(t_mini *minishell)
 			free(minishell->input);
 			break ;
 		}
+		minishell->line++;
 		if (*minishell->input == '\0')
 		{
 			free(minishell->input);

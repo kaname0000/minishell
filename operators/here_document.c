@@ -6,7 +6,7 @@
 /*   By: okaname <okaname@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 14:24:05 by okaname           #+#    #+#             */
-/*   Updated: 2025/05/24 00:06:57 by okaname          ###   ########.fr       */
+/*   Updated: 2025/05/25 18:20:43 by okaname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@ static void	free_close_exit(char *line, int fd, int status)
 	free(line);
 	close(fd);
 	exit(status);
+}
+
+static void	wated_eof(t_mini *mini, char *eof, int fd)
+{
+	ft_putstr_fd("bash: warning: here-document at line ", 2);
+	ft_putnbr_fd(mini->line, 2);
+	ft_putstr_fd(" delimited by end-of-file (wanted `", 2);
+	ft_putstr_fd(eof, 2);
+	ft_putstr_fd("')\n", 2);
+	close(fd);
+	exit(0);
 }
 
 static int	get_doc(int pipefd, char *char_EOF, t_mini *mini,
@@ -36,7 +47,9 @@ static int	get_doc(int pipefd, char *char_EOF, t_mini *mini,
 		while (1)
 		{
 			line = readline("> ");
-			if (!line || !ft_strcmp(line, char_EOF))
+			if (!line)
+				wated_eof(mini, char_EOF, pipefd);
+			if (!ft_strcmp(line, char_EOF))
 				free_close_exit(line, pipefd, 0);
 			if (mini->expand_flag)
 				line = expand_line(line, mini);
