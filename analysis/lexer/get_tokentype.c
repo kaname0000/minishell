@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 13:11:59 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/24 17:35:35 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:44:50 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	get_tokentype2(t_token *token)
 		token->type = TOK_BUILTIN;
 	else
 	{
-		if (!ft_strcmp(token->value, "$NOVAL"))
+		if (token->value[0] == '$')
 		{
 			free(token->value);
 			token->value = ft_strdup("");
