@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 13:11:59 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/28 17:44:50 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:35:08 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,7 @@ static void	get_tokentype2(t_token *token)
 		|| simple_check(token, "exit"))
 		token->type = TOK_BUILTIN;
 	else
-	{
-		if (token->value[0] == '$')
-		{
-			free(token->value);
-			token->value = ft_strdup("");
-		}
 		token->type = TOK_WORD;
-	}
 }
 
 void	get_tokentype(t_token *token, t_token *pre_token)
