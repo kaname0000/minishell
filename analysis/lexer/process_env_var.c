@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 00:52:47 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/28 17:32:30 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/29 20:57:52 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,7 @@ void	process_env_var(t_tokenlist *tokenlist, t_mini *mini)
 	tokenlist->dflag = (int *)ft_calloc(sizeof(int), i);
 	if (!tokenlist->dflag)
 		return (free_tokenlist(tokenlist, NULL, NULL, FAILED));
-	while (make_quote_flag(tokenlist))
-		;
+	make_quote_flag(tokenlist);
 	while (expand_env_var(tokenlist, mini))
 		;
 }

@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:53:55 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/28 19:31:06 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/29 20:58:12 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			check_unclosed_quote(t_tokenset *tokenset);
 int			make_new_tokenset_with_quote(t_tokenset *tokenset, int i, int j);
 char		*get_env(t_mini *mini, char *env, t_tokenlist *tokenlist);
 void		process_env_var(t_tokenlist *tokenlist, t_mini *mini);
-int			make_quote_flag(t_tokenlist *tokenlist);
+void		make_quote_flag(t_tokenlist *tokenlist);
 void		malloc_failed(void);
 int			check_single_symbol(t_token *token, int c, t_tokenlist *tokenlist);
 int			check_double_symbol(t_token *token, char *symbol,

@@ -6,78 +6,36 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 18:15:40 by yookamot          #+#    #+#             */
-/*   Updated: 2025/04/29 23:00:37 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/29 20:59:56 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lexer.h"
 
-// 0文字目の処理
-static void	make_quote_flag_ex0(t_tokenlist *tokenlist)
+// quoteのフラグ配列作成
+void	make_quote_flag(t_tokenlist *tokenlist)
 {
-	if (tokenlist->input[0] == '\'')
-		tokenlist->sflag[0] = 1;
-	else if (tokenlist->input[0] == '"')
-		tokenlist->dflag[0] = 1;
-}
+	size_t	i;
+	size_t	len;
+	int		in_s;
+	int		in_d;
 
-// 0文字目以外の処理
-static void	make_quote_flag_ex1(t_tokenlist *tokenlist, int i, char quote)
-{
-	if (quote == '\'')
+	len = ft_strlen(tokenlist->input);
+	in_s = 0;
+	in_d = 0;
+	i = 0;
+	while (i < len)
 	{
-		if (!tokenlist->dflag[i - 1] && !tokenlist->sflag[i - 1])
-			tokenlist->sflag[i] = 1;
-		else if (tokenlist->dflag[i - 1])
-			tokenlist->dflag[i] = 1;
-	}
-	else if (quote == '"')
-	{
-		if (!tokenlist->dflag[i - 1] && !tokenlist->sflag[i - 1])
-			tokenlist->dflag[i] = 1;
-		else if (tokenlist->sflag[i - 1])
-			tokenlist->sflag[i] = 1;
-	}
-	else
-	{
-		tokenlist->sflag[i] = tokenlist->sflag[i - 1];
-		tokenlist->dflag[i] = tokenlist->dflag[i - 1];
-	}
-}
-
-// quoteが閉じられていなかった場合、修正する。
-static int	fix_quote_flag(t_tokenlist *tokenlist, int *flag)
-{
-	int	i;
-
-	i = ft_strlen(tokenlist->input) - 1;
-	while (flag[i])
-	{
-		flag[i] = 0;
-		i--;
-	}
-	return (i);
-}
-
-// quoteのフラグ配列作成、返り値は修正した先頭、次の呼び出しではそこからスタートする。
-int	make_quote_flag(t_tokenlist *tokenlist)
-{
-	static int	i;
-	int			j;
-
-	while (tokenlist->input[i])
-	{
-		if (!i)
-			make_quote_flag_ex0(tokenlist);
-		else
-			make_quote_flag_ex1(tokenlist, i, tokenlist->input[i]);
+		if (tokenlist->input[i] == '\'' && !in_d)
+			in_s = !in_s;
+		else if (tokenlist->input[i] == '"' && !in_s)
+			in_d = !in_d;
+		tokenlist->sflag[i] = in_s;
+		tokenlist->dflag[i] = in_d;
 		i++;
 	}
-	j = 0;
-	if (tokenlist->sflag[i - 1])
-		j = fix_quote_flag(tokenlist, tokenlist->sflag);
-	else if (tokenlist->dflag[i - 1])
-		j = fix_quote_flag(tokenlist, tokenlist->dflag);
-	i = j;
-	return (j);
+	if (in_s)
+		ft_bzero(tokenlist->sflag, len * sizeof(int));
+	if (in_d)
+		ft_bzero(tokenlist->dflag, len * sizeof(int));
 }
