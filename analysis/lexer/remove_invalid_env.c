@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 18:37:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/28 19:27:18 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/05/30 20:25:44 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ static char	*reshape_value(char *value, int len, t_tokenset *tokenset)
 	char	*new;
 	int		i;
 	int		j;
+	int		new_len;
 
-	new = (char *)malloc(sizeof(char) * (ft_strlen(value) - len));
+	new_len = ft_strlen(value) - len;
+	if (new_len <= 0)
+		new_len = 1;
+	new = (char *)malloc(sizeof(char) * new_len);
 	if (!new)
 		free_tokenset(tokenset, FAILED);
 	i = 0;
@@ -48,7 +52,10 @@ static char	*reshape_value(char *value, int len, t_tokenset *tokenset)
 	j += len;
 	while (value[j])
 		new[i++] = value[j++];
-	new[i] = '\0';
+	if (i == 0 || new_len > i)
+		new[i++] = '\0';
+	else
+		new[i - 1] = '\0';
 	return (new);
 }
 
