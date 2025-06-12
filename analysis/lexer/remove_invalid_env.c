@@ -6,7 +6,7 @@
 /*   By: yookamot <yookamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 18:37:35 by yookamot          #+#    #+#             */
-/*   Updated: 2025/05/30 20:25:44 by yookamot         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:48:42 by yookamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*reshape_value(char *value, int len, t_tokenset *tokenset)
 	if (i == 0 || new_len > i)
 		new[i++] = '\0';
 	else
-		new[i - 1] = '\0';
+		new[i] = '\0';
 	return (new);
 }
 
